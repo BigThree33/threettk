@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>YOUR NAME · 像素存档</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#15152b;color:#eceafc;font-family:ui-monospace,Consolas,"Courier New","Microsoft YaHei",monospace;line-height:1.7;
+background-image:linear-gradient(#ffffff08 1px,transparent 1px),linear-gradient(90deg,#ffffff08 1px,transparent 1px);background-size:32px 32px}
+::selection{background:#ffd23f;color:#15152b}
+.wrap{max-width:880px;margin:0 auto;padding:44px 28px 80px}
+.px{display:grid;grid-template-columns:repeat(16,1fr);width:160px;height:160px;image-rendering:pixelated}
+.px i{display:block}
+.pf{position:relative;background:#211f3f;box-shadow:0 -4px 0 #0a0a14,0 4px 0 #0a0a14,-4px 0 0 #0a0a14,4px 0 0 #0a0a14}
+.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;font-size:13px;letter-spacing:2px}
+.chip{padding:4px 12px;color:#4be1c3}
+.live{color:#ff6b9d;animation:blink 1.2s steps(1) infinite}
+.grid{display:grid;grid-template-columns:280px 1fr;gap:34px;align-items:start}
+.card{padding:22px}
+.card h1{font-size:26px;letter-spacing:2px;color:#ffd23f;margin:14px 0 2px;line-height:1.2}
+.job{font-size:13px;color:#a9a3d6;margin-bottom:16px}
+.stat{display:flex;align-items:center;gap:8px;font-size:13px;margin:8px 0}
+.stat span{width:64px;flex:none}
+.stat em{font-style:normal;color:#a9a3d6;width:36px;text-align:right}
+.bar{flex:1;height:12px;background:#0a0a14}
+.bar b{display:block;height:100%;background-image:repeating-linear-gradient(90deg,#ffd23f 0 8px,#0a0a14 8px 10px)}
+.bar.hp b{background-image:repeating-linear-gradient(90deg,#ff5a5f 0 8px,#0a0a14 8px 10px)}
+.bar.mp b{background-image:repeating-linear-gradient(90deg,#4ba3ff 0 8px,#0a0a14 8px 10px)}
+.h2{font-size:14px;letter-spacing:3px;color:#ffd23f;margin:0 0 12px;display:flex;align-items:center;gap:8px}
+.h2::before{content:"";width:10px;height:10px;background:#ffd23f;flex:none}
+.col>.h2{margin-top:26px}
+.equip{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.item{padding:14px 16px;font-size:13px}
+.item b{display:block;font-size:15px;margin:8px 0 2px;color:#fff}
+.item small{color:#a9a3d6;display:block;line-height:1.5}
+.ico{width:24px;height:24px;background:#ff6b9d;box-shadow:4px 4px 0 #8b7cff}
+.ico.alt{background:#4be1c3;box-shadow:4px 4px 0 #ffd23f}
+.rare{color:#ffd23f;letter-spacing:1px}
+.log ul{list-style:none;padding:6px 18px}
+.log li{display:grid;grid-template-columns:52px 1fr;gap:4px 12px;padding:10px 0;font-size:13px;border-bottom:2px dashed #3a3666}
+.log li:last-child{border-bottom:0}
+.log li small{grid-column:2;color:#a9a3d6;line-height:1.5}
+.tag{text-align:center;padding:1px 0;height:22px;line-height:20px;color:#0a0a14;align-self:start}
+.t-me{background:#ff6b9d}.t-job{background:#a9a3d6}.t-paid{background:#ffd23f}.t-try{background:#4be1c3}
+.dialog{margin-top:34px;padding:16px 20px;display:flex;gap:18px;align-items:center;font-size:15px}
+.dialog .px{width:64px;height:64px;flex:none}
+.dialog p{flex:1;line-height:1.8}
+.more{color:#ffd23f;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+@media (max-width:720px){
+.grid{grid-template-columns:1fr}
+.equip{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><span class="pf chip">SAVE FILE 01</span><span class="live">● LIVE 2026</span></div>
+  <div class="grid">
+    <div class="pf card">
+      <div class="px" aria-hidden="true"></div>
+      <h1>YOUR NAME</h1>
+      <p class="job">职业：前端开发 / 个人开发者</p>
+      <div class="stat"><span>HP 体力</span><i class="bar hp"><b style="width:70%"></b></i><em>7/10</em></div>
+      <div class="stat"><span>MP 灵感</span><i class="bar mp"><b style="width:60%"></b></i><em>6/10</em></div>
+      <div class="stat"><span>好奇心</span><i class="bar"><b style="width:90%"></b></i><em>9/10</em></div>
+      <div class="stat"><span>早睡</span><i class="bar"><b style="width:20%"></b></i><em>2/10</em></div>
+    </div>
+    <div class="col">
+      <h2 class="h2">装备 EQUIPMENT</h2>
+      <div class="equip">
+        <div class="pf item"><i class="ico"></i><b>NOEVA <span class="rare">★★★</span></b><small>记思路、复盘自己的 App<br>状态：已上线</small></div>
+        <div class="pf item"><i class="ico alt"></i><b>GeeGeeKing <span class="rare">★★</span></b><small>像素风桌面待办小组件<br>状态：开发中</small></div>
+      </div>
+      <h2 class="h2">冒险日志 LOG</h2>
+      <div class="pf log"><ul>
+        <li><span class="tag t-me">个人</span><b>NOEVA</b><small>第一次生产部署上线了</small></li>
+        <li><span class="tag t-me">个人</span><b>GeeGeeKing</b><small>在研究用 Tauri 做成桌面安装包</small></li>
+        <li><span class="tag t-paid">接单</span><b>课堂计分 + 动画小程序</b><small>老师上课用的计分板，加分时有动画</small></li>
+        <li><span class="tag t-try">练手</span><b>热点新闻爬取展示站</b><small>爬下来，排好队给你看</small></li>
+        <li><span class="tag t-try">练手</span><b>仿写某游戏公司官网</b><small>照着做一遍，学人家怎么排版</small></li>
+        <li><span class="tag t-job">上班</span><b>C 端图片 / AI 生成工具</b><small>面向普通用户的出图工具</small></li>
+        <li><span class="tag t-job">上班</span><b>B 端教师 Agent 助手</b><small>给老师用的智能助手</small></li>
+      </ul></div>
+    </div>
+  </div>
+  <div class="pf dialog"><div class="px" aria-hidden="true"></div><p>「Hello，我是 Your Name。上班写工具，下班养两只小项目。这里是我的存档。」</p><span class="more">▼</span></div>
+</div>
+<script>
+const M=[
+'................',
+'......kkkk......',
+'....kkhhhhkk....',
+'...khhhhhhhhk...',
+'..khhhhhhhhhhk..',
+'..khhhhhhhhhhk..',
+'..khksssssskhk..',
+'..khsssssssshk..',
+'..khsseesseshk..',
+'..khsseesseshk..',
+'..khsssssssshk..',
+'...kkssmmsskk...',
+'....kkcccckk....',
+'...kcccccccck...',
+'...kcccccccck...',
+'....kkkkkkkk....'
+];
+const C={k:'#0a0a14',h:'#4be1c3',s:'#f7cfae',e:'#1b1b2f',m:'#d95763',c:'#8b7cff'};
+document.querySelectorAll('.px').forEach(el=>{
+  el.innerHTML=M.join('').split('').map(ch=>`<i style="background:${C[ch]||'transparent'}"></i>`).join('');
+});
+</script>
+</body>
+</html>
