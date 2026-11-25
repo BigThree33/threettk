@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>YOUR NAME · 多巴胺像素存档</title>
+<style>
+  :root {
+    --ink: #181818;
+    --paper: #f5ff62;
+    --pink: #ff72b6;
+    --blue: #6172ff;
+    --mint: #74e8b5;
+    --lilac: #c5a5ff;
+    --white: #fffdf5;
+    --shadow: 7px 7px 0 var(--ink);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--paper);
+    font-family: Arial, "Microsoft YaHei", sans-serif;
+    overflow-x: hidden;
+  }
+  body::before {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-image: radial-gradient(#18181820 .8px, transparent .8px);
+    background-size: 7px 7px;
+    content: "";
+    pointer-events: none;
+  }
+  button, a { font: inherit; color: inherit; }
+  button { cursor: pointer; }
+  a { text-decoration: none; }
+  :focus-visible { outline: 4px solid var(--blue); outline-offset: 4px; }
+  ::selection { color: var(--white); background: var(--ink); }
+  .mono { font-family: "Courier New", ui-monospace, monospace; }
+  .pixel { image-rendering: pixelated; }
+  .ticker {
+    overflow: hidden;
+    border-block: 3px solid var(--ink);
+    color: var(--white);
+    background: var(--ink);
+    white-space: nowrap;
+  }
+  .ticker-track {
+    display: flex;
+    width: max-content;
+    padding: 10px 0;
+    font: 700 12px/1.2 "Courier New", monospace;
+    letter-spacing: .14em;
+    animation: ticker 25s linear infinite;
+  }
+  .ticker-track span { padding-right: 42px; }
+  .ticker-track b { margin-right: 42px; color: var(--pink); }
+  @keyframes ticker { to { transform: translateX(-50%); } }
+  .shell { width: min(1220px, calc(100% - 48px)); margin: 0 auto; }
+  .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 22px;
+    padding: 24px 0 18px;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand-icon {
+    display: grid;
+    grid-template-columns: repeat(3, 8px);
+    grid-template-rows: repeat(3, 8px);
+    gap: 3px;
+    transform: rotate(-8deg);
+  }
+  .brand-icon i { background: var(--ink); }
+  .brand-icon i:nth-child(1), .brand-icon i:nth-child(3), .brand-icon i:nth-child(7), .brand-icon i:nth-child(9) { background: transparent; }
+  .brand-icon i:nth-child(5) { background: var(--pink); }
+  .brand b { display: block; font: 900 15px/1 Arial, sans-serif; letter-spacing: -.03em; }
+  .brand small { display: block; margin-top: 5px; font: 700 10px/1 "Courier New", monospace; letter-spacing: .12em; }
+  .palette { display: flex; align-items: center; gap: 9px; }
+  .palette > span { margin-right: 3px; font: 700 10px/1 "Courier New", monospace; letter-spacing: .12em; }
+  .swatch {
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    border: 2px solid var(--ink);
+    border-radius: 50%;
+    background: var(--swatch);
+    transition: transform .2s ease;
+  }
+  .swatch:hover { transform: translateY(-4px) rotate(10deg); }
+  .swatch[aria-pressed="true"] { box-shadow: 0 0 0 3px var(--paper), 0 0 0 5px var(--ink); }
+  .back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 11px;
+    border: 2px solid var(--ink);
+    background: var(--white);
+    font: 700 11px/1 "Courier New", monospace;
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+  .back:hover { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--ink); }
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.12fr) minmax(330px, .88fr);
+    gap: clamp(28px, 5vw, 76px);
+    align-items: center;
+    min-height: 640px;
+    padding: 40px 0 76px;
+  }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border: 2px solid var(--ink);
+    background: var(--mint);
+    font: 800 11px/1 "Courier New", monospace;
+    letter-spacing: .08em;
+    transform: rotate(-2deg);
+  }
+  .eyebrow::before { width: 8px; height: 8px; background: var(--ink); content: ""; animation: blink 1.3s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: .25; } }
+  h1 {
+    max-width: 760px;
+    margin: 25px 0 22px;
+    font-size: clamp(58px, 7.2vw, 108px);
+    font-weight: 950;
+    line-height: .86;
+    letter-spacing: -.075em;
+  }
+  h1 .outline {
+    color: var(--paper);
+    -webkit-text-stroke: 3px var(--ink);
+    text-shadow: 5px 5px 0 var(--pink);
+  }
+  h1 .name { position: relative; display: inline-block; }
+  h1 .name::after {
+    position: absolute;
+    right: -21px;
+    bottom: -14px;
+    width: 92px;
+    height: 29px;
+    border-block: 3px solid var(--ink);
+    background: var(--blue);
+    content: "PLAYER 01";
+    color: var(--white);
+    font: 900 11px/25px "Courier New", monospace;
+    letter-spacing: .03em;
+    text-align: center;
+    transform: rotate(-7deg);
+  }
+  .intro { max-width: 590px; margin: 0; font-size: clamp(16px, 1.6vw, 20px); font-weight: 700; line-height: 1.7; }
+  .intro mark { padding: 1px 7px; color: var(--white); background: var(--ink); }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 48px;
+    padding: 12px 18px;
+    border: 3px solid var(--ink);
+    background: var(--white);
+    font-size: 13px;
+    font-weight: 900;
+    box-shadow: 5px 5px 0 var(--ink);
+    transition: transform .18s ease, box-shadow .18s ease;
+  }
+  .btn:hover { transform: translate(-2px, -2px) rotate(-1deg); box-shadow: 8px 8px 0 var(--ink); }
+  .btn:active { transform: translate(4px, 4px); box-shadow: 1px 1px 0 var(--ink); }
+  .btn.primary { background: var(--pink); }
+  .portrait-wrap { position: relative; width: min(100%, 440px); justify-self: center; }
+  .portrait {
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-height: 470px;
+    border: 4px solid var(--ink);
+    background: var(--pink);
+    box-shadow: 13px 13px 0 var(--ink);
+    transform: rotate(3deg);
+    transition: transform .25s ease;
+    isolation: isolate;
+  }
+  .portrait::before {
+    position: absolute;
+    inset: 18px;
+    z-index: -1;
+    border: 3px dashed var(--ink);
+    content: "";
+  }
+  .portrait canvas { width: 176px !important; height: 176px !important; filter: drop-shadow(10px 10px 0 #18181835); }
+  .portrait-tag {
+    position: absolute;
+    top: 24px;
+    left: -28px;
+    padding: 10px 14px;
+    border: 3px solid var(--ink);
+    background: var(--white);
+    font: 900 12px/1 "Courier New", monospace;
+    transform: rotate(-9deg);
+  }
+  .portrait-caption {
+    position: absolute;
+    right: -22px;
+    bottom: 32px;
+    width: 176px;
+    padding: 13px 15px;
+    border: 3px solid var(--ink);
+    background: var(--mint);
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1.55;
+    transform: rotate(-5deg);
+  }
+  .portrait-caption b { display: block; margin-bottom: 4px; font: 900 10px/1 "Courier New", monospace; letter-spacing: .1em; }
+  .sticker {
+    position: absolute;
+    right: -23px;
+    top: -26px;
+    display: grid;
+    place-items: center;
+    width: 91px;
+    height: 91px;
+    border: 3px solid var(--ink);
+    border-radius: 50%;
+    background: var(--blue);
+    color: var(--white);
+    font: 900 13px/1.1 "Courier New", monospace;
+    text-align: center;
+    transform: rotate(12deg);
+  }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 72px;
+  }
+  .stat {
+    min-height: 128px;
+    padding: 17px;
+    border: 3px solid var(--ink);
+    background: var(--white);
+    box-shadow: 5px 5px 0 var(--ink);
+    transition: transform .2s ease;
+  }
+  .stat:nth-child(2) { background: var(--lilac); transform: rotate(1.5deg); }
+  .stat:nth-child(3) { background: var(--mint); transform: rotate(-1deg); }
+  .stat:nth-child(4) { background: var(--pink); transform: rotate(1deg); }
+  .stat:hover { transform: translateY(-6px) rotate(0); }
+  .stat small { font: 800 10px/1 "Courier New", monospace; letter-spacing: .08em; }
+  .stat strong { display: block; margin: 15px 0 9px; font-size: 27px; line-height: 1; letter-spacing: -.05em; }
+  .cells { display: flex; gap: 4px; }
+  .cells i { width: 13px; height: 10px; border: 2px solid var(--ink); background: transparent; }
+  .cells i.on { background: var(--ink); }
+  .section-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 27px; }
+  .section-head p { margin: 0 0 8px; font: 800 11px/1 "Courier New", monospace; letter-spacing: .13em; }
+  h2 { margin: 0; font-size: clamp(35px, 5vw, 65px); line-height: .95; letter-spacing: -.065em; }
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; }
+  .filter {
+    padding: 9px 13px;
+    border: 2px solid var(--ink);
+    background: var(--white);
+    font: 800 11px/1 "Courier New", monospace;
+  }
+  .filter[aria-pressed="true"] { color: var(--white); background: var(--ink); }
+  .works { padding-bottom: 82px; }
+  .work-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .work {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 335px;
+    padding: 22px;
+    border: 3px solid var(--ink);
+    background: var(--white);
+    box-shadow: var(--shadow);
+    transition: transform .22s ease, box-shadow .22s ease;
+  }
+  .work:nth-child(3n + 1) { background: var(--lilac); }
+  .work:nth-child(3n + 2) { background: var(--mint); }
+  .work:nth-child(3n + 3) { background: var(--pink); }
+  .work:hover { transform: translate(-3px, -5px) rotate(-.5deg); box-shadow: 11px 12px 0 var(--ink); }
+  .work[hidden] { display: none; }
+  .work-top { display: flex; align-items: start; justify-content: space-between; gap: 12px; }
+  .work-num { font: 900 12px/1 "Courier New", monospace; }
+  .rarity { padding: 5px 7px; border: 2px solid var(--ink); background: var(--paper); font: 900 10px/1 "Courier New", monospace; }
+  .pixel-art {
+    position: relative;
+    display: grid;
+    place-items: center;
+    height: 125px;
+    margin: 23px 0 20px;
+    border: 3px solid var(--ink);
+    background: var(--paper);
+    overflow: hidden;
+  }
+  .pixel-art::after {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(#18181810 1px, transparent 1px), linear-gradient(90deg, #18181810 1px, transparent 1px);
+    background-size: 12px 12px;
+    content: "";
+  }
+  .art-icon { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(5, 12px); grid-auto-rows: 12px; gap: 2px; }
+  .art-icon i { background: var(--ink); }
+  .art-icon i.blank { background: transparent; }
+  .art-icon i.accent { background: var(--blue); }
+  .art-icon i.pink { background: var(--pink); }
+  .work h3 { margin: 0 0 9px; font-size: 23px; line-height: 1.1; letter-spacing: -.04em; }
+  .work p { margin: 0 0 22px; font-size: 13px; font-weight: 700; line-height: 1.65; }
+  .work button { align-self: start; margin-top: auto; padding: 0; border: 0; border-bottom: 2px solid var(--ink); background: transparent; font-size: 12px; font-weight: 900; }
+  .work button:hover { background: var(--paper); }
+  .now-strip {
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    margin-bottom: 78px;
+    border: 4px solid var(--ink);
+    background: var(--white);
+    box-shadow: 10px 10px 0 var(--ink);
+  }
+  .now-copy { padding: clamp(25px, 4vw, 46px); }
+  .now-copy > small { font: 900 11px/1 "Courier New", monospace; letter-spacing: .13em; }
+  .now-copy blockquote { margin: 22px 0; font-size: clamp(25px, 3.2vw, 42px); font-weight: 950; line-height: 1.2; letter-spacing: -.05em; }
+  .now-copy p { margin: 0; font-size: 13px; font-weight: 700; line-height: 1.7; }
+  .now-side { display: grid; place-items: center; padding: 28px; border-left: 4px solid var(--ink); background: var(--blue); color: var(--white); }
+  .now-side canvas { width: 120px !important; height: 120px !important; }
+  .now-side p { margin: 14px 0 0; font: 800 11px/1.5 "Courier New", monospace; text-align: center; }
+  footer { padding: 30px 0 38px; border-top: 3px solid var(--ink); }
+  .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 22px; }
+  .footer-row b { font-size: 19px; letter-spacing: -.04em; }
+  .footer-row p { margin: 7px 0 0; font: 700 11px/1.5 "Courier New", monospace; }
+  .footer-row .btn { background: var(--paper); }
+  dialog {
+    width: min(540px, calc(100% - 32px));
+    padding: 0;
+    border: 4px solid var(--ink);
+    color: var(--ink);
+    background: var(--white);
+    box-shadow: 12px 12px 0 var(--ink);
+  }
+  dialog::backdrop { background: #181818b8; backdrop-filter: blur(3px); }
+  .dialog-head { display: flex; justify-content: space-between; gap: 18px; padding: 15px 18px; border-bottom: 3px solid var(--ink); background: var(--pink); }
+  .dialog-head b { font: 900 12px/1 "Courier New", monospace; }
+  .dialog-close { width: 30px; height: 30px; border: 2px solid var(--ink); background: var(--white); font-weight: 900; }
+  .dialog-body { padding: 25px; }
+  .dialog-body h3 { margin: 0 0 12px; font-size: 30px; letter-spacing: -.05em; }
+  .dialog-body p { font-size: 14px; font-weight: 700; line-height: 1.8; }
+  .dialog-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+  .dialog-tags span { padding: 7px 9px; border: 2px solid var(--ink); background: var(--paper); font: 800 10px/1 "Courier New", monospace; }
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; padding-top: 30px; }
+    .hero-copy { max-width: 740px; }
+    .portrait-wrap { width: min(90%, 440px); margin-top: 16px; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .work-grid { grid-template-columns: repeat(2, 1fr); }
+    .now-strip { grid-template-columns: 1fr; }
+    .now-side { border-left: 0; border-top: 4px solid var(--ink); }
+  }
+  @media (max-width: 600px) {
+    .shell { width: min(100% - 28px, 1220px); }
+    .top { flex-wrap: wrap; gap: 17px; padding-top: 18px; }
+    .palette { order: 3; width: 100%; }
+    .hero { min-height: 0; padding: 35px 0 58px; gap: 35px; }
+    h1 { margin-top: 22px; font-size: clamp(48px, 15.5vw, 78px); }
+    h1 .name::after { right: -5px; bottom: -17px; }
+    .portrait { min-height: 385px; }
+    .portrait canvas { width: 144px !important; height: 144px !important; }
+    .portrait-tag { left: -8px; }
+    .portrait-caption { right: -7px; bottom: 20px; }
+    .sticker { right: -8px; width: 76px; height: 76px; }
+    .stats { gap: 11px; margin-bottom: 58px; }
+    .stat { min-height: 114px; padding: 13px; }
+    .stat strong { font-size: 22px; }
+    .cells i { width: 9px; }
+    .section-head { display: block; }
+    .filters { margin-top: 20px; }
+    .work-grid { grid-template-columns: 1fr; }
+    .work { min-height: 320px; }
+    .footer-row { align-items: start; flex-direction: column; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  }
+</style>
+</head>
+<body id="top">
+<div class="ticker" aria-hidden="true"><div class="ticker-track"><span>SAVE THE DAY <b>◆</b> MAKE COOL THINGS <b>◆</b> STAY CURIOUS <b>◆</b> PET THE DOG <b>◆</b> SHIP IT <b>◆</b></span><span>SAVE THE DAY <b>◆</b> MAKE COOL THINGS <b>◆</b> STAY CURIOUS <b>◆</b> PET THE DOG <b>◆</b> SHIP IT <b>◆</b></span></div></div>
+<div class="shell">
+  <header class="top">
+    <a class="back" href="gallery.html#36" target="_parent">← 返回总览</a>
+    <div class="brand"><span class="brand-icon" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span><b>YOUR NAME</b><small>PERSONAL SAVE / NO. 05</small></span></div>
+    <div class="palette" role="group" aria-label="切换页面配色"><span>MOOD</span><button class="swatch" style="--swatch:#f5ff62" data-theme="pop" aria-label="柠檬黄配色" aria-pressed="true"></button><button class="swatch" style="--swatch:#ff72b6" data-theme="pink" aria-label="樱花粉配色" aria-pressed="false"></button><button class="swatch" style="--swatch:#74e8b5" data-theme="mint" aria-label="薄荷绿配色" aria-pressed="false"></button><button class="swatch" style="--swatch:#c5a5ff" data-theme="lilac" aria-label="香芋紫配色" aria-pressed="false"></button></div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow">ONLINE · SAVE FILE LOADED</span>
+        <h1>HELLO,<br>I'M <span class="name outline">YOUR<br>NAME.</span></h1>
+        <p class="intro">上班写工具，下班做小项目，顺便记录一点生活。这里不是一份完美简历，是 <mark>正在通关的个人存档</mark>。</p>
+        <div class="hero-actions"><a class="btn primary" href="#works">查看我的装备 ↓</a><button class="btn" id="quoteBtn" type="button">随机今日状态 ↻</button></div>
+      </div>
+      <div class="portrait-wrap">
+        <div class="portrait" id="portrait">
+          <span class="portrait-tag">LV. 26 / FRONT-END</span>
+          <canvas class="samo" data-pose="face" data-px="8" data-p="#f2868f" aria-label="像素萨摩耶头像"></canvas>
+          <div class="portrait-caption"><b>CO-OP PARTNER</b>负责卖萌，也负责提醒我早点睡。</div>
+          <div class="sticker">100%<br>GOOD<br>BOY</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats" aria-label="角色属性">
+      <article class="stat"><small>BUILD / 构建</small><strong>09 / 10</strong><div class="cells" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div></article>
+      <article class="stat"><small>CURIOUS / 好奇</small><strong>10 / 10</strong><div class="cells" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div></article>
+      <article class="stat"><small>IDEAS / 灵感</small><strong>08 / 10</strong><div class="cells" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div></article>
+      <article class="stat"><small>SLEEP / 早睡</small><strong>03 / 10</strong><div class="cells" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></article>
+    </section>
+
+    <section class="works" id="works">
+      <div class="section-head"><div><p>02 / SELECTED EQUIPMENT</p><h2>最近在玩什么？</h2></div><div class="filters" role="group" aria-label="筛选作品"><button class="filter" data-filter="all" aria-pressed="true">全部</button><button class="filter" data-filter="personal" aria-pressed="false">个人项目</button><button class="filter" data-filter="work" aria-pressed="false">工作作品</button></div></div>
+      <div class="work-grid">
+        <article class="work" data-kind="personal"><div class="work-top"><span class="work-num">ITEM / 001</span><span class="rarity">★★★</span></div><div class="pixel-art"><span class="art-icon" aria-hidden="true"><i></i><i></i><i class="accent"></i><i></i><i></i><i></i><i class="accent"></i><i class="accent"></i><i class="accent"></i><i></i><i class="accent"></i><i class="accent"></i><i class="accent"></i><i class="accent"></i><i class="accent"></i><i></i><i class="accent"></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="pink"></i><i class="pink"></i><i></i><i></i></span></div><h3>NOEVA</h3><p>记思路、复盘自己的 App。从界面到部署，一点点把它变成真正能用的产品。</p><button type="button" data-project="NOEVA">查看存档 →</button></article>
+        <article class="work" data-kind="personal"><div class="work-top"><span class="work-num">ITEM / 002</span><span class="rarity">★★★</span></div><div class="pixel-art"><span class="art-icon" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i class="pink"></i><i class="pink"></i><i class="pink"></i><i></i><i></i><i class="pink"></i><i class="pink"></i><i class="pink"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="accent"></i><i class="accent"></i><i class="accent"></i><i class="accent"></i><i></i><i class="blank"></i><i></i><i></i><i></i><i></i></span></div><h3>GeeGeeKing</h3><p>像素风桌面待办小组件。把每天的小任务，做成桌面上的轻量游戏。</p><button type="button" data-project="GeeGeeKing">查看存档 →</button></article>
+        <article class="work" data-kind="personal"><div class="work-top"><span class="work-num">ITEM / 003</span><span class="rarity">★★</span></div><div class="pixel-art"><span class="art-icon" aria-hidden="true"><i></i><i></i><i class="accent"></i><i></i><i></i><i></i><i class="accent"></i><i class="accent"></i><i></i><i></i><i class="accent"></i><i></i><i class="accent"></i><i></i><i></i><i class="accent"></i><i></i><i class="accent"></i><i></i><i></i><i></i><i></i><i class="blank"></i><i></i><i></i></span></div><h3>课堂计分小程序</h3><p>为老师做的课堂计分与动画呈现工具，让回答问题这件事更有参与感。</p><button type="button" data-project="课堂计分小程序">查看存档 →</button></article>
+        <article class="work" data-kind="personal"><div class="work-top"><span class="work-num">ITEM / 004</span><span class="rarity">★★</span></div><div class="pixel-art"><span class="art-icon" aria-hidden="true"><i></i><i class="pink"></i><i class="pink"></i><i></i><i></i><i class="pink"></i><i class="pink"></i><i class="pink"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="accent"></i><i class="accent"></i><i></i><i></i><i></i><i class="accent"></i><i class="accent"></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div><h3>热点新闻爬取站</h3><p>把散落的热点新闻爬下来、排好队，再用一个轻快的前端展示出来。</p><button type="button" data-project="热点新闻爬取站">查看存档 →</button></article>
+        <article class="work" data-kind="work"><div class="work-top"><span class="work-num">ITEM / 005</span><span class="rarity">EPIC</span></div><div class="pixel-art"><span class="art-icon" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i class="accent"></i><i class="accent"></i><i class="accent"></i><i class="accent"></i><i class="accent"></i><i></i><i class="accent"></i><i></i><i></i><i></i><i class="accent"></i><i></i><i class="accent"></i><i></i><i></i><i></i><i class="accent"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="pink"></i><i></i><i></i></span></div><h3>C 端图片 / AI 工具</h3><p>面向普通用户的出图与图片处理工具，在效率、反馈和易用性之间寻找平衡。</p><button type="button" data-project="C 端图片 / AI 工具">查看存档 →</button></article>
+        <article class="work" data-kind="work"><div class="work-top"><span class="work-num">ITEM / 006</span><span class="rarity">EPIC</span></div><div class="pixel-art"><span class="art-icon" aria-hidden="true"><i></i><i></i><i class="pink"></i><i></i><i></i><i></i><i class="pink"></i><i class="pink"></i><i></i><i></i><i></i><i class="pink"></i><i></i><i></i><i></i><i class="pink"></i><i></i><i></i><i></i><i class="pink"></i><i></i><i></i><i></i><i></i><i class="blank"></i><i></i><i></i><i></i></span></div><h3>B 端教师 Agent</h3><p>给老师用的智能助手。把复杂的产品流程，整理成清晰、可靠的工作体验。</p><button type="button" data-project="B 端教师 Agent">查看存档 →</button></article>
+      </div>
+    </section>
+
+    <section class="now-strip" aria-labelledby="nowTitle">
+      <div class="now-copy"><small>03 / CURRENT QUEST</small><blockquote id="nowTitle">「今天的目标：<br>把想法变成能点的东西。」</blockquote><p id="nowDesc">正在打磨 NOEVA 与 GeeGeeKing，也在继续探索更有趣的交互和个人表达。</p><button class="btn" id="nextQuest" type="button" style="margin-top:22px">换一个任务 ↻</button></div>
+      <div class="now-side"><canvas class="samo" data-pose="side" data-px="5" aria-label="像素萨摩耶伙伴"></canvas><p>SAMO SAYS:<br>别忘了保存，也别忘了休息。</p></div>
+    </section>
+  </main>
+
+  <footer><div class="footer-row"><div><b>谢谢你看到这里。</b><p>THIS SAVE FILE IS STILL BEING WRITTEN.</p></div><a class="btn" href="#top" onclick="window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})">回到起点 ↑</a></div></footer>
+</div>
+<dialog id="projectDialog" aria-labelledby="dialogTitle"><div class="dialog-head"><b>ITEM DETAILS</b><button class="dialog-close" type="button" aria-label="关闭详情">×</button></div><div class="dialog-body"><h3 id="dialogTitle"></h3><p id="dialogDesc"></p><div class="dialog-tags" id="dialogTags"></div></div></dialog>
+<script src="assets/samo.js"></script>
+<script>
+  const palettes = {
+    pop: { paper: '#f5ff62', pink: '#ff72b6', blue: '#6172ff', mint: '#74e8b5', lilac: '#c5a5ff' },
+    pink: { paper: '#ffd6e9', pink: '#ff5d9e', blue: '#7457ff', mint: '#b9efb1', lilac: '#ffb36b' },
+    mint: { paper: '#c9f7d7', pink: '#ff9bc7', blue: '#5577df', mint: '#f6ef73', lilac: '#bda0ff' },
+    lilac: { paper: '#e2d2ff', pink: '#ff82b4', blue: '#7255db', mint: '#87e4b1', lilac: '#f5ef73' }
+  };
+  document.querySelectorAll('.swatch').forEach(button => {
+    button.addEventListener('click', () => {
+      const theme = palettes[button.dataset.theme];
+      Object.entries(theme).forEach(([key, value]) => document.documentElement.style.setProperty(`--${key}`, value));
+      document.querySelectorAll('.swatch').forEach(el => el.setAttribute('aria-pressed', String(el === button)));
+    });
+  });
+  const quotes = [
+    ['「今天的目标：把想法变成能点的东西。」', '正在打磨 NOEVA 与 GeeGeeKing，也在继续探索更有趣的交互和个人表达。'],
+    ['「进度 60%，但快乐已经满格。」', '给萨摩耶画了新的像素姿势，给博客加了一点不必要的动效。'],
+    ['「先做出来，再慢慢变好。」', '个人项目不一定要宏大，能解决自己的一个小问题就值得记录。'],
+    ['「今天的 Bug，是明天的经验值。」', '修完一个旧问题，顺手把过程写进冒险日志。']
+  ];
+  let quoteIndex = 0;
+  document.getElementById('quoteBtn').addEventListener('click', () => {
+    quoteIndex = (quoteIndex + 1) % quotes.length;
+    document.getElementById('nowTitle').innerHTML = quotes[quoteIndex][0];
+    document.getElementById('nowDesc').textContent = quotes[quoteIndex][1];
+  });
+  document.getElementById('nextQuest').addEventListener('click', () => document.getElementById('quoteBtn').click());
+  document.querySelectorAll('.filter').forEach(button => {
+    button.addEventListener('click', () => {
+      document.querySelectorAll('.filter').forEach(el => el.setAttribute('aria-pressed', String(el === button)));
+      document.querySelectorAll('.work').forEach(card => { card.hidden = button.dataset.filter !== 'all' && card.dataset.kind !== button.dataset.filter; });
+    });
+  });
+  const projects = {
+    'NOEVA': ['个人产品 / 已上线', '用于记录思路与复盘的 App。参与界面、交互与生产部署，持续把真实使用中的问题变成下一次更新。', ['产品设计', '前端开发', '部署上线']],
+    'GeeGeeKing': ['个人项目 / 开发中', '像素风桌面待办小组件，正在研究用 Tauri 制作桌面安装包，让任务管理更轻、更有个人特色。', ['像素风', 'Tauri', '桌面小组件']],
+    '课堂计分小程序': ['接单项目', '面向课堂场景的计分与动画呈现小程序，用即时反馈和动画让课堂互动更轻松。', ['小程序', '动画反馈', '课堂工具']],
+    '热点新闻爬取站': ['练手项目', '完成热点新闻采集与整理，并用前端页面呈现，练习数据处理和可视化展示。', ['Python', '数据采集', '信息展示']],
+    'C 端图片 / AI 工具': ['工作项目', '面向普通用户的图片与 AI 生成工具，关注操作效率、生成反馈与整体易用性。', ['C 端产品', 'AI 工具', '图片处理']],
+    'B 端教师 Agent': ['工作项目', '面向教师的智能助手，围绕真实教学流程设计信息架构和交互细节。', ['B 端产品', 'Agent', '教学场景']]
+  };
+  const dialog = document.getElementById('projectDialog');
+  document.querySelectorAll('[data-project]').forEach(button => {
+    button.addEventListener('click', () => {
+      const data = projects[button.dataset.project];
+      document.getElementById('dialogTitle').textContent = button.dataset.project;
+      document.getElementById('dialogDesc').textContent = `${data[0]}。${data[1]}`;
+      document.getElementById('dialogTags').replaceChildren(...data[2].map(text => { const span = document.createElement('span'); span.textContent = text; return span; }));
+      dialog.showModal();
+    });
+  });
+  dialog.querySelector('.dialog-close').addEventListener('click', () => dialog.close());
+  dialog.addEventListener('click', event => { if (event.target === dialog) { const r = dialog.getBoundingClientRect(); if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) dialog.close(); } });
+  const portrait = document.getElementById('portrait');
+  if (matchMedia('(pointer:fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    portrait.addEventListener('pointermove', event => {
+      const r = portrait.getBoundingClientRect();
+      const x = (event.clientX - r.left) / r.width - .5;
+      const y = (event.clientY - r.top) / r.height - .5;
+      portrait.style.transform = `rotate(${3 + x * 5}deg) translate(${x * 8}px, ${y * 8}px)`;
+    });
+    portrait.addEventListener('pointerleave', () => { portrait.style.transform = ''; });
+  }
+</script>
+</body>
+</html>

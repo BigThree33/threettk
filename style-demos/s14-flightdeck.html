@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<title>YOUR NAME · 存档漂流舱</title>
+<style>
+:root{
+  --void:#070b0c;--deck:#0c1213;--panel:#10191a;--panel-2:#131f20;
+  --line:#2b3d3b;--line-soft:#1c2c2b;--ink:#d7e6dd;--muted:#7f9890;
+  --green:#a9ef76;--mint:#66dbb5;--amber:#ffb65e;--red:#ff796f;
+  --mono:"Cascadia Code","SFMono-Regular",Consolas,"Liberation Mono","Microsoft YaHei",monospace;
+  --cut:10px;
+}
+*{box-sizing:border-box}
+html{background:var(--void);scroll-behavior:smooth}
+body{margin:0;color:var(--ink);font:12px/1.65 var(--mono);background:
+  linear-gradient(rgba(102,219,181,.025) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(102,219,181,.025) 1px,transparent 1px),var(--void);
+  background-size:32px 32px;min-width:0;overflow-x:hidden}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:20;opacity:.12;background:repeating-linear-gradient(0deg,transparent 0 3px,#000 3px 4px)}
+button,a,input{font:inherit}
+button{color:inherit}
+a{color:inherit;text-decoration:none}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--amber);outline-offset:4px}
+::selection{background:var(--green);color:var(--void)}
+[hidden]{display:none!important}
+.shell{width:min(1460px,calc(100% - 40px));margin:auto}
+.utility{height:46px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);gap:16px}
+.back{display:inline-flex;align-items:center;gap:10px;color:var(--muted);letter-spacing:.08em}
+.back:hover{color:var(--green)}
+.back i{font-style:normal;color:var(--green)}
+.utility-right{display:flex;gap:24px;color:var(--muted);font-size:10px;letter-spacing:.13em}
+.online{color:var(--green)}
+.online::before{content:"";display:inline-block;width:6px;height:6px;margin-right:8px;background:var(--green);box-shadow:0 0 10px #a9ef7677;animation:blink 2.4s steps(2,end) infinite}
+.hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(360px,.75fr);gap:32px;padding:34px 0 30px;align-items:end}
+.eyebrow{display:flex;align-items:center;gap:10px;color:var(--green);font-size:10px;letter-spacing:.2em;margin-bottom:12px}
+.eyebrow::before{content:"";width:24px;height:1px;background:var(--green)}
+h1{font-size:clamp(32px,4.2vw,62px);line-height:.98;letter-spacing:-.065em;margin:0 0 14px;font-weight:700}
+h1 span{color:var(--green)}
+.hero-copy{color:var(--muted);max-width:610px;margin:0;font-size:12px;letter-spacing:.04em}
+.save-grid{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);background:var(--deck)}
+.meta{padding:13px 16px;min-width:0;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.meta:nth-child(2n){border-right:0}.meta:nth-last-child(-n+2){border-bottom:0}
+.meta-label{display:block;font-size:9px;color:var(--muted);letter-spacing:.16em;margin-bottom:4px}
+.meta-value{display:block;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.meta-value.accent{color:var(--amber)}
+.console{display:grid;grid-template-columns:248px minmax(0,1fr) 294px;gap:12px;align-items:start}
+.panel{position:relative;background:linear-gradient(135deg,rgba(102,219,181,.025),transparent 42%),var(--panel);border:1px solid var(--line);min-width:0;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));animation:panel-in .7s both}
+.panel:nth-child(2){animation-delay:.08s}.panel:nth-child(3){animation-delay:.16s}
+.panel::before,.panel::after{content:"";position:absolute;width:22px;height:1px;background:var(--green);opacity:.7;z-index:2}
+.panel::before{left:0;top:0}.panel::after{right:0;bottom:0}
+.panel-head{min-height:42px;display:flex;justify-content:space-between;align-items:center;padding:0 14px;border-bottom:1px solid var(--line);gap:10px;background:rgba(7,11,12,.25)}
+.panel-title{font-size:10px;letter-spacing:.14em;color:var(--muted);white-space:nowrap}
+.panel-title b{color:var(--ink);font-weight:400}
+.index{color:var(--green);font-size:9px}
+.profile-body{padding:17px 16px 15px;text-align:center}
+.portrait-wrap{height:116px;display:grid;place-items:center;position:relative;margin-bottom:13px;background:radial-gradient(ellipse,rgba(102,219,181,.09),transparent 68%)}
+.portrait-wrap::before,.portrait-wrap::after{content:"";position:absolute;width:24px;height:24px;border-color:var(--line);border-style:solid}
+.portrait-wrap::before{left:7px;top:4px;border-width:1px 0 0 1px}.portrait-wrap::after{right:7px;bottom:4px;border-width:0 1px 1px 0}
+canvas.samo{display:block;image-rendering:pixelated;filter:drop-shadow(0 8px 14px #0008)}
+.player-name{font-size:18px;letter-spacing:.08em;margin:0 0 2px}.player-role{color:var(--green);font-size:10px;letter-spacing:.16em}
+.player-id{color:var(--muted);font-size:9px;margin-top:8px}
+.xp-line{display:flex;justify-content:space-between;color:var(--muted);font-size:9px;margin:17px 0 6px}
+.xp-track{height:5px;background:#050909;border:1px solid var(--line);padding:1px}
+.xp-fill{height:100%;width:68%;background:repeating-linear-gradient(90deg,var(--green) 0 6px,transparent 6px 8px)}
+.section-label{padding:11px 14px 8px;color:var(--muted);font-size:9px;letter-spacing:.18em;border-top:1px solid var(--line-soft)}
+.stat{padding:6px 15px 9px}
+.stat-top{display:flex;justify-content:space-between;gap:8px;margin-bottom:5px}
+.stat-top span:first-child{color:#b8cac2}.stat-num{color:var(--green)}
+.segments{display:flex;gap:3px;height:8px}
+.segments i{display:block;flex:1;background:#253330;transform:skewX(-16deg)}
+.segments i.on{background:var(--mint)}.segments.amber i.on{background:var(--amber)}
+.stat:nth-of-type(2) .segments i.on{background:var(--green)}
+.inventory-mini{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:5px 14px 16px}
+.slot{background:#0a1112;border:1px solid var(--line-soft);aspect-ratio:1;display:grid;place-items:center;font-size:19px;position:relative}
+.slot::after{content:attr(data-label);position:absolute;bottom:2px;font-size:7px;color:var(--muted)}
+.radar-panel{min-height:568px}
+.radar-head-right{display:flex;gap:8px;align-items:center;color:var(--mint);font-size:9px}
+.filters{display:flex;gap:5px;padding:10px 12px;border-bottom:1px solid var(--line-soft);flex-wrap:wrap}
+.filter{border:1px solid var(--line);background:transparent;color:var(--muted);padding:5px 10px;cursor:pointer;font-size:9px;letter-spacing:.08em;transition:color .18s,background .18s,border-color .18s}
+.filter:hover{border-color:var(--mint);color:var(--ink)}
+.filter[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#0a140c}
+.radar-stage{position:relative;margin:14px;aspect-ratio:1.23;overflow:hidden;background:#091112;border:1px solid #314541;isolation:isolate}
+.radar-stage::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(circle,transparent 45%,rgba(4,10,10,.28) 100%)}
+.radar-svg{position:absolute;inset:0;width:100%;height:100%;color:#35534a}
+.radar-svg .grid{stroke:currentColor;stroke-width:.7;fill:none;opacity:.55}
+.radar-svg .cross{stroke:#487262;stroke-width:.7;opacity:.55}
+.radar-svg text{fill:#66887c;font:8px var(--mono);letter-spacing:1px}
+.sweep{position:absolute;inset:0;background:conic-gradient(from 0deg,transparent 0deg 302deg,rgba(102,219,181,.03) 316deg,rgba(102,219,181,.25) 359deg,transparent 360deg);animation:sweep 8s linear infinite;pointer-events:none;z-index:2}
+.sweep::after{content:"";position:absolute;left:50%;top:50%;width:50%;height:1px;transform-origin:left;background:linear-gradient(90deg,#a9ef76aa,transparent)}
+.noise{position:absolute;inset:0;opacity:.18;pointer-events:none;background-image:radial-gradient(#72b499 0.6px,transparent .6px);background-size:5px 5px;z-index:2}
+.radar-coordinates{position:absolute;left:9px;bottom:7px;color:#6b8d7f;font-size:8px;letter-spacing:.12em;z-index:3}
+.radar-north{position:absolute;top:8px;left:50%;transform:translateX(-50%);color:var(--green);font-size:9px;z-index:3}
+.target{position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%);z-index:4;border:0;background:transparent;padding:12px;cursor:pointer;color:var(--green);display:flex;align-items:center;flex-direction:column;min-width:88px}
+.target-dot{width:11px;height:11px;background:currentColor;transform:rotate(45deg);box-shadow:0 0 12px currentColor;position:relative;transition:transform .2s}
+.target-dot::after{content:"";position:absolute;inset:3px;background:#0a1312}
+.target-code{margin-top:11px;padding:2px 5px;background:#091312e8;border:1px solid currentColor;font-size:9px;letter-spacing:.06em;white-space:nowrap}
+.target-sub{font-size:7px;color:var(--muted);margin-top:4px;white-space:nowrap}
+.target:hover .target-dot{transform:rotate(135deg) scale(1.15)}
+.target[aria-pressed="true"] .target-dot{color:var(--amber);animation:target-pulse 1.5s steps(2,end) infinite}
+.lock{position:absolute;width:42px;height:42px;left:var(--x);top:var(--y);transform:translate(-50%,-50%);pointer-events:none;z-index:3;opacity:0;transition:left .35s steps(5),top .35s steps(5),opacity .2s}
+.lock.visible{opacity:1}
+.lock i{position:absolute;width:11px;height:11px;border-color:var(--amber);border-style:solid}
+.lock i:nth-child(1){left:0;top:0;border-width:1px 0 0 1px}.lock i:nth-child(2){right:0;top:0;border-width:1px 1px 0 0}.lock i:nth-child(3){left:0;bottom:0;border-width:0 0 1px 1px}.lock i:nth-child(4){right:0;bottom:0;border-width:0 1px 1px 0}
+.radar-footer{padding:0 14px 13px;display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:8px;letter-spacing:.08em}
+.radar-footer strong{color:var(--green);font-weight:400}
+.detail-body{padding:17px 16px}
+.detail-kicker{display:flex;justify-content:space-between;gap:10px;color:var(--green);font-size:9px;letter-spacing:.1em;margin-bottom:10px}
+.status{display:inline-flex;align-items:center;gap:5px;color:var(--amber)}
+.status::before{content:"";width:5px;height:5px;background:currentColor}
+.detail-title{font-size:23px;line-height:1.25;margin:0 0 5px;letter-spacing:-.04em}
+.detail-en{font-size:9px;color:var(--muted);letter-spacing:.16em;margin-bottom:17px}
+.detail-desc{color:#9fb3aa;margin:0 0 17px;min-height:60px}
+.data-row{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-top:1px solid var(--line-soft);font-size:10px}
+.data-row span:first-child{color:var(--muted)}.data-row span:last-child{text-align:right}
+.objectives{margin:14px 0 0;padding:0;list-style:none;display:grid;gap:7px}
+.objective{display:flex;align-items:flex-start;gap:9px;width:100%;background:transparent;border:0;padding:3px 0;text-align:left;color:#a9bbb3;cursor:pointer;font-size:10px}
+.objective:hover{color:var(--green)}
+.check{width:13px;height:13px;flex:0 0 13px;border:1px solid #587166;display:grid;place-items:center;margin-top:2px;color:#0a140c;font-size:9px}
+.objective[aria-pressed="true"] .check{background:var(--green);border-color:var(--green)}
+.objective[aria-pressed="true"]{color:var(--muted);text-decoration:line-through}
+.progress-label{display:flex;justify-content:space-between;color:var(--muted);font-size:9px;margin:17px 0 5px}
+.progress-track{height:6px;background:#070d0d;border:1px solid var(--line);padding:1px}
+.progress-fill{height:100%;width:0;background:var(--green);transition:width .35s steps(6)}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:17px}
+.action{border:1px solid var(--line);background:#131f1e;padding:9px 8px;cursor:pointer;font-size:9px;letter-spacing:.08em;transition:background .18s,color .18s,transform .18s}
+.action:hover{background:var(--green);color:#0b140d;transform:translateY(-2px)}
+.action.primary{border-color:var(--green);color:var(--green)}
+.action.primary:hover{color:#0b140d}
+.signal{display:flex;align-items:flex-end;gap:2px;height:9px}
+.signal i{display:block;width:3px;background:var(--green)}.signal i:nth-child(1){height:3px}.signal i:nth-child(2){height:5px}.signal i:nth-child(3){height:7px}.signal i:nth-child(4){height:9px}
+.bottom-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(340px,.65fr);gap:12px;margin-top:12px}
+.log-panel,.gear-panel{animation-delay:.22s}
+.log-tabs{display:flex;gap:4px}
+.log-tab{background:transparent;border:1px solid transparent;color:var(--muted);padding:5px 10px;cursor:pointer;font-size:9px}
+.log-tab:hover{color:var(--green)}.log-tab[aria-selected="true"]{color:var(--green);border-color:var(--line);background:#172321}
+.log-list{list-style:none;margin:0;padding:0 15px}
+.log-entry{display:grid;grid-template-columns:76px 12px minmax(0,1fr) auto;gap:10px;padding:12px 0;border-bottom:1px solid var(--line-soft);align-items:start}
+.log-entry:last-child{border-bottom:0}
+.log-time{color:var(--muted);font-size:9px}.log-dot{width:5px;height:5px;background:var(--mint);margin-top:6px}.log-entry[data-type="life"] .log-dot{background:var(--amber)}
+.log-text{min-width:0}.log-text b{font-weight:400;color:#c6d7cf}.log-text p{margin:3px 0 0;color:var(--muted);font-size:10px}
+.log-tag{font-size:8px;color:var(--mint);border:1px solid var(--line);padding:1px 5px;white-space:nowrap}
+.empty{padding:30px 15px;color:var(--muted);text-align:center}
+.gear-list{padding:7px 14px 13px;display:grid;gap:0}
+.gear{display:grid;grid-template-columns:30px minmax(0,1fr) auto;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--line-soft)}
+.gear:last-child{border-bottom:0}
+.gear-icon{width:28px;height:28px;border:1px solid var(--line);display:grid;place-items:center;color:var(--green);background:#0a1112}
+.gear-name{font-size:11px}.gear-sub{color:var(--muted);font-size:9px}
+.gear-state{color:var(--green);font-size:8px;letter-spacing:.08em}
+footer{display:flex;justify-content:space-between;gap:16px;padding:20px 0 25px;color:#637b72;font-size:9px;letter-spacing:.12em}
+.toast{position:fixed;right:22px;bottom:22px;z-index:30;max-width:min(340px,calc(100% - 44px));padding:12px 16px;border:1px solid var(--green);background:#111e19;color:var(--green);box-shadow:0 10px 40px #0009;transform:translateY(20px);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
+.toast.show{opacity:1;transform:translateY(0)}
+@keyframes sweep{to{transform:rotate(360deg)}}
+@keyframes blink{50%{opacity:.3}}
+@keyframes target-pulse{50%{opacity:.5}}
+@keyframes panel-in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@media(min-width:1200px){.radar-stage{aspect-ratio:1.15}}
+@media(max-width:1100px){
+  .console{grid-template-columns:220px minmax(0,1fr)}
+  .detail-panel{grid-column:1/-1}.detail-body{display:grid;grid-template-columns:1fr 1fr;gap:0 28px}.detail-main{grid-row:span 2}.detail-desc{min-height:0}
+  .bottom-grid{grid-template-columns:1fr}.gear-list{grid-template-columns:1fr 1fr;gap:0 24px}.gear:nth-last-child(2){border-bottom:0}
+}
+@media(max-width:760px){
+  .shell{width:calc(100% - 24px)}.utility{height:42px}.utility-right span:not(.online){display:none}
+  .hero{grid-template-columns:1fr;gap:22px;padding:26px 0 22px}.hero-copy{font-size:11px}
+  .save-grid{grid-template-columns:1fr 1fr}.meta{padding:10px 12px}
+  .console{grid-template-columns:1fr}.profile-panel{grid-row:2}.radar-panel{grid-row:1;min-height:0}.detail-panel{grid-column:auto}
+  .profile-body{display:grid;grid-template-columns:110px 1fr;text-align:left;gap:0 14px}.portrait-wrap{grid-row:span 3;height:112px;margin:0}.player-name{align-self:end}.xp-line{margin-top:8px}
+  .profile-panel .section-label,.profile-panel .stat,.inventory-mini{grid-column:1/-1}.stats-wrap{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}.stats-wrap .section-label{grid-column:1/-1}.stat{padding-left:0;padding-right:0}
+  .detail-body{display:block}.detail-desc{min-height:0}.radar-stage{aspect-ratio:1.08;margin:12px}.target{min-width:76px;padding:8px}.target-code{font-size:8px}.target-sub{font-size:7px}
+  .radar-head-right{display:none}.radar-footer{font-size:7px}.log-entry{grid-template-columns:59px 8px minmax(0,1fr);gap:8px}.log-tag{display:none}.gear-list{grid-template-columns:1fr}.gear:nth-last-child(2){border-bottom:1px solid var(--line-soft)}
+  footer{font-size:8px;flex-direction:column;gap:5px}
+}
+@media(max-width:390px){
+  .shell{width:calc(100% - 20px)}h1{font-size:35px}.hero{gap:18px}.meta-value{font-size:10px}
+  .filters{padding:9px 8px;gap:4px}.filter{padding:5px 8px}.radar-stage{margin:10px;aspect-ratio:1}.radar-footer{padding:0 10px 11px}.radar-footer span:last-child{display:none}
+  .target{min-width:70px;padding:7px}.target-code{font-size:7px}.target-sub{font-size:6px}.radar-svg text{font-size:7px}
+  .bottom-grid{grid-template-columns:minmax(0,1fr)}.panel-head{padding:0 11px}.log-tab{padding:5px 7px}.log-list{padding:0 11px}.log-text p{font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}.sweep{background:conic-gradient(from 35deg,transparent 0deg 340deg,rgba(102,219,181,.12) 359deg,transparent 360deg)}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+  <header class="utility">
+    <a class="back" href="gallery.html#34" target="_parent"><i>◀</i> 返回图鉴 / GALLERY</a>
+    <div class="utility-right"><span>LOCAL SIGNAL · 本地信号</span><span class="online">SYSTEM NOMINAL</span></div>
+  </header>
+
+  <section class="hero" aria-labelledby="page-title">
+    <div>
+      <div class="eyebrow">PERSONAL ARCHIVE / FLIGHT DECK 014</div>
+      <h1 id="page-title">YOUR NAME<span>_</span></h1>
+      <p class="hero-copy">把生活调成飞行模式。这里存档代码、好奇心与偶尔早睡的夜晚——所有坐标均为真实进度，所有任务都可以重新校准。</p>
+    </div>
+    <div class="save-grid" aria-label="存档信息">
+      <div class="meta"><span class="meta-label">PLAYER / 玩家</span><span class="meta-value">YOUR NAME</span></div>
+      <div class="meta"><span class="meta-label">SAVE SLOT / 存档</span><span class="meta-value accent">04 · 自动同步</span></div>
+      <div class="meta"><span class="meta-label">CHAPTER / 章节</span><span class="meta-value">02 构建中</span></div>
+      <div class="meta"><span class="meta-label">CHECKSUM / 校验</span><span class="meta-value">8F2A–C04D</span></div>
+    </div>
+  </section>
+
+  <main class="console">
+    <aside class="panel profile-panel" aria-labelledby="profile-title">
+      <div class="panel-head"><span class="panel-title" id="profile-title"><b>01</b> / PLAYER FILE</span><span class="index">LV.24</span></div>
+      <div class="profile-body">
+        <div class="portrait-wrap"><canvas class="samo" data-pose="portrait" data-px="5" aria-label="像素萨摩耶头像" role="img">像素萨摩耶</canvas></div>
+        <h2 class="player-name">YOUR NAME</h2>
+        <div class="player-role">前端开发者 × 生活观察员</div>
+        <div class="player-id">ID: YOUR-004 / ASIA·EAST</div>
+        <div class="xp-line"><span>下一等级</span><span>6,820 / 10,000 XP</span></div>
+        <div class="xp-track"><div class="xp-fill"></div></div>
+      </div>
+      <div class="stats-wrap">
+        <div class="section-label">ATTRIBUTE MATRIX / 属性</div>
+        <div class="stat"><div class="stat-top"><span>前端开发</span><span class="stat-num">88</span></div><div class="segments" aria-label="前端开发 88"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div></div>
+        <div class="stat"><div class="stat-top"><span>好奇心</span><span class="stat-num">96</span></div><div class="segments" aria-label="好奇心 96"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div></div>
+        <div class="stat"><div class="stat-top"><span>早睡</span><span class="stat-num">42</span></div><div class="segments amber" aria-label="早睡 42"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+        <div class="stat"><div class="stat-top"><span>咖啡耐受</span><span class="stat-num">73</span></div><div class="segments" aria-label="咖啡耐受 73"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div></div>
+      </div>
+      <div class="section-label">QUICK SLOTS / 随身槽位</div>
+      <div class="inventory-mini"><div class="slot" data-label="灵感">✦</div><div class="slot" data-label="咖啡">≈</div><div class="slot" data-label="TODO">≡</div></div>
+    </aside>
+
+    <section class="panel radar-panel" aria-labelledby="radar-title">
+      <div class="panel-head"><span class="panel-title" id="radar-title"><b>02</b> / TASK RADAR</span><span class="radar-head-right"><span class="signal" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span id="visible-count">04 TARGETS</span></span></div>
+      <div class="filters" role="group" aria-label="筛选雷达任务">
+        <button class="filter" type="button" data-filter="all" aria-pressed="true">全部 04</button>
+        <button class="filter" type="button" data-filter="dev" aria-pressed="false">开发 02</button>
+        <button class="filter" type="button" data-filter="writing" aria-pressed="false">写作 01</button>
+        <button class="filter" type="button" data-filter="life" aria-pressed="false">生活 01</button>
+      </div>
+      <div class="radar-stage" id="radar-stage">
+        <svg class="radar-svg" viewBox="0 0 500 440" preserveAspectRatio="none" aria-hidden="true">
+          <circle class="grid" cx="250" cy="220" r="190"/><circle class="grid" cx="250" cy="220" r="130"/><circle class="grid" cx="250" cy="220" r="65"/>
+          <path class="cross" d="M60 220H440M250 30V410M115 85L385 355M385 85L115 355"/>
+          <path class="grid" d="M65 155H90V190H65ZM410 250H435V285H410Z" stroke-dasharray="3 3"/>
+          <text x="256" y="49">000</text><text x="415" y="214">090</text><text x="254" y="408">180</text><text x="53" y="214">270</text>
+        </svg>
+        <div class="sweep" aria-hidden="true"></div><div class="noise" aria-hidden="true"></div><div class="radar-north" aria-hidden="true">N / 000</div>
+        <div class="lock visible" id="lock" style="--x:28%;--y:34%" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        <button class="target" type="button" data-task="noeva" data-category="dev" style="--x:28%;--y:34%" aria-pressed="true" aria-label="查看 NOEVA 任务详情">
+          <span class="target-dot"></span><span class="target-code">NOEVA</span><span class="target-sub">SIDE QUEST · 72%</span>
+        </button>
+        <button class="target" type="button" data-task="geegeeking" data-category="dev" style="--x:72%;--y:27%" aria-pressed="false" aria-label="查看 GeeGeeKing 任务详情">
+          <span class="target-dot"></span><span class="target-code">GeeGeeKing</span><span class="target-sub">SIDE QUEST · 35%</span>
+        </button>
+        <button class="target" type="button" data-task="writing" data-category="writing" style="--x:68%;--y:70%" aria-pressed="false" aria-label="查看写作任务详情">
+          <span class="target-dot"></span><span class="target-code">写作</span><span class="target-sub">STORY LOG · 50%</span>
+        </button>
+        <button class="target" type="button" data-task="life" data-category="life" style="--x:30%;--y:76%" aria-pressed="false" aria-label="查看生活任务详情">
+          <span class="target-dot"></span><span class="target-code">生活</span><span class="target-sub">DAILY ROUTINE · 25%</span>
+        </button>
+        <span class="radar-coordinates">RANGE 04.2 KM · SCAN 08.0 SEC</span>
+      </div>
+      <div class="radar-footer"><span>点击信标读取任务 · <strong id="radar-hint">NOEVA 已锁定</strong></span><span>LAT 31.23 / LON 121.47</span></div>
+    </section>
+
+    <aside class="panel detail-panel" aria-labelledby="detail-panel-title">
+      <div class="panel-head"><span class="panel-title" id="detail-panel-title"><b>03</b> / MISSION DATA</span><span class="index" id="mission-code">DEV–01</span></div>
+      <div class="detail-body">
+        <div class="detail-main">
+          <div class="detail-kicker"><span id="mission-type">开发任务</span><span class="status" id="mission-status">进行中</span></div>
+          <h2 class="detail-title" id="mission-title">NOEVA</h2>
+          <div class="detail-en" id="mission-en">INTERACTIVE SPACE PROJECT</div>
+          <p class="detail-desc" id="mission-desc">一个关于声音与空间的小型交互实验。让浏览器成为乐器，让每一次移动都留下可见的回声。</p>
+          <div class="data-row"><span>优先级</span><span id="mission-priority">HIGH / 高</span></div>
+          <div class="data-row"><span>截止坐标</span><span id="mission-date">2026.12.18</span></div>
+          <div class="data-row"><span>奖励</span><span id="mission-reward">+480 XP · 新装备</span></div>
+        </div>
+        <div class="detail-progress">
+          <ul class="objectives" id="objectives" aria-label="任务目标"></ul>
+          <div class="progress-label"><span>完成度</span><span id="progress-text">2 / 3 · 67%</span></div>
+          <div class="progress-track" role="progressbar" aria-label="任务完成度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="67" id="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+          <div class="actions"><button class="action primary" id="log-button" type="button">＋ 写入日志</button><button class="action" id="reset-button" type="button">↺ 重置目标</button></div>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <section class="bottom-grid" aria-label="日志与项目装备">
+    <div class="panel log-panel">
+      <div class="panel-head"><span class="panel-title"><b>04</b> / CAPTAIN'S LOG</span><div class="log-tabs" role="tablist" aria-label="日志分类"><button class="log-tab" type="button" role="tab" data-log-filter="all" aria-selected="true">全部</button><button class="log-tab" type="button" role="tab" data-log-filter="dev" aria-selected="false">开发</button><button class="log-tab" type="button" role="tab" data-log-filter="life" aria-selected="false">生活</button></div></div>
+      <ol class="log-list" id="log-list" role="tabpanel" aria-live="polite">
+        <li class="log-entry" data-type="dev"><time class="log-time" datetime="2026-11-24">11.24 23:18</time><span class="log-dot"></span><div class="log-text"><b>雷达校准完成</b><p>给交互原型补上了键盘导航，信标终于可以被 Tab 逐个捕获。</p></div><span class="log-tag">NOEVA</span></li>
+        <li class="log-entry" data-type="dev"><time class="log-time" datetime="2026-11-23">11.23 20:06</time><span class="log-dot"></span><div class="log-text"><b>给组件做了一次减法</b><p>删掉三个包装层，留下真正有用的边界状态与空数据提示。</p></div><span class="log-tag">REFACTOR</span></li>
+        <li class="log-entry" data-type="life"><time class="log-time" datetime="2026-11-22">11.22 07:42</time><span class="log-dot"></span><div class="log-text"><b>早睡计划：首次达成</b><p>把手机留在客厅，换来了完整的七小时睡眠和清醒的早晨。</p></div><span class="log-tag">LIFE</span></li>
+      </ol>
+      <div class="empty" id="log-empty" hidden>该频段暂无日志。选择其他分类继续读取。</div>
+    </div>
+    <div class="panel gear-panel">
+      <div class="panel-head"><span class="panel-title"><b>05</b> / PROJECT LOADOUT</span><span class="index">03 EQUIPPED</span></div>
+      <div class="gear-list">
+        <div class="gear"><span class="gear-icon" aria-hidden="true">&lt;/&gt;</span><div><div class="gear-name">NOEVA</div><div class="gear-sub">Web Audio · Canvas</div></div><span class="gear-state">BUILDING</span></div>
+        <div class="gear"><span class="gear-icon" aria-hidden="true">◎</span><div><div class="gear-name">GeeGeeKing</div><div class="gear-sub">Creative coding</div></div><span class="gear-state">TESTING</span></div>
+        <div class="gear"><span class="gear-icon" aria-hidden="true">✎</span><div><div class="gear-name">像素漂流志</div><div class="gear-sub">Essay · Field notes</div></div><span class="gear-state">DRAFT 03</span></div>
+      </div>
+    </div>
+  </section>
+  <footer><span>© 2026 YOUR NAME · ALL SIGNALS RESERVED</span><span>BUILD 14.04 / 本地存档，不上传任何数据</span></footer>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="assets/samo.js"></script>
+<script>
+(function(){
+  'use strict';
+  const tasks = {
+    noeva:{code:'DEV–01',type:'开发任务',title:'NOEVA',en:'INTERACTIVE SPACE PROJECT',desc:'一个关于声音与空间的小型交互实验。让浏览器成为乐器，让每一次移动都留下可见的回声。',priority:'HIGH / 高',date:'2026.12.18',reward:'+480 XP · 新装备',objectives:['定义声音与光点的映射规则','完成核心交互与键盘操作','录制一段可分享的演示'],initial:[true,true,false]},
+    geegeeking:{code:'DEV–02',type:'开发任务',title:'GeeGeeKing',en:'GENERATIVE PLAYGROUND',desc:'一台由规则驱动的像素玩具。随机种子决定地形，玩家只需留下方向，世界就会自己生长。',priority:'MED / 中',date:'2027.01.09',reward:'+360 XP · 生成器',objectives:['整理地图生成算法','加入三种可切换的生物','完成移动端触控适配'],initial:[true,false,false]},
+    writing:{code:'LOG–01',type:'写作任务',title:'像素漂流志',en:'NOTES FROM THE SMALL WEB',desc:'记录那些不急着扩张的小网站、独立开发者，以及浏览器里值得停留的十分钟。',priority:'NORMAL / 普通',date:'2026.12.28',reward:'+220 XP · 新章节',objectives:['收集三个受访灵感','完成第一章草稿','校对并发布独立页面'],initial:[true,false,false]},
+    life:{code:'LIFE–01',type:'生活任务',title:'夜间补给',en:'REST IS A SKILL',desc:'不是效率挑战，只是给第二天的自己留一点电。睡前半小时，让屏幕和思绪一起降噪。',priority:'LOW / 低',date:'EVERY DAY',reward:'+80 XP · 清醒早晨',objectives:['23:30 前放下手机','读十页纸质书','记录一个今天的好消息'],initial:[false,false,false]}
+  };
+  const $=s=>document.querySelector(s), $$=s=>Array.from(document.querySelectorAll(s));
+  const state={}; let current='noeva', filter='all', toastTimer;
+  try{
+    const saved=JSON.parse(localStorage.getItem('flightdeck-s14')||'null');
+    if(saved&&saved.state)Object.keys(tasks).forEach(id=>{if(Array.isArray(saved.state[id]))state[id]=saved.state[id]});
+  }catch(e){}
+  function persist(){try{localStorage.setItem('flightdeck-s14',JSON.stringify({state:state,updated:Date.now()}));}catch(e){}}
+  function toast(message){const el=$('#toast');el.textContent=message;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),2400);}
+  function renderDetail(){
+    const task=tasks[current], done=state[current];
+    $('#mission-code').textContent=task.code;$('#mission-type').textContent=task.type;$('#mission-title').textContent=task.title;
+    $('#mission-en').textContent=task.en;$('#mission-desc').textContent=task.desc;$('#mission-priority').textContent=task.priority;
+    $('#mission-date').textContent=task.date;$('#mission-reward').textContent=task.reward;
+    const complete=done.filter(Boolean).length, pct=Math.round(complete/done.length*100);
+    $('#mission-status').textContent=complete===done.length?'已完成':complete?'进行中':'待启航';
+    $('#objectives').replaceChildren(...done.map((checked,i)=>{
+      const li=document.createElement('li'),button=document.createElement('button');button.type='button';button.className='objective';button.setAttribute('aria-pressed',String(checked));
+      const box=document.createElement('span');box.className='check';box.textContent=checked?'✓':'';box.setAttribute('aria-hidden','true');
+      const label=document.createElement('span');label.textContent=task.objectives[i];button.append(box,label);
+      button.addEventListener('click',()=>{state[current][i]=!state[current][i];persist();renderDetail();updateTargetProgress(current);toast(state[current][i]?'目标达成 · 进度已保存':'目标已重新打开');});li.append(button);return li;
+    }));
+    $('#progress-text').textContent=complete+' / '+done.length+' · '+pct+'%';$('#progress-fill').style.width=pct+'%';$('#progress-track').setAttribute('aria-valuenow',pct);
+  }
+  function updateTargetProgress(id){const t=tasks[id], done=state[id].filter(Boolean).length, pct=Math.round(done/t.objectives.length*100), target=$('[data-task="'+id+'"]');if(target)target.querySelector('.target-sub').textContent=(target.dataset.category==='dev'?'SIDE QUEST':target.dataset.category==='writing'?'STORY LOG':'DAILY ROUTINE')+' · '+pct+'%';}
+  function selectTask(id,focus){
+    if(!tasks[id])return;current=id;
+    $$('.target').forEach(t=>t.setAttribute('aria-pressed',String(t.dataset.task===id)));
+    const target=$('[data-task="'+id+'"]'),lock=$('#lock');lock.style.setProperty('--x',target.style.getPropertyValue('--x'));lock.style.setProperty('--y',target.style.getPropertyValue('--y'));lock.classList.add('visible');
+    $('#radar-hint').textContent=id==='geegeeking'?'GeeGeeKing 已锁定':tasks[id].title+' 已锁定';renderDetail();
+    if(focus)target.focus({preventScroll:true});
+  }
+  Object.keys(tasks).forEach(id=>{state[id]=Array.isArray(state[id])&&state[id].length===tasks[id].objectives.length?state[id]:tasks[id].initial.slice();updateTargetProgress(id);});
+  $$('.target').forEach(button=>button.addEventListener('click',()=>selectTask(button.dataset.task)));
+  $$('.filter').forEach(button=>button.addEventListener('click',()=>{
+    filter=button.dataset.filter;$$('.filter').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
+    let visible=0;$$('.target').forEach(t=>{const show=filter==='all'||t.dataset.category===filter;t.hidden=!show;if(show)visible++;});
+    $('#visible-count').textContent=String(visible).padStart(2,'0')+' TARGETS';
+    const selected=$('.target[data-task="'+current+'"]');if(selected.hidden){const first=$('.target:not([hidden])');if(first)selectTask(first.dataset.task);}$('#lock').classList.toggle('visible',!$('.target[data-task="'+current+'"]').hidden);
+  }));
+  $('#reset-button').addEventListener('click',()=>{state[current]=tasks[current].objectives.map(()=>false);persist();renderDetail();updateTargetProgress(current);toast(tasks[current].title+' · 目标已重置');});
+  $('#log-button').addEventListener('click',()=>{
+    const task=tasks[current],complete=state[current].filter(Boolean).length,li=document.createElement('li');li.className='log-entry';li.dataset.type=current==='life'?'life':'dev';
+    const now=new Date(),stamp=String(now.getMonth()+1).padStart(2,'0')+'.'+String(now.getDate()).padStart(2,'0')+' '+String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
+    const time=document.createElement('time');time.className='log-time';time.dateTime=now.toISOString().slice(0,10);time.textContent=stamp;
+    const dot=document.createElement('span');dot.className='log-dot';dot.setAttribute('aria-hidden','true');
+    const text=document.createElement('div');text.className='log-text';const title=document.createElement('b');title.textContent=task.title+' · 航行记录';const p=document.createElement('p');p.textContent='完成 '+complete+' / '+task.objectives.length+' 个目标。'+(complete===task.objectives.length?'任务归档，准备领取奖励。':'继续校准，下一步已经标记。');text.append(title,p);
+    const tag=document.createElement('span');tag.className='log-tag';tag.textContent=current==='geegeeking'?'GeeGeeKing':task.title.toUpperCase();li.append(time,dot,text,tag);$('#log-list').prepend(li);
+    applyLogFilter($('.log-tab[aria-selected="true"]').dataset.logFilter);toast('日志已写入本地航行记录');
+  });
+  function applyLogFilter(value){$$('.log-tab').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.logFilter===value)));let count=0;$$('.log-entry').forEach(e=>{e.hidden=value!=='all'&&e.dataset.type!==value;if(!e.hidden)count++;});$('#log-empty').hidden=count>0;}
+  $$('.log-tab').forEach(button=>button.addEventListener('click',()=>applyLogFilter(button.dataset.logFilter)));
+  renderDetail();
+})();
+</script>
+</body>
+</html>
