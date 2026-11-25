@@ -8,4 +8,4 @@
 
 ## 进度
 
-- 2026-11-25 已添加 14 种个人主页风格 Demo，入口为 `style-demos/index.html`，支持底部导航、hash 直达和移动端适配。
+- 2026-11-25 已添加 14 种个人主页风格 Demo（A–N），并扩展 10 种个人博客风格 Demo（O–X，参考 Framer / Awwwards / Recent / Thrine / React Bits），共 24 套风格，入口为 `style-demos/index.html`，支持底部导航、hash 直达、文章阅读预览和移动端适配。

@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>个人主页 · 14 种风格 Demo</title>
+<title>个人主页 & 博客 · 24 种风格 Demo</title>
+<link rel="stylesheet" href="blog-demos.css">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -452,6 +453,17 @@ background-image:repeating-linear-gradient(transparent 0 35px,#c9b48940 35px 36p
   <button data-s="l" role="tab" aria-controls="l">L 自然有机</button>
   <button data-s="m" role="tab" aria-controls="m">M 杂志编辑</button>
   <button data-s="n" role="tab" aria-controls="n">N 粒子交互</button>
+  <span class="sw-sep" aria-hidden="true">博客 +10</span>
+  <button data-s="o" role="tab" aria-controls="o">O Framer 动效刊</button>
+  <button data-s="p" role="tab" aria-controls="p">P Awwwards 索引</button>
+  <button data-s="q" role="tab" aria-controls="q">Q Recent 时间流</button>
+  <button data-s="r" role="tab" aria-controls="r">R Thrine 3D 馆</button>
+  <button data-s="s" role="tab" aria-controls="s">S React Bits 聚光</button>
+  <button data-s="t" role="tab" aria-controls="t">T 曜石工程志</button>
+  <button data-s="u" role="tab" aria-controls="u">U 极光丝绸</button>
+  <button data-s="v" role="tab" aria-controls="v">V 分屏读本</button>
+  <button data-s="w" role="tab" aria-controls="w">W 粘土工作台</button>
+  <button data-s="x" role="tab" aria-controls="x">X 像素抖动志</button>
 </nav>
 
 <!-- ================= A ================= -->
@@ -769,6 +781,719 @@ background-image:repeating-linear-gradient(transparent 0 35px,#c9b48940 35px 36p
 </div>
 </section>
 
+<!-- ================= O · Framer 动效刊 ================= -->
+<section id="o" class="panel">
+<div class="o-wrap">
+  <header class="o-nav">
+    <div class="o-brand"><span class="o-logo">3</span><span>Threeee · Blog</span></div>
+    <div class="o-tabs" role="group" aria-label="文章分类">
+      <button class="o-tab on" data-cat="all">全部文章</button>
+      <button class="o-tab" data-cat="eng">工程部署</button>
+      <button class="o-tab" data-cat="craft">交互设计</button>
+      <button class="o-tab" data-cat="essay">随笔思考</button>
+    </div>
+    <a class="o-cta" href="mailto:Threeee33@outlook.com">订阅 / 联系 ↗</a>
+  </header>
+
+  <section class="o-hero">
+    <div>
+      <span class="o-pill"><i class="o-dot"></i>正在写：GeeGeeKing × Tauri 桌面化笔记</span>
+      <h1>写给自己的<br><span>前端手记</span>与实验。</h1>
+      <p>我是前端开发者 & 独立创作者。白天做 C 端 AI 出图工具与 B 端教师 Agent，晚上维护 NOEVA 和 GeeGeeKing，顺手把踩过的坑、拆解过的动效写在这里。</p>
+      <div class="o-stats">
+        <div><b>24+</b><span>实验与笔记</span></div>
+        <div><b>02</b><span>持续迭代中的产品</span></div>
+        <div><b>Nov 25</b><span>最近更新</span></div>
+      </div>
+    </div>
+    <article class="o-feature" data-post="noeva-deploy">
+      <div class="o-cover">
+        <span class="o-cover-badge">FEATURED STORY · 01</span>
+        <strong>把 NOEVA 第一次送上生产环境：踩过的 7 个坑</strong>
+      </div>
+      <div class="o-feature-meta"><span>工程部署 · NOEVA</span><span>2026.11.22 · 8 min</span></div>
+      <h2>从本地跑通到公网部署的最小闭环</h2>
+      <p>环境变量、首屏字体、静态资源缓存与数据库脚本——记录第一个个人产品真正上线的那一晚。</p>
+      <span class="o-read">点击阅读全文 <i>→</i></span>
+    </article>
+  </section>
+
+  <div class="o-main">
+    <div class="o-grid">
+      <article class="o-card" data-cat="eng" data-post="geegeeking-tauri">
+        <div>
+          <div class="o-card-top"><span class="o-chip">桌面端 · Tauri</span><time>2026.11.24</time></div>
+          <h3>给 GeeGeeKing 套壳 Tauri：前端第一次碰桌面原生体验</h3>
+          <p>透明窗口置顶、系统托盘与像素无抗锯齿渲染，让像素小人真正住进任务栏旁边。</p>
+        </div>
+        <div class="o-card-foot"><span>6 min read</span><span class="o-arrow">↗</span></div>
+      </article>
+      <article class="o-card" data-cat="craft" data-post="spring-motion">
+        <div>
+          <div class="o-card-top"><span class="o-chip design">交互动效</span><time>2026.11.18</time></div>
+          <h3>写给自己的前端动效笔记：如何用弹簧曲线做出不油腻的交互</h3>
+          <p>拆解 Framer 与 React Bits 里的克制阻尼、指针聚光与微交互节奏。</p>
+        </div>
+        <div class="o-card-foot"><span>10 min read</span><span class="o-arrow">↗</span></div>
+      </article>
+      <article class="o-card" data-cat="eng" data-post="ai-agent-ui">
+        <div>
+          <div class="o-card-top"><span class="o-chip ai">AI 产品</span><time>2026.11.09</time></div>
+          <h3>从 C 端出图工具到 B 端教师 Agent：AI 界面的状态设计复盘</h3>
+          <p>如何把模型生成时“不知道在干嘛的十秒”拆解成可理解、可微调的阶段反馈。</p>
+        </div>
+        <div class="o-card-foot"><span>12 min read</span><span class="o-arrow">↗</span></div>
+      </article>
+      <article class="o-card" data-cat="essay" data-post="why-handcode-blog">
+        <div>
+          <div class="o-card-top"><span class="o-chip essay">随笔思考</span><time>2026.10.28</time></div>
+          <h3>为什么我还是想亲手写一个个人博客，而不是只发社交媒体</h3>
+          <p>信息流里的帖子活不过三天，自己的域名却可以把半成品和思考慢慢养大。</p>
+        </div>
+        <div class="o-card-foot"><span>5 min read</span><span class="o-arrow">↗</span></div>
+      </article>
+      <article class="o-card" data-cat="craft" data-post="game-site-study">
+        <div>
+          <div class="o-card-top"><span class="o-chip design">排版拆解</span><time>2026.10.14</time></div>
+          <h3>仿写游戏公司官网的 48 小时：拆解排版节奏与首屏视觉重心</h3>
+          <p>从栅格比例到极端字号对比，像素级复刻一次高完成度官网的收获。</p>
+        </div>
+        <div class="o-card-foot"><span>7 min read</span><span class="o-arrow">↗</span></div>
+      </article>
+      <article class="o-card" data-cat="eng" data-post="noeva-deploy">
+        <div>
+          <div class="o-card-top"><span class="o-chip">工程部署</span><time>2026.11.22</time></div>
+          <h3>把 NOEVA 第一次送上生产环境：从本地跑到线上踩过的 7 个坑</h3>
+          <p>整理一套个人项目的轻量上线核对清单，下次发布不再通宵排错。</p>
+        </div>
+        <div class="o-card-foot"><span>8 min read</span><span class="o-arrow">↗</span></div>
+      </article>
+    </div>
+
+    <aside class="o-rail">
+      <div class="o-box">
+        <h4>Now / 近期碎片</h4>
+        <ul class="o-notes">
+          <li><small>11.25</small>参考 Framer、Awwwards、Thrine 和 React Bits 给博客多画了 10 套风格 Demo。</li>
+          <li><small>11.24</small>跑通了 Tauri 透明置顶窗口，GeeGeeKing 终于能悬浮在桌面角落了。</li>
+          <li><small>11.22</small>NOEVA 第一次部署到生产环境，算是一块里程碑。</li>
+        </ul>
+      </div>
+      <div class="o-box">
+        <h4>Active Projects</h4>
+        <div class="o-projects">
+          <div class="o-proj"><div><b>NOEVA</b><small>思路记录与复盘 App</small></div><span class="o-state">已上线</span></div>
+          <div class="o-proj"><div><b>GeeGeeKing</b><small>像素风桌面待办</small></div><span class="o-state dev">Tauri 中</span></div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+</section>
+
+<!-- ================= P · Awwwards 画廊索引 ================= -->
+<section id="p" class="panel">
+<div class="p-preview" id="pPreview" aria-hidden="true"><div class="p-preview-inner" id="pPreviewInner"></div></div>
+<div class="p-wrap">
+  <header class="p-bar">
+    <span>THREEEE — EDITORIAL BLOG ARCHIVE</span>
+    <span class="p-bar-mid">● HOVER ROWS FOR COVER PREVIEW</span>
+    <span class="p-bar-right" id="pClock">18:00:00 CST</span>
+  </header>
+
+  <section class="p-hero">
+    <h1>DIGITAL<br><em>Journal</em><br>&amp; CRAFT.</h1>
+    <div class="p-desc">
+      <b>Personal Blog · Issue 2026</b>
+      用画廊目录的方式保存每一篇长文、项目复盘与界面实验。移动光标悬停文章行查看动态封面预览，点击任意条目直接进入阅读。
+    </div>
+  </section>
+
+  <div class="p-index-head">
+    <span>No.</span><span>Essay Title</span><span>Category</span><span>Length</span><span style="justify-self:end">Date</span>
+  </div>
+  <div class="p-rows">
+    <article class="p-row" data-post="noeva-deploy"><span class="p-no">01</span><h3>把 NOEVA 第一次送上生产环境：踩过的 7 个坑</h3><span class="p-cat">Engineering</span><span class="p-time">8 min</span><span class="p-date">2026.11.22</span></article>
+    <article class="p-row" data-post="geegeeking-tauri"><span class="p-no">02</span><h3>给 GeeGeeKing 套壳 Tauri：前端碰桌面原生体验</h3><span class="p-cat">Desktop / Pixel</span><span class="p-time">6 min</span><span class="p-date">2026.11.24</span></article>
+    <article class="p-row" data-post="spring-motion"><span class="p-no">03</span><h3>前端动效笔记：如何用弹簧曲线做出不油腻的交互</h3><span class="p-cat">Motion Craft</span><span class="p-time">10 min</span><span class="p-date">2026.11.18</span></article>
+    <article class="p-row" data-post="ai-agent-ui"><span class="p-no">04</span><h3>从 C 端出图工具到 B 端教师 Agent 的状态设计复盘</h3><span class="p-cat">AI Interface</span><span class="p-time">12 min</span><span class="p-date">2026.11.09</span></article>
+    <article class="p-row" data-post="why-handcode-blog"><span class="p-no">05</span><h3>为什么我还是想亲手写一个个人博客</h3><span class="p-cat">Essay</span><span class="p-time">5 min</span><span class="p-date">2026.10.28</span></article>
+    <article class="p-row" data-post="game-site-study"><span class="p-no">06</span><h3>仿写游戏公司官网 48 小时：拆解排版与首屏重心</h3><span class="p-cat">Study / Grid</span><span class="p-time">7 min</span><span class="p-date">2026.10.14</span></article>
+  </div>
+
+  <footer class="p-foot-grid">
+    <div class="p-foot-col"><small>01 / About Author</small><p>前端开发与独立产品制作者。关注清晰排版、触感交互，以及把日常灵感打磨成小而顺手的数字工具。</p></div>
+    <div class="p-foot-col"><small>02 / Shipping Now</small><p>NOEVA（已上线生产环境）与 GeeGeeKing（正用 Tauri 打包为轻量桌面像素待办小组件）。</p></div>
+    <div class="p-foot-col"><small>03 / Contact &amp; RSS</small><p>写给同行、未来的自己，也欢迎聊有意思的想法：Threeee33@outlook.com</p></div>
+  </footer>
+</div>
+</section>
+
+<!-- ================= Q · Recent 极简时间流 ================= -->
+<section id="q" class="panel">
+<div class="q-wrap">
+  <aside class="q-side">
+    <div class="q-avatar">3T</div>
+    <h1>Your Name</h1>
+    <p class="q-role">前端开发 · 个人博客与数字书桌</p>
+    <p class="q-bio">白天写 AI 出图工具和教师 Agent，下班维护 NOEVA 与 GeeGeeKing。这里按时间顺序记录长文章和随手碎念。</p>
+    <div class="q-now-box">
+      <h2>Recently</h2>
+      <div class="q-now-item"><span>在做</span><b>GeeGeeKing (Tauri)</b></div>
+      <div class="q-now-item"><span>刚发</span><b>NOEVA v1.0 生产版</b></div>
+      <div class="q-now-item"><span>在学</span><b>Rust / 动效物理</b></div>
+      <div class="q-now-item"><span>状态</span><b>挑选博客视觉方向</b></div>
+    </div>
+    <div class="q-links">
+      <a href="mailto:Threeee33@outlook.com">Email</a>
+      <a href="#o">作品集</a>
+      <a href="#q">RSS</a>
+    </div>
+  </aside>
+
+  <main>
+    <header class="q-head">
+      <div class="q-head-title"><i class="q-live-dot"></i><span>Recent Stream · 按时间阅读</span></div>
+      <div class="q-filter">
+        <button class="on" data-type="all">全部</button>
+        <button data-type="post">长文章</button>
+        <button data-type="note">短想法</button>
+      </div>
+    </header>
+
+    <div class="q-group-label">November 2026</div>
+    <div class="q-list">
+      <article class="q-entry" data-type="note">
+        <div class="q-entry-row"><time>Nov 25</time><h3>给个人博客做了一轮风格巡礼：从 Framer 到 React Bits</h3><span class="q-kind note">短想法</span></div>
+        <p class="q-excerpt">比起一开始就纠结技术栈，把同一个人的真实文章放进 24 种排版里对照着看，反而能一眼分辨自己真正想长期打开的是哪一种。</p>
+        <div class="q-expand">小结论：视觉外壳可以很有辨识度，但文章列表和正文区一定要干净、低噪点，这样写第 50 篇时才不会嫌弃自己的模板。</div>
+        <span class="q-toggle-hint">点击展开全文摘要 ↓</span>
+      </article>
+      <article class="q-entry" data-type="post">
+        <div class="q-entry-row"><time>Nov 24</time><h3>给 GeeGeeKing 套壳 Tauri：前端第一次碰桌面原生体验</h3><span class="q-kind">长文章 · 6m</span></div>
+        <p class="q-excerpt">透明置顶窗口、系统托盘菜单与本地 JSON 存档权限——把像素风待办从浏览器搬上桌面的实操记录。</p>
+        <div class="q-expand">相比 Electron 动辄上百兆的安装包，Tauri 打包后的轻巧体积非常契合桌面小挂件定位。难点主要在窗口拖拽区域与跨平台高分屏缩放下的像素清晰度。</div>
+        <span class="q-toggle-hint">点击展开全文摘要 ↓</span>
+      </article>
+      <article class="q-entry" data-type="post">
+        <div class="q-entry-row"><time>Nov 22</time><h3>把 NOEVA 第一次送上生产环境：从本地跑到线上踩过的 7 个坑</h3><span class="q-kind">长文章 · 8m</span></div>
+        <p class="q-excerpt">第一次把自己的个人 App 完整部署上线，记录域名、构建期环境变量与移动端首屏优化清单。</p>
+        <div class="q-expand">个人项目最怕陷入无限本地打磨。先把最小闭环推到线上，真实使用一周后暴露出的体验问题，比在脑子里空想三个月准确十倍。</div>
+        <span class="q-toggle-hint">点击展开全文摘要 ↓</span>
+      </article>
+      <article class="q-entry" data-type="note">
+        <div class="q-entry-row"><time>Nov 19</time><h3>关于动效克制的一句备忘</h3><span class="q-kind note">短想法</span></div>
+        <p class="q-excerpt">凡是让用户“等动画播完才能点下一步”的动效，再炫也要砍掉。好的过渡应该永远跟得上手速。</p>
+        <div class="q-expand">把时长控制在 180ms–320ms，用 cubic-bezier(0.22, 1, 0.36, 1) 处理位移，就能同时拥有弹性与干脆感。</div>
+        <span class="q-toggle-hint">点击展开全文摘要 ↓</span>
+      </article>
+      <article class="q-entry" data-type="post">
+        <div class="q-entry-row"><time>Nov 18</time><h3>写给自己的前端动效笔记：如何用弹簧曲线做出不油腻的交互</h3><span class="q-kind">长文章 · 10m</span></div>
+        <p class="q-excerpt">拆解 Framer 与 React Bits 中最耐看的几类微交互，总结给个人博客复用的动效基线。</p>
+        <div class="q-expand">核心三原则：方向符合因果、时长短于视线驻留、遵循 prefers-reduced-motion 且隐藏时零空转。</div>
+        <span class="q-toggle-hint">点击展开全文摘要 ↓</span>
+      </article>
+    </div>
+
+    <div class="q-group-label">October 2026</div>
+    <div class="q-list">
+      <article class="q-entry" data-type="post">
+        <div class="q-entry-row"><time>Oct 28</time><h3>为什么我还是想亲手写一个个人博客，而不是只发社交媒体</h3><span class="q-kind">长文章 · 5m</span></div>
+        <p class="q-excerpt">把零散的工程记录、复盘和实验留在自己的域名下，让时间慢慢沉淀成可检索的档案。</p>
+        <div class="q-expand">写博客不是为了表演专业，而是给三个月后的自己留一盏灯——回头翻看当时怎么解决某个 bug，本身就是很棒的复利。</div>
+        <span class="q-toggle-hint">点击展开全文摘要 ↓</span>
+      </article>
+      <article class="q-entry" data-type="post">
+        <div class="q-entry-row"><time>Oct 14</time><h3>仿写游戏公司官网的 48 小时：拆解排版节奏与首屏视觉重心</h3><span class="q-kind">长文章 · 7m</span></div>
+        <p class="q-excerpt">像素级复刻一次官网后，重新理解了字重对比、留白比例与克制配色的重要性。</p>
+        <div class="q-expand">越是视觉抓人的网站，信息层级反而越少：首屏只讲一件事，其余辅助元数据全部压缩到极小的视觉权重里。</div>
+        <span class="q-toggle-hint">点击展开全文摘要 ↓</span>
+      </article>
+    </div>
+  </main>
+</div>
+</section>
+
+<!-- ================= R · Thrine 3D 雕塑馆 ================= -->
+<section id="r" class="panel" data-mat="clay">
+<div class="r-wrap">
+  <header class="r-top">
+    <div class="r-brand">THRINE.BLOG <span>3D Material Studio</span></div>
+    <div class="r-mats" role="group" aria-label="切换 3D 材质">
+      <button class="r-mat-btn on" data-mat="clay">陶瓷 Clay</button>
+      <button class="r-mat-btn" data-mat="chrome">液态铬 Chrome</button>
+      <button class="r-mat-btn" data-mat="glass">磨砂玻璃 Glass</button>
+      <button class="r-mat-btn" data-mat="iridescent">虹彩 Iridescent</button>
+    </div>
+  </header>
+
+  <section class="r-hero">
+    <div>
+      <span class="r-kicker">Sculpted Notes &amp; Essays</span>
+      <h1>有触感的<br>个人技术博客。</h1>
+      <p>灵感来自 Thrine 的 3D 材质展台——移动右侧舞台指针可 3D 旋转雕塑，点击右上角实时切换陶瓷、液态铬、玻璃与虹彩材质，每一篇文章都像一件被认真打磨过的小物件。</p>
+      <div class="r-hero-tags">
+        <span>React &amp; Next.js</span><span>Tauri Desktop</span><span>Creative UI</span><span>Indie Maker</span>
+      </div>
+    </div>
+    <div class="r-stage" id="rStage">
+      <div class="r-rig" id="rRig">
+        <div class="r-torus"></div>
+        <div class="r-sphere"></div>
+        <div class="r-cube"></div>
+        <div class="r-pill3d"></div>
+      </div>
+      <span class="r-stage-tip">MOVE POINTER TO ORBIT 3D</span>
+    </div>
+  </section>
+
+  <div class="r-grid">
+    <article class="r-card" data-post="noeva-deploy">
+      <div><div class="r-icon3d">01</div><h3>把 NOEVA 第一次送上生产环境</h3><p>从本地 localhost 到公网生产部署，完整复盘踩过的 7 个关键坑。</p></div>
+      <div class="r-card-foot"><span>工程部署</span><span>2026.11.22</span></div>
+    </article>
+    <article class="r-card" data-post="geegeeking-tauri">
+      <div><div class="r-icon3d">02</div><h3>GeeGeeKing × Tauri 桌面化实验</h3><p>给像素待办小组件做透明置顶窗口与原生安装包的第一手记录。</p></div>
+      <div class="r-card-foot"><span>桌面应用</span><span>2026.11.24</span></div>
+    </article>
+    <article class="r-card" data-post="spring-motion">
+      <div><div class="r-icon3d">03</div><h3>用弹簧曲线做出不油腻的微交互</h3><p>拆解 Framer 与 3D 材质动效里的阻尼感与空间层次。</p></div>
+      <div class="r-card-foot"><span>交互设计</span><span>2026.11.18</span></div>
+    </article>
+    <article class="r-card" data-post="ai-agent-ui">
+      <div><div class="r-icon3d">04</div><h3>AI 出图与教师 Agent 的状态设计</h3><p>把不确定的生成等待拆解成清晰、可编辑、可打断的阶段反馈。</p></div>
+      <div class="r-card-foot"><span>AI 产品</span><span>2026.11.09</span></div>
+    </article>
+    <article class="r-card" data-post="why-handcode-blog">
+      <div><div class="r-icon3d">05</div><h3>为什么我还是想亲手写个人博客</h3><p>在算法信息流之外，保留一块完全由自己掌控审美与节奏的自留地。</p></div>
+      <div class="r-card-foot"><span>随笔</span><span>2026.10.28</span></div>
+    </article>
+    <article class="r-card" data-post="game-site-study">
+      <div><div class="r-icon3d">06</div><h3>仿写游戏公司官网的 48 小时</h3><p>从视觉重心到栅格密度，一次沉浸式的品牌页排版拆解练习。</p></div>
+      <div class="r-card-foot"><span>设计拆解</span><span>2026.10.14</span></div>
+    </article>
+  </div>
+</div>
+</section>
+
+<!-- ================= S · React Bits 聚光暗夜 ================= -->
+<section id="s" class="panel">
+<canvas id="sCanvas" aria-hidden="true"></canvas>
+<div class="s-wrap">
+  <header class="s-top">
+    <b>THREEEE // BITS.LOG</b>
+    <span>SQUARES CANVAS · DECRYPTED TEXT · SPOTLIGHT CARDS</span>
+  </header>
+
+  <section class="s-hero">
+    <div class="s-shiny"><i class="s-shiny-dot" aria-hidden="true"></i><span class="s-shiny-txt">PERSONAL ENGINEERING BLOG · REACT BITS INSPIRED</span></div>
+    <h1 class="s-decrypt" title="悬停或点击重新解码">
+      <span id="sDecryptTarget" data-text="CODE, MOTION &amp; NOTES.">CODE, MOTION &amp; NOTES.</span>
+    </h1>
+    <p>融合 React Bits 经典交互组件：移动鼠标点亮背景方格画布、悬停上方标题触发字符解码动画、掠过下方卡片感受指针聚光灯，并用底部 Dock 按主题筛选文章。</p>
+    <div class="s-dock" role="group" aria-label="按主题筛选">
+      <button class="on" data-topic="all">All</button>
+      <button data-topic="eng">Next / Deploy</button>
+      <button data-topic="tauri">Tauri</button>
+      <button data-topic="craft">Motion</button>
+      <button data-topic="ai">AI UI</button>
+    </div>
+  </section>
+
+  <div class="s-grid">
+    <article class="s-card" data-topic="eng" data-post="noeva-deploy">
+      <div>
+        <div class="s-card-meta"><span>01 // DEPLOY</span><span>11.22</span></div>
+        <h3>把 NOEVA 第一次送上生产环境：踩过的 7 个坑</h3>
+        <p>个人项目第一次公网部署的排错实录与可复用上线核对表。</p>
+      </div>
+      <div class="s-card-foot"><span>8 min read</span><span>Read →</span></div>
+    </article>
+    <article class="s-card" data-topic="tauri" data-post="geegeeking-tauri">
+      <div>
+        <div class="s-card-meta"><span>02 // TAURI</span><span>11.24</span></div>
+        <h3>给 GeeGeeKing 套壳 Tauri：Web 前端碰桌面原生</h3>
+        <p>透明窗口置顶、像素清晰渲染与系统托盘打包探索。</p>
+      </div>
+      <div class="s-card-foot"><span>6 min read</span><span>Read →</span></div>
+    </article>
+    <article class="s-card" data-topic="craft" data-post="spring-motion">
+      <div>
+        <div class="s-card-meta"><span>03 // MOTION</span><span>11.18</span></div>
+        <h3>前端动效笔记：如何用弹簧曲线做出不油腻的交互</h3>
+        <p>让卡片聚光、悬停位移动效保持 60fps 与克制体感。</p>
+      </div>
+      <div class="s-card-foot"><span>10 min read</span><span>Read →</span></div>
+    </article>
+    <article class="s-card" data-topic="ai" data-post="ai-agent-ui">
+      <div>
+        <div class="s-card-meta"><span>04 // AI AGENT</span><span>11.09</span></div>
+        <h3>C 端出图工具与 B 端教师 Agent 状态设计复盘</h3>
+        <p>生成式产品里，如何让不确定的等待变得透明且可控。</p>
+      </div>
+      <div class="s-card-foot"><span>12 min read</span><span>Read →</span></div>
+    </article>
+    <article class="s-card" data-topic="craft" data-post="game-site-study">
+      <div>
+        <div class="s-card-meta"><span>05 // LAYOUT</span><span>10.14</span></div>
+        <h3>仿写游戏公司官网 48 小时：拆解排版与视觉重心</h3>
+        <p>从首屏比例到细节动效，复盘一次高密度排版临摹。</p>
+      </div>
+      <div class="s-card-foot"><span>7 min read</span><span>Read →</span></div>
+    </article>
+    <article class="s-card" data-topic="eng" data-post="why-handcode-blog">
+      <div>
+        <div class="s-card-meta"><span>06 // ESSAY</span><span>10.28</span></div>
+        <h3>为什么我还是想亲手写一个个人博客</h3>
+        <p>打造一处长期属于自己的前端实验室与写作档案库。</p>
+      </div>
+      <div class="s-card-foot"><span>5 min read</span><span>Read →</span></div>
+    </article>
+  </div>
+</div>
+</section>
+
+<!-- ================= T · Resend 曜石工程志 ================= -->
+<section id="t" class="panel">
+<div class="tb-beam" aria-hidden="true"></div>
+<div class="tb-wrap">
+  <div class="tb-frame">
+    <span class="tb-cross tl">+</span><span class="tb-cross tr">+</span>
+    <span class="tb-cross bl">+</span><span class="tb-cross br">+</span>
+
+    <header class="tb-nav">
+      <b>threeee.dev / blog</b>
+      <div class="tb-nav-links"><span>文章</span><span>项目</span><span>关于</span><span>RSS</span></div>
+    </header>
+
+    <section class="tb-hero">
+      <div>
+        <span class="tb-badge">CHANGELOG · NOV 2026</span>
+        <h1>写给工程师的<br><span>克制而清晰</span>博客。</h1>
+        <p>参考 Resend 与 Linear 的曜石暗色工程美学：1px 银色细线框架、顶部柔和光束与代码级排版，专注呈现技术复盘、架构笔记与独立开发日志。</p>
+        <div class="tb-hero-act">
+          <button class="tb-btn" data-post="geegeeking-tauri">阅读最新一篇 →</button>
+          <button class="tb-btn ghost" data-post="noeva-deploy">查看 NOEVA 复盘</button>
+        </div>
+      </div>
+      <div class="tb-codecard">
+        <div class="tb-code-bar"><span>blog.config.ts</span><span>TypeScript</span></div>
+        <div class="tb-code"><span class="c">// 个人博客元数据快照</span>
+<span class="k">export const</span> author = {
+  name: <span class="s">'Your Name'</span>,
+  stack: [<span class="s">'React'</span>, <span class="s">'Next.js'</span>, <span class="s">'Tauri'</span>],
+  shipping: {
+    noeva: <span class="s">'live-in-prod'</span>,
+    geegeeking: <span class="a">'desktop-alpha'</span>,
+  },
+};</div>
+      </div>
+    </section>
+
+    <div class="tb-grid">
+      <article class="tb-post" data-post="noeva-deploy">
+        <div><div class="tb-post-top"><span>ENGINEERING</span><time>2026-11-22</time></div><h3>把 NOEVA 第一次送上生产环境：踩过的 7 个坑</h3><p>完整复盘个人项目首次部署公网时的构建、缓存与移动端适配问题。</p></div>
+        <div class="tb-post-foot">8 min read →</div>
+      </article>
+      <article class="tb-post" data-post="geegeeking-tauri">
+        <div><div class="tb-post-top"><span>TAURI</span><time>2026-11-24</time></div><h3>给 GeeGeeKing 套壳 Tauri：前端碰桌面端原生体验</h3><p>探索轻量桌面安装包、无边框透明窗口与像素渲染细节。</p></div>
+        <div class="tb-post-foot">6 min read →</div>
+      </article>
+      <article class="tb-post" data-post="spring-motion">
+        <div><div class="tb-post-top"><span>INTERACTION</span><time>2026-11-18</time></div><h3>写给自己的前端动效笔记：不油腻的弹簧曲线</h3><p>拆解短阻尼过渡与高帧率指针交互的实用参数。</p></div>
+        <div class="tb-post-foot">10 min read →</div>
+      </article>
+      <article class="tb-post" data-post="ai-agent-ui">
+        <div><div class="tb-post-top"><span>AI PRODUCT</span><time>2026-11-09</time></div><h3>C 端出图工具与 B 端教师 Agent 状态设计复盘</h3><p>总结生成式 AI 产品中等待态、流式反馈与局部编辑的界面模式。</p></div>
+        <div class="tb-post-foot">12 min read →</div>
+      </article>
+      <article class="tb-post" data-post="why-handcode-blog">
+        <div><div class="tb-post-top"><span>ESSAY</span><time>2026-10-28</time></div><h3>为什么我还是想亲手写一个个人博客</h3><p>关于个人数字花园、长期写作习惯与零算法打扰的表达空间。</p></div>
+        <div class="tb-post-foot">5 min read →</div>
+      </article>
+      <article class="tb-post" data-post="game-site-study">
+        <div><div class="tb-post-top"><span>DESIGN STUDY</span><time>2026-10-14</time></div><h3>仿写游戏公司官网的 48 小时排版拆解</h3><p>从栅格系统到首屏视觉锚点，记录一次像素级复刻收获。</p></div>
+        <div class="tb-post-foot">7 min read →</div>
+      </article>
+    </div>
+
+    <footer class="tb-sub">
+      <p><b>保持更新：</b>不发营销邮件，只在写出新长文或发布新版本时同步一条 RSS。</p>
+      <button class="tb-rss-pill" id="tbRssBtn">copy https://yourname.dev/rss.xml</button>
+    </footer>
+  </div>
+</div>
+</section>
+
+<!-- ================= U · React Bits 极光丝绸 ================= -->
+<section id="u" class="panel">
+<canvas id="uCanvas" aria-hidden="true"></canvas>
+<div class="u-wrap">
+  <header class="u-nav">
+    <span>AURORA JOURNAL · 2026</span>
+    <span>TRUE FOCUS + FLOWING MENU</span>
+  </header>
+
+  <section class="u-hero">
+    <div class="u-focus-line" aria-label="焦点关键词">
+      <span class="u-word active">思考</span>
+      <span class="u-word">编码</span>
+      <span class="u-word">写作</span>
+      <span class="u-word">发布</span>
+    </div>
+    <p>灵感来自 React Bits 的 Aurora 极光丝绸、True Focus 焦点框与 Flowing Menu 流动菜单——光标移到上方词语锁定焦点，悬停下方任意文章行触发高反差流动横幅。</p>
+  </section>
+
+  <div class="u-menu">
+    <article class="u-item" data-post="noeva-deploy">
+      <span class="u-item-num">01</span><h3>把 NOEVA 第一次送上生产环境：踩过的 7 个坑</h3><span class="u-item-meta">工程部署 · 11.22</span>
+      <div class="u-marquee" aria-hidden="true"><div class="u-track"><span>NOEVA 生产上线复盘 <i>8 MIN</i></span><span>从本地到公网的 7 个坑 <i>READ ESSAY ↗</i></span><span>NOEVA 生产上线复盘 <i>8 MIN</i></span><span>从本地到公网的 7 个坑 <i>READ ESSAY ↗</i></span></div></div>
+    </article>
+    <article class="u-item" data-post="geegeeking-tauri">
+      <span class="u-item-num">02</span><h3>给 GeeGeeKing 套壳 Tauri：前端碰桌面端原生体验</h3><span class="u-item-meta">Tauri · 11.24</span>
+      <div class="u-marquee" aria-hidden="true"><div class="u-track"><span>GEEGEEKING 像素桌面小人 <i>TAURI</i></span><span>透明置顶窗口与托盘实践 <i>READ ESSAY ↗</i></span><span>GEEGEEKING 像素桌面小人 <i>TAURI</i></span><span>透明置顶窗口与托盘实践 <i>READ ESSAY ↗</i></span></div></div>
+    </article>
+    <article class="u-item" data-post="spring-motion">
+      <span class="u-item-num">03</span><h3>写给自己的前端动效笔记：不油腻的弹簧曲线交互</h3><span class="u-item-meta">交互动效 · 11.18</span>
+      <div class="u-marquee" aria-hidden="true"><div class="u-track"><span>克制的弹簧阻尼与微交互 <i>MOTION</i></span><span>FRAMER × REACT BITS 拆解 <i>READ ESSAY ↗</i></span><span>克制的弹簧阻尼与微交互 <i>MOTION</i></span><span>FRAMER × REACT BITS 拆解 <i>READ ESSAY ↗</i></span></div></div>
+    </article>
+    <article class="u-item" data-post="ai-agent-ui">
+      <span class="u-item-num">04</span><h3>从 C 端出图工具到 B 端教师 Agent 的状态设计复盘</h3><span class="u-item-meta">AI 产品 · 11.09</span>
+      <div class="u-marquee" aria-hidden="true"><div class="u-track"><span>生成式 AI 界面状态机 <i>AGENT UI</i></span><span>把等待拆成可编辑反馈 <i>READ ESSAY ↗</i></span><span>生成式 AI 界面状态机 <i>AGENT UI</i></span><span>把等待拆成可编辑反馈 <i>READ ESSAY ↗</i></span></div></div>
+    </article>
+    <article class="u-item" data-post="why-handcode-blog">
+      <span class="u-item-num">05</span><h3>为什么我还是想亲手写一个个人博客</h3><span class="u-item-meta">个人随笔 · 10.28</span>
+      <div class="u-marquee" aria-hidden="true"><div class="u-track"><span>在信息流之外建一座小花园 <i>ESSAY</i></span><span>长期写作与个人存档 <i>READ ESSAY ↗</i></span><span>在信息流之外建一座小花园 <i>ESSAY</i></span><span>长期写作与个人存档 <i>READ ESSAY ↗</i></span></div></div>
+    </article>
+    <article class="u-item" data-post="game-site-study">
+      <span class="u-item-num">06</span><h3>仿写游戏公司官网的 48 小时：拆解排版与首屏重心</h3><span class="u-item-meta">设计拆解 · 10.14</span>
+      <div class="u-marquee" aria-hidden="true"><div class="u-track"><span>48 小时像素级官网复刻 <i>LAYOUT</i></span><span>字号对比与栅格节奏 <i>READ ESSAY ↗</i></span><span>48 小时像素级官网复刻 <i>LAYOUT</i></span><span>字号对比与栅格节奏 <i>READ ESSAY ↗</i></span></div></div>
+    </article>
+  </div>
+</div>
+</section>
+
+<!-- ================= V · Awwwards 分屏读本 ================= -->
+<section id="v" class="panel">
+<div class="v-ticker" aria-hidden="true">
+  <div class="v-ticker-inner">NOW WRITING: TAURI DESKTOP PACKING &nbsp;//&nbsp; NOEVA V1.0 IN PRODUCTION &nbsp;//&nbsp; INTERACTIVE SPLIT BLOG READER &nbsp;//&nbsp; CLICK ANY ESSAY ON THE LEFT &nbsp;//&nbsp; NOW WRITING: TAURI DESKTOP PACKING &nbsp;//&nbsp; NOEVA V1.0 IN PRODUCTION &nbsp;//&nbsp; INTERACTIVE SPLIT BLOG READER &nbsp;//&nbsp;</div>
+</div>
+<div class="v-wrap">
+  <header class="v-head">
+    <h1>READ <mark>LIVE</mark><br>JOURNAL.</h1>
+    <div class="v-head-meta">
+      <b>AWWWARDS SPLIT-READER CONCEPT</b><br>
+      左侧点选目录 · 右侧原地沉浸阅读<br>
+      6 篇真实主题样文可实时切换
+    </div>
+  </header>
+
+  <div class="v-split">
+    <div class="v-list" role="listbox" aria-label="选择要阅读的文章">
+      <button class="v-pick on" data-post="noeva-deploy"><div class="v-pick-top"><span>01 / 工程部署</span><span>11.22</span></div><b>把 NOEVA 第一次送上生产环境：踩过的 7 个坑</b></button>
+      <button class="v-pick" data-post="geegeeking-tauri"><div class="v-pick-top"><span>02 / 桌面端实验</span><span>11.24</span></div><b>给 GeeGeeKing 套壳 Tauri：前端碰桌面端原生体验</b></button>
+      <button class="v-pick" data-post="spring-motion"><div class="v-pick-top"><span>03 / 交互与动效</span><span>11.18</span></div><b>写给自己的前端动效笔记：如何用弹簧曲线做出不油腻的交互</b></button>
+      <button class="v-pick" data-post="ai-agent-ui"><div class="v-pick-top"><span>04 / AI 产品</span><span>11.09</span></div><b>从 C 端出图工具到 B 端教师 Agent：AI 界面状态设计复盘</b></button>
+      <button class="v-pick" data-post="why-handcode-blog"><div class="v-pick-top"><span>05 / 个人随笔</span><span>10.28</span></div><b>为什么我还是想亲手写一个个人博客，而不是只发社交媒体</b></button>
+      <button class="v-pick" data-post="game-site-study"><div class="v-pick-top"><span>06 / 设计拆解</span><span>10.14</span></div><b>仿写游戏公司官网的 48 小时：拆解排版节奏与首屏视觉重心</b></button>
+    </div>
+
+    <article class="v-reader" aria-live="polite">
+      <div class="v-reader-bar">
+        <span class="v-lime" id="vReaderCat">工程部署</span>
+        <span id="vReaderMeta">2026.11.22 · 8 min read</span>
+      </div>
+      <h2 id="vReaderTitle">把 NOEVA 第一次送上生产环境：从本地跑到线上踩过的 7 个坑</h2>
+      <blockquote class="v-reader-quote" id="vReaderQuote"></blockquote>
+      <div class="v-reader-body" id="vReaderBody"></div>
+      <footer class="v-reader-foot">
+        <span id="vReaderTags">#NOEVA #Next.js</span>
+        <span>Your Name · Split Blog Reader</span>
+      </footer>
+    </article>
+  </div>
+</div>
+</section>
+
+<!-- ================= W · Thrine 粘土工作台 ================= -->
+<section id="w" class="panel">
+<div class="w-wrap">
+  <header class="w-head">
+    <div class="w-brand"><div class="w-clay-avatar">YN</div><span>软陶书桌 · Personal Blog</span></div>
+    <div class="w-moods">
+      <button class="w-mood on" data-mood="all">全部卡片</button>
+      <button class="w-mood" data-mood="build">项目日志</button>
+      <button class="w-mood" data-mood="craft">设计交互</button>
+      <button class="w-mood" data-mood="think">日常思考</button>
+    </div>
+  </header>
+
+  <div class="w-bento">
+    <article class="w-tile w-hero-tile" data-post="why-handcode-blog">
+      <div>
+        <span class="w-clay-tag">THRINE CLAY × FRAMER BENTO</span>
+        <h1>温暖圆润，<br>像一座手作书桌。</h1>
+        <p>结合 Thrine 柔和的粘土 3D 质感与 Framer 的模块化卡片节奏：既能放长篇技术复盘，也适合放随手记和项目进度，读起来轻松没有压迫感。</p>
+      </div>
+      <div class="w-sculpture" aria-hidden="true">
+        <div class="w-blob-a"></div>
+        <div class="w-blob-b"></div>
+        <div class="w-blob-c"></div>
+      </div>
+    </article>
+
+    <aside class="w-tile w-stat-tile">
+      <div>
+        <span style="font-size:11px;font-weight:700;letter-spacing:.12em;color:#3d6b52">WRITING STREAK</span>
+        <b>2026</b>
+        <p>今年已经上线了 NOEVA，正在把 GeeGeeKing 打包成桌面像素应用，博客也要慢慢长起来。</p>
+      </div>
+      <div class="w-bars" aria-hidden="true">
+        <i style="height:40%"></i><i style="height:68%"></i><i style="height:52%"></i><i style="height:85%"></i><i style="height:100%"></i><i style="height:74%"></i>
+      </div>
+    </aside>
+
+    <article class="w-tile w-post wide" data-mood="build" data-post="noeva-deploy">
+      <div>
+        <div class="w-post-top"><span>项目日志 · NOEVA</span><time>2026.11.22</time></div>
+        <h3>把 NOEVA 第一次送上生产环境：从本地跑到线上踩过的 7 个坑</h3>
+        <p>记录个人 App 第一次公网发布的完整踩坑笔记，以及之后每次发版都会照着过一遍的轻量自检清单。</p>
+      </div>
+      <div class="w-post-foot"><span>8 min read · 点击阅读</span><button class="w-like" data-count="24">♡ 24</button></div>
+    </article>
+
+    <article class="w-tile w-post wide" data-mood="build" data-post="geegeeking-tauri">
+      <div>
+        <div class="w-post-top"><span>桌面实验 · Tauri</span><time>2026.11.24</time></div>
+        <h3>给 GeeGeeKing 套壳 Tauri：让像素待办小人住进任务栏</h3>
+        <p>透明置顶、系统托盘和 crisp pixel rendering——Web 前端把小工具做成桌面安装包的第一手笔记。</p>
+      </div>
+      <div class="w-post-foot"><span>6 min read · 点击阅读</span><button class="w-like" data-count="19">♡ 19</button></div>
+    </article>
+
+    <article class="w-tile w-post" data-mood="craft" data-post="spring-motion">
+      <div>
+        <div class="w-post-top"><span>设计交互</span><time>11.18</time></div>
+        <h3>用弹簧曲线做出不油腻的交互</h3>
+        <p>为什么克制的 280ms 位移，比花哨动画更耐看。</p>
+      </div>
+      <div class="w-post-foot"><span>10 min</span><button class="w-like" data-count="31">♡ 31</button></div>
+    </article>
+
+    <article class="w-tile w-post" data-mood="think" data-post="ai-agent-ui">
+      <div>
+        <div class="w-post-top"><span>AI 产品</span><time>11.09</time></div>
+        <h3>出图工具与教师 Agent 的状态设计</h3>
+        <p>把 AI 的不确定等待，拆解成透明可编辑的体验。</p>
+      </div>
+      <div class="w-post-foot"><span>12 min</span><button class="w-like" data-count="17">♡ 17</button></div>
+    </article>
+
+    <article class="w-tile w-post" data-mood="craft" data-post="game-site-study">
+      <div>
+        <div class="w-post-top"><span>排版临摹</span><time>10.14</time></div>
+        <h3>仿写游戏公司官网的 48 小时</h3>
+        <p>量完首屏比例后，我重新理解了克制与视觉重心。</p>
+      </div>
+      <div class="w-post-foot"><span>7 min</span><button class="w-like" data-count="15">♡ 15</button></div>
+    </article>
+  </div>
+</div>
+</section>
+
+<!-- ================= X · React Bits 像素抖动志 ================= -->
+<section id="x" class="panel" data-crt="amber">
+<div class="xd-wrap">
+  <header class="xd-top">
+    <span><b>DITHER.LOG</b> // 首页像素实验 · 正文清晰可读</span>
+    <div class="xd-pal" role="group" aria-label="切换荧光配色">
+      <button class="on" data-crt="amber">AMBER 琥珀</button>
+      <button data-crt="green">PHOSPHOR 绿屏</button>
+      <button data-crt="cyan">CYAN 青光</button>
+    </div>
+  </header>
+
+  <section class="xd-banner">
+    <canvas id="xdCanvas" aria-hidden="true"></canvas>
+    <div class="xd-banner-copy">
+      <small>REACT BITS DITHER WAVE + PIXEL CARDS</small>
+      <h1>用有序像素抖动保留游戏基因，用现代字体写长文章。</h1>
+      <p>移动鼠标扰动背后的 Bayer 4×4 实时像素抖动波纹，右上角可切换荧光主色。这是「像素个性」与「长文可读性」折中的一种现代解法。</p>
+    </div>
+  </section>
+
+  <div class="xd-layout">
+    <div class="xd-cards">
+      <article class="xd-card" data-post="geegeeking-tauri">
+        <div>
+          <div class="xd-card-meta"><span>LOG_01 // TAURI</span><span>11.24</span></div>
+          <h3>给 GeeGeeKing 套壳 Tauri：Web 前端碰桌面原生</h3>
+          <p>透明窗口、托盘与像素无抗锯齿缩放的踩坑记录。</p>
+        </div>
+        <div class="xd-card-foot"><span>6 MIN</span><span>OPEN [ENTER]</span></div>
+      </article>
+      <article class="xd-card" data-post="noeva-deploy">
+        <div>
+          <div class="xd-card-meta"><span>LOG_02 // PROD</span><span>11.22</span></div>
+          <h3>把 NOEVA 第一次送上生产环境的 7 个坑</h3>
+          <p>把个人复盘 App 完整部署到公网的最小发布清单。</p>
+        </div>
+        <div class="xd-card-foot"><span>8 MIN</span><span>OPEN [ENTER]</span></div>
+      </article>
+      <article class="xd-card" data-post="spring-motion">
+        <div>
+          <div class="xd-card-meta"><span>LOG_03 // MOTION</span><span>11.18</span></div>
+          <h3>前端动效笔记：不油腻的弹簧曲线交互</h3>
+          <p>像素感视觉与丝滑微交互如何共存。</p>
+        </div>
+        <div class="xd-card-foot"><span>10 MIN</span><span>OPEN [ENTER]</span></div>
+      </article>
+      <article class="xd-card" data-post="ai-agent-ui">
+        <div>
+          <div class="xd-card-meta"><span>LOG_04 // AGENT</span><span>11.09</span></div>
+          <h3>AI 出图工具与教师 Agent 的状态机设计</h3>
+          <p>生成式界面的过程透明与可微调设计复盘。</p>
+        </div>
+        <div class="xd-card-foot"><span>12 MIN</span><span>OPEN [ENTER]</span></div>
+      </article>
+    </div>
+
+    <aside class="xd-prose" data-post="why-handcode-blog">
+      <span class="xd-prose-kicker">READABILITY PREVIEW // 正文排版示例</span>
+      <h2>为什么我还是想亲手写一个个人博客</h2>
+      <p>头图和卡片用像素抖动与微网格保留「独立游戏 / 极客」味道，但真正点进文章正文时，切换回舒展的行高（1.95）和柔和的暖灰纸墨对比度。</p>
+      <p>这样既不会像纯 8-bit 像素字体那样读三百字就累眼，也绝不会沦为千篇一律的通用博客模板。</p>
+      <div class="xd-prose-tags">
+        <span>#DitherShader</span><span>#PixelCard</span><span>#ReadableProse</span><span>#点击读完整篇</span>
+      </div>
+    </aside>
+  </div>
+</div>
+</section>
+
+<!-- Shared Blog Quick-Read Modal for O–X -->
+<div class="bm-backdrop" id="bmBackdrop" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="bmTitle">
+  <div class="bm-dialog" id="bmDialog">
+    <div class="bm-head">
+      <div class="bm-meta">
+        <span class="bm-tag" id="bmCategory">分类</span>
+        <span id="bmDate">2026.11.25</span>
+        <span>·</span>
+        <span id="bmRead">8 min read</span>
+      </div>
+      <button class="bm-close" id="bmClose" aria-label="关闭阅读窗口">✕</button>
+    </div>
+    <h2 class="bm-title" id="bmTitle"></h2>
+    <p class="bm-lead" id="bmLead"></p>
+    <div class="bm-body" id="bmBody"></div>
+    <div class="bm-foot">
+      <span id="bmTags"></span>
+      <span>ESC / 点击空白处关闭</span>
+    </div>
+  </div>
+</div>
+
+<script src="blog-demos.js"></script>
 <script>
 const M=[
 '................',
@@ -792,7 +1517,7 @@ const C={k:'#0a0a14',h:'#4be1c3',s:'#f7cfae',e:'#1b1b2f',m:'#d95763',c:'#8b7cff'
 document.querySelectorAll('.px').forEach(el=>{
   el.innerHTML=M.join('').split('').map(ch=>`<i style="background:${C[ch]||'transparent'}"></i>`).join('');
 });
-const ids=Array.from('abcdefghijklmn');
+const ids=Array.from('abcdefghijklmnopqrstuvwx');
 const nav=document.querySelector('.switch');
 const tabs=[...nav.querySelectorAll('button')];
 const reduceMotion=matchMedia('(prefers-reduced-motion: reduce)');
@@ -815,6 +1540,7 @@ function show(k){
   const activeTab=tabs.find(b=>b.dataset.s===k);
   nav.scrollTo({left:activeTab.offsetLeft-(nav.clientWidth-activeTab.offsetWidth)/2,behavior:'auto'});
   k==='n'?startParticles():stopParticles();
+  if(window.onDemoPanelChange)window.onDemoPanelChange(k);
 }
 tabs.forEach(b=>b.onclick=()=>{
   show(b.dataset.s);
