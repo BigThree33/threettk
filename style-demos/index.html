@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>个人主页风格 Demo</title>
+<title>个人主页 · 14 种风格 Demo</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -12,8 +12,9 @@ button{font:inherit;cursor:pointer}
 .panel{display:none;min-height:100vh}
 .panel.on{display:block}
 .wrap{max-width:880px;margin:0 auto;padding:44px 28px 130px}
-.switch{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);display:flex;gap:4px;padding:6px;background:#000c;border-radius:999px;z-index:99;white-space:nowrap;max-width:calc(100vw - 16px)}
-.switch button{border:0;background:transparent;color:#bbb;font-size:13px;padding:9px 13px;border-radius:999px;color:#ccc}
+.switch{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);display:flex;gap:4px;padding:6px;background:#000c;border:1px solid #ffffff1f;border-radius:999px;z-index:99;white-space:nowrap;max-width:calc(100vw - 16px);overflow-x:auto;scrollbar-width:none;box-shadow:0 10px 35px #0003;backdrop-filter:blur(16px)}
+.switch::-webkit-scrollbar{display:none}
+.switch button{border:0;background:transparent;color:#bbb;font-size:13px;padding:9px 13px;border-radius:999px;color:#ccc;flex:none}
 .switch button.on{background:#fff;color:#111}
 .switch button:focus-visible{outline:2px solid #fff;outline-offset:2px}
 body.clean .switch{display:none}
@@ -139,6 +140,288 @@ background-image:repeating-linear-gradient(transparent 0 35px,#c9b48940 35px 36p
 .d-cursor{display:inline-block;width:8px;height:16px;background:#e6edf3;vertical-align:-3px;animation:blink 1s steps(1) infinite}
 .d-desc{color:#8b949e}
 
+/* ---------- E–N shared ---------- */
+.x-wrap{max-width:1180px;margin:0 auto;padding:70px 32px 140px}
+.x-kicker{font-size:12px;letter-spacing:.18em;text-transform:uppercase}
+.panel.on .x-wrap{animation:panel-in .45s ease both}
+@keyframes panel-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* ---------- E 瑞士排版 ---------- */
+#e{background:#f3f1eb;color:#111;font-family:Arial,"Helvetica Neue",sans-serif}
+.e-top{display:flex;justify-content:space-between;align-items:center;padding-bottom:14px;border-bottom:2px solid #111;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.e-top span:last-child{color:#f03a2d}
+.e-hero{display:grid;grid-template-columns:1.6fr .7fr;gap:48px;align-items:end;padding:58px 0 64px}
+.e-hero h1{font-size:clamp(68px,10.5vw,154px);font-weight:900;line-height:.79;letter-spacing:-.085em;text-transform:uppercase}
+.e-hero h1 span{display:block;color:#f03a2d}
+.e-intro{max-width:310px;font-size:17px;line-height:1.65}
+.e-intro b{display:block;margin-bottom:18px;font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+.e-meta{display:flex;gap:24px;margin-top:28px;padding-top:14px;border-top:1px solid #111;font-size:12px;text-transform:uppercase}
+.e-works{border-top:2px solid #111}
+.e-work{display:grid;grid-template-columns:58px 1.25fr 1fr 88px;gap:20px;align-items:center;padding:22px 12px;border-bottom:1px solid #111;transition:background .2s,color .2s,padding .2s}
+.e-work:hover{background:#f03a2d;color:#fff;padding-left:22px}
+.e-num{font-size:12px;font-weight:700}
+.e-work h3{font-size:clamp(22px,3vw,38px);letter-spacing:-.045em}
+.e-work p{font-size:14px;line-height:1.5;opacity:.72}
+.e-state{justify-self:end;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+
+/* ---------- F Bento ---------- */
+#f{background:#edf0e8;color:#223027;font-family:"Avenir Next","Segoe UI",sans-serif}
+.f-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px}
+.f-head h2{font-size:15px;font-weight:600;letter-spacing:.04em}
+.f-live{display:flex;align-items:center;gap:8px;font-size:12px;color:#647268}
+.f-live::before{content:"";width:7px;height:7px;border-radius:50%;background:#70b889;box-shadow:0 0 0 4px #70b88920}
+.f-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.f-card{background:#fff;border:1px solid #dfe4db;border-radius:26px;padding:28px;box-shadow:0 8px 24px #263b2b06}
+.f-profile{grid-column:span 7;min-height:350px;background:#1b3025;color:#f5f7ef;position:relative;overflow:hidden}
+.f-profile::after{content:"";position:absolute;width:300px;height:300px;right:-90px;bottom:-120px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#d9f6a9,#7baa77 45%,#335a43 75%);opacity:.85}
+.f-profile>*{position:relative;z-index:1}
+.f-avatar{width:68px;height:68px;display:grid;place-items:center;border:1px solid #ffffff38;border-radius:22px;background:#ffffff0d;font-size:22px;font-weight:700;margin-bottom:42px}
+.f-profile h1{font-size:clamp(40px,5vw,66px);line-height:1;letter-spacing:-.055em;font-weight:600;max-width:520px}
+.f-profile p{max-width:440px;margin-top:18px;color:#b9c9bb;line-height:1.7}
+.f-social{display:flex;gap:8px;margin-top:30px}
+.f-social span{padding:8px 12px;border:1px solid #ffffff25;border-radius:999px;font-size:11px;color:#d7e2d5}
+.f-status{grid-column:span 5;display:flex;flex-direction:column;justify-content:space-between;background:#dff0c9}
+.f-status .x-kicker{color:#567047}
+.f-status strong{display:block;font-size:30px;line-height:1.2;letter-spacing:-.04em;margin:28px 0 12px}
+.f-status p{font-size:14px;color:#567047;line-height:1.6}
+.f-meter{height:7px;background:#bdd39f;border-radius:999px;margin-top:28px;overflow:hidden}
+.f-meter i{display:block;width:72%;height:100%;background:#385b34;border-radius:inherit}
+.f-project{grid-column:span 4;min-height:215px;display:flex;flex-direction:column;justify-content:space-between;transition:transform .2s,box-shadow .2s}
+.f-project:hover{transform:translateY(-5px);box-shadow:0 18px 35px #263b2b12}
+.f-project .f-icon{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;font-size:20px;background:#edf1e8}
+.f-project:nth-of-type(3) .f-icon{background:#ffe3d4}
+.f-project:nth-of-type(4) .f-icon{background:#e7e0fa}
+.f-project h3{font-size:23px;letter-spacing:-.035em;margin-top:30px}
+.f-project p{font-size:13px;color:#718075;margin-top:7px;line-height:1.5}
+.f-now{grid-column:span 8}
+.f-now h2,.f-contact h2{font-size:13px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:22px}
+.f-now ul{list-style:none}
+.f-now li{display:grid;grid-template-columns:60px 1fr;gap:16px;padding:11px 0;border-top:1px solid #e7ebe4;font-size:13px}
+.f-now time{color:#8a978d}
+.f-contact{grid-column:span 4;background:#f7f8f4;display:flex;flex-direction:column;justify-content:space-between}
+.f-contact p{font-size:19px;line-height:1.5;letter-spacing:-.025em}
+.f-contact a{color:#2f5c3c;font-size:13px;text-decoration:none;border-bottom:1px solid #2f5c3c;align-self:flex-start;padding-bottom:3px}
+
+/* ---------- G Y2K ---------- */
+#g{background:radial-gradient(circle at 12% 12%,#9af4ff 0,transparent 28%),radial-gradient(circle at 88% 22%,#ff91db 0,transparent 32%),linear-gradient(135deg,#bba7ff,#ef9dda 48%,#83d9ff);color:#201447;font-family:"Arial Black","Trebuchet MS",sans-serif;overflow:hidden}
+.g-shell{background:linear-gradient(145deg,#ffffff70,#ffffff20);border:1px solid #ffffffb0;border-radius:34px;padding:30px;box-shadow:0 25px 80px #49277935,inset 0 1px 0 #fff;backdrop-filter:blur(18px)}
+.g-top{display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+.g-top span:last-child{padding:7px 12px;border:1px solid #ffffffa0;border-radius:999px;background:#ffffff35}
+.g-hero{display:grid;grid-template-columns:1.4fr .6fr;gap:30px;align-items:center;padding:60px 10px 52px}
+.g-title{font-size:clamp(58px,8vw,112px);line-height:.84;letter-spacing:-.07em;color:#fff;background:linear-gradient(180deg,#fff 0%,#d8f7ff 28%,#8b8fb9 48%,#fff 52%,#b6a6e9 72%,#fff 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 4px 0 #634a8b) drop-shadow(0 10px 14px #49277935)}
+.g-title span{display:block;font-size:.42em;letter-spacing:-.03em;margin-top:16px;-webkit-text-fill-color:#241447;filter:none}
+.g-hero p{max-width:470px;margin-top:26px;font-family:"Trebuchet MS",sans-serif;font-size:15px;line-height:1.7;font-weight:600}
+.g-orb{position:relative;width:220px;height:220px;justify-self:center;border-radius:50%;background:radial-gradient(circle at 32% 25%,#fff 0%,#b9f4ff 12%,#a799ef 38%,#f5a5dc 66%,#6c70bd 100%);box-shadow:inset -18px -20px 30px #4d398455,inset 12px 12px 24px #fff8,0 24px 45px #5c3a8a35}
+.g-orb::before{content:"";position:absolute;left:-28px;right:-28px;top:48%;height:36px;border:8px solid #e7fbff;border-top-color:#9d92c7;border-radius:50%;transform:rotate(-18deg);box-shadow:0 8px 12px #44346c30}
+.g-orb::after{content:"✦";position:absolute;right:-12px;top:-16px;color:#fff;font-size:50px;text-shadow:0 4px 0 #7a5a9c}
+.g-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.g-card{border:1px solid #ffffffb0;border-radius:22px;padding:22px;background:linear-gradient(135deg,#ffffff65,#ffffff20);box-shadow:inset 0 1px 0 #fff,0 10px 25px #5a3a8715;font-family:"Trebuchet MS",sans-serif}
+.g-card small{font-size:10px;letter-spacing:.14em;text-transform:uppercase;opacity:.6}
+.g-card h3{font-size:25px;letter-spacing:-.045em;margin:20px 0 8px}
+.g-card p{font-size:13px;line-height:1.55;opacity:.75}
+.g-card b{display:inline-block;margin-top:20px;padding:6px 10px;border-radius:999px;background:#ffffff55;font-size:10px;letter-spacing:.08em}
+
+/* ---------- H 新粗野主义 ---------- */
+#h{background:#ffe14d;color:#101010;font-family:"Arial Black","Microsoft YaHei",sans-serif}
+.h-strip{margin:0 -32px 48px;padding:12px 0;background:#111;color:#ffe14d;transform:rotate(-1.4deg);font-size:13px;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;overflow:hidden}
+.h-hero{position:relative;padding:24px 0 64px}
+.h-hero h1{font-size:clamp(64px,11vw,164px);line-height:.82;letter-spacing:-.075em;text-transform:uppercase}
+.h-hero h1 span{display:inline-block;padding:0 .08em;background:#f34b3f;color:#111;transform:rotate(-3deg)}
+.h-hero p{max-width:540px;margin-top:34px;font-family:"Microsoft YaHei",sans-serif;font-size:17px;line-height:1.7;font-weight:700}
+.h-sticker{position:absolute;right:3%;top:4%;width:126px;height:126px;display:grid;place-items:center;border:3px solid #111;border-radius:50%;background:#fff;font-size:15px;line-height:1.2;text-align:center;transform:rotate(12deg);box-shadow:6px 6px 0 #111}
+.h-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.h-card{min-height:235px;padding:25px;border:3px solid #111;background:#fff;box-shadow:8px 8px 0 #111;transition:transform .15s,box-shadow .15s}
+.h-card:hover{transform:translate(4px,4px);box-shadow:4px 4px 0 #111}
+.h-card small{font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+.h-card h3{font-size:32px;line-height:.95;letter-spacing:-.055em;margin:50px 0 12px;text-transform:uppercase}
+.h-card p{font-family:"Microsoft YaHei",sans-serif;font-size:13px;line-height:1.6;font-weight:700}
+.h-card:nth-child(2){background:#f7a7cf}.h-card:nth-child(3){background:#87d9ff}
+
+/* ---------- I 玻璃拟态 ---------- */
+#i{position:relative;isolation:isolate;background:#07131f;color:#eaf7ff;font-family:"Segoe UI","Microsoft YaHei",sans-serif;overflow:hidden}
+.i-orb{position:absolute;border-radius:50%;filter:blur(10px);opacity:.65;z-index:-1;animation:orb-float 12s ease-in-out infinite alternate}
+.i-orb.one{width:520px;height:520px;left:-180px;top:4%;background:radial-gradient(circle at 35% 35%,#4ce0d2,#166c83 50%,transparent 72%)}
+.i-orb.two{width:560px;height:560px;right:-160px;top:18%;background:radial-gradient(circle at 40% 40%,#bd8cff,#4a347e 52%,transparent 72%);animation-delay:-5s}
+.i-orb.three{width:420px;height:420px;left:38%;bottom:-180px;background:radial-gradient(circle,#318bff,transparent 68%)}
+@keyframes orb-float{to{transform:translate3d(28px,-24px,0) scale(1.08)}}
+.x-wrap{position:relative}
+.i-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:42px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#b7d1df}
+.i-nav b{color:#fff;font-size:14px}
+.i-hero{display:grid;grid-template-columns:1.25fr .75fr;gap:28px}
+.i-card{border:1px solid #ffffff24;background:linear-gradient(135deg,#ffffff16,#ffffff07);border-radius:28px;box-shadow:inset 0 1px 0 #ffffff24,0 24px 70px #0003;backdrop-filter:blur(24px)}
+.i-intro{padding:52px}
+.i-intro h1{font-size:clamp(50px,6.5vw,88px);line-height:.98;letter-spacing:-.065em;font-weight:600}
+.i-intro h1 span{color:#75eadb}
+.i-intro p{max-width:510px;margin-top:26px;color:#b7d1df;line-height:1.8;font-size:16px}
+.i-tags{display:flex;flex-wrap:wrap;gap:9px;margin-top:32px}
+.i-tags span{padding:8px 12px;border:1px solid #ffffff22;border-radius:999px;background:#ffffff08;font-size:11px;color:#d8edf5}
+.i-profile{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:38px;text-align:center}
+.i-avatar{width:150px;height:150px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 30% 25%,#d7fff7,#71d8d0 28%,#6b68b8 68%,#252c56);box-shadow:inset -12px -14px 25px #1118,0 0 0 12px #ffffff07,0 24px 55px #0004;font-size:38px;font-weight:700;color:#fff}
+.i-profile h2{font-size:25px;margin-top:30px;letter-spacing:-.03em}
+.i-profile p{font-size:13px;color:#a7c3d2;margin-top:8px}
+.i-profile .i-available{margin-top:24px;padding:9px 13px;border-radius:999px;background:#4ce0d215;color:#75eadb;font-size:11px}
+.i-projects{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px}
+.i-project{padding:28px;min-height:195px;transition:transform .2s,border-color .2s}
+.i-project:hover{transform:translateY(-5px);border-color:#75eadb66}
+.i-project small{color:#75eadb;font-size:10px;letter-spacing:.15em;text-transform:uppercase}
+.i-project h3{font-size:25px;letter-spacing:-.04em;margin:34px 0 9px}
+.i-project p{font-size:13px;line-height:1.6;color:#a7c3d2}
+
+/* ---------- J 太空 HUD ---------- */
+#j{position:relative;overflow:hidden;background:#070b14;color:#dce8ff;font-family:"SFMono-Regular",Consolas,"Microsoft YaHei",monospace}
+.j-grid-bg{position:absolute;left:-20%;right:-20%;bottom:-12%;height:48%;background-image:linear-gradient(#3866a23d 1px,transparent 1px),linear-gradient(90deg,#3866a23d 1px,transparent 1px);background-size:46px 46px;transform:perspective(420px) rotateX(62deg);transform-origin:bottom;mask-image:linear-gradient(transparent,#000 70%)}
+.j-wrap{position:relative}
+.j-hud{display:flex;justify-content:space-between;gap:20px;padding-bottom:16px;border-bottom:1px solid #31445f;font-size:10px;letter-spacing:.16em;color:#7f96b7;text-transform:uppercase}
+.j-hud b{color:#ff9d55}
+.j-hero{display:grid;grid-template-columns:1.25fr .75fr;gap:40px;align-items:center;min-height:540px}
+.j-title{font-size:clamp(58px,8.4vw,124px);line-height:.86;letter-spacing:-.075em;font-weight:800;color:transparent;-webkit-text-stroke:1px #758cae}
+.j-title span{display:block;color:#e8efff;-webkit-text-stroke:0}
+.j-title em{display:block;color:#ff9d55;font-style:normal;-webkit-text-stroke:0}
+.j-copy{max-width:560px;margin-top:30px;font-size:14px;line-height:1.9;color:#91a5c3}
+.j-planet{position:relative;width:230px;height:230px;justify-self:center;border-radius:50%;background:radial-gradient(circle at 30% 26%,#ffd2a1,#ff9253 28%,#9b3f3b 65%,#2d1831);box-shadow:inset -25px -22px 35px #160c1c99,0 0 70px #ff8b4a26;animation:planet-float 6s ease-in-out infinite}
+.j-planet::before{content:"";position:absolute;left:-55px;right:-55px;top:46%;height:55px;border:8px solid #d99b6d;border-left-color:#68414d;border-right-color:#f3bb8b;border-radius:50%;transform:rotate(-17deg);box-shadow:0 6px 12px #0008}
+.j-planet::after{content:"01";position:absolute;inset:45% 0 auto;text-align:center;font-size:11px;letter-spacing:.3em;color:#2b1930}
+@keyframes planet-float{50%{transform:translateY(-13px) rotate(3deg)}}
+.j-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#31445f;border:1px solid #31445f;margin-bottom:26px}
+.j-stat{background:#0b111d;padding:18px}
+.j-stat small{display:block;color:#6e86a9;font-size:9px;letter-spacing:.12em}
+.j-stat b{display:block;margin-top:8px;font-size:20px;color:#e8efff}
+.j-projects{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.j-project{position:relative;padding:24px;border:1px solid #31445f;background:#0b111dd9;overflow:hidden}
+.j-project::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:#ff9d55}
+.j-project small{color:#ff9d55;font-size:9px;letter-spacing:.12em}
+.j-project h3{font-size:20px;margin:30px 0 10px;color:#e8efff}
+.j-project p{font-size:12px;line-height:1.65;color:#8198b8}
+
+/* ---------- K 暗金极简 ---------- */
+#k{position:relative;background:#0c0c0b;color:#e8e2d6;font-family:Georgia,"Times New Roman","Songti SC",serif;overflow:hidden}
+.k-watermark{position:absolute;right:-.04em;top:-.18em;font-size:min(58vw,760px);line-height:1;color:#ffffff03;pointer-events:none}
+.k-wrap{position:relative;max-width:1000px}
+.k-top{display:flex;justify-content:space-between;align-items:center;padding-bottom:20px;border-bottom:1px solid #bca56855;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#bca568}
+.k-top b{font-size:15px;color:#e8e2d6;font-weight:400}
+.k-hero{text-align:center;padding:105px 0 95px}
+.k-hero small{font-size:11px;letter-spacing:.32em;color:#bca568;text-transform:uppercase}
+.k-hero h1{font-size:clamp(56px,8vw,108px);font-weight:400;line-height:.95;letter-spacing:-.055em;margin-top:28px}
+.k-hero h1 em{font-weight:400;color:#bca568}
+.k-hero p{max-width:560px;margin:30px auto 0;font-family:"Microsoft YaHei",sans-serif;font-size:13px;line-height:1.9;color:#8f8b82}
+.k-sign{display:inline-block;margin-top:38px;padding:11px 22px;border:1px solid #bca56866;color:#d8c28b;font-size:10px;letter-spacing:.16em;text-transform:uppercase}
+.k-list-head{display:grid;grid-template-columns:70px 1fr 110px;gap:20px;padding:0 0 14px;border-bottom:1px solid #bca56866;font-size:9px;letter-spacing:.18em;color:#8d8060;text-transform:uppercase}
+.k-item{display:grid;grid-template-columns:70px 1fr 110px;gap:20px;align-items:center;padding:24px 0;border-bottom:1px solid #ffffff12;transition:padding .2s,color .2s}
+.k-item:hover{padding-left:12px;color:#d8c28b}
+.k-num{font-size:11px;color:#8d8060}
+.k-item h3{font-size:clamp(23px,3vw,34px);font-weight:400;letter-spacing:-.025em}
+.k-item p{font-family:"Microsoft YaHei",sans-serif;font-size:11px;color:#79766f;margin-top:7px}
+.k-state{justify-self:end;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#bca568}
+.k-footer{display:flex;justify-content:space-between;margin-top:42px;font-size:10px;letter-spacing:.1em;color:#77736a}
+
+/* ---------- L 自然有机 ---------- */
+#l{background:#edf1e4;color:#26392c;font-family:"Avenir Next","Segoe UI","Microsoft YaHei",sans-serif}
+.l-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:56px}
+.l-nav b{font-family:Georgia,serif;font-size:24px;font-weight:400;letter-spacing:-.04em}
+.l-nav span{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#72806b}
+.l-hero{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center}
+.l-hero h1{font-size:clamp(54px,7vw,96px);line-height:.98;letter-spacing:-.065em;font-weight:500}
+.l-hero h1 em{font-family:Georgia,serif;font-weight:400;color:#66845f}
+.l-hero p{max-width:500px;margin-top:28px;font-size:15px;line-height:1.9;color:#667460}
+.l-note{display:inline-flex;align-items:center;gap:9px;margin-top:28px;padding:10px 15px;border-radius:999px;background:#dce6cf;font-size:11px;color:#4f684a}
+.l-note::before{content:"";width:7px;height:7px;border-radius:50%;background:#6f9662}
+.l-art{position:relative;height:390px}
+.l-blob{position:absolute;inset:30px 20px 20px 40px;border-radius:42% 58% 54% 46% / 48% 39% 61% 52%;background:linear-gradient(145deg,#d6e3bd,#8eae79);box-shadow:inset 20px 20px 50px #f6ffe055,0 30px 60px #46613c20}
+.l-blob::before{content:"";position:absolute;width:170px;height:250px;left:32%;top:16%;border-radius:100% 0 100% 0;background:linear-gradient(135deg,#f5f8e9,#b6cb96);transform:rotate(22deg);box-shadow:12px 16px 30px #45603720}
+.l-blob::after{content:"";position:absolute;left:43%;top:18%;width:3px;height:210px;background:#6b8a5b;transform:rotate(22deg);border-radius:999px;opacity:.55}
+.l-sun{position:absolute;right:8%;top:2%;width:92px;height:92px;border-radius:50%;background:#e5bb72;box-shadow:0 0 0 16px #e5bb7218}
+.l-caption{position:absolute;right:0;bottom:0;padding:16px 20px;border-radius:18px;background:#f8faf2;box-shadow:0 12px 30px #26392c12;font-family:Georgia,serif;font-size:15px;font-style:italic}
+.l-section-title{display:flex;justify-content:space-between;align-items:end;margin:90px 0 24px;padding-bottom:14px;border-bottom:1px solid #9aab8c66}
+.l-section-title h2{font-size:13px;letter-spacing:.15em;text-transform:uppercase;font-weight:500}
+.l-section-title span{font-family:Georgia,serif;font-style:italic;color:#7d8c73}
+.l-projects{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.l-project{padding:30px;min-height:270px;border-radius:34px 34px 12px 34px;background:#f8faf2;box-shadow:0 16px 40px #26392c0b;display:flex;flex-direction:column;justify-content:space-between}
+.l-project:nth-child(2){border-radius:12px 34px 34px 34px;background:#dfe8d2}
+.l-project:nth-child(3){border-radius:34px 12px 34px 34px;background:#eadfc9}
+.l-project .l-index{font-family:Georgia,serif;font-style:italic;color:#809273}
+.l-project h3{font-size:30px;letter-spacing:-.045em;font-weight:500;margin-top:42px}
+.l-project p{font-size:13px;line-height:1.7;color:#718067;margin-top:10px}
+
+/* ---------- M 杂志编辑 ---------- */
+#m{background:#f2ede2;color:#171717;font-family:Georgia,"Times New Roman","Songti SC",serif}
+.m-bar{display:flex;justify-content:space-between;margin:0;padding:12px 32px;background:#171717;color:#f2ede2;font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+.m-mast{display:flex;justify-content:space-between;align-items:end;padding-bottom:18px;border-bottom:3px solid #171717}
+.m-mast h2{font-size:14px;letter-spacing:.18em;text-transform:uppercase}
+.m-mast span{font-size:11px;color:#6d675d}
+.m-headline{display:grid;grid-template-columns:1fr 220px;gap:36px;align-items:end;padding:42px 0 36px}
+.m-headline h1{font-size:clamp(58px,8vw,112px);line-height:.86;letter-spacing:-.07em;font-weight:400}
+.m-headline h1 em{color:#c43e30;font-weight:400}
+.m-issue{text-align:right;font-size:11px;line-height:1.8;color:#6d675d}
+.m-issue b{display:block;font-size:42px;font-weight:400;color:#171717;line-height:1}
+.m-layout{display:grid;grid-template-columns:.9fr 1.5fr;gap:42px;border-top:1px solid #171717;padding-top:28px}
+.m-feature{position:relative;min-height:420px;overflow:hidden;background:#c43e30}
+.m-feature::before{content:"";position:absolute;width:330px;height:330px;border-radius:50%;background:#171717;left:-90px;bottom:-80px}
+.m-feature::after{content:"";position:absolute;width:210px;height:420px;background:#f2ede2;right:30px;top:38px;transform:rotate(24deg)}
+.m-feature span{position:absolute;left:26px;top:24px;z-index:1;color:#f2ede2;font-size:11px;letter-spacing:.16em;text-transform:uppercase;writing-mode:vertical-rl}
+.m-feature b{position:absolute;right:54px;bottom:34px;z-index:2;font-size:76px;font-weight:400;color:#c43e30;mix-blend-mode:multiply}
+.m-copy .m-deck{font-size:24px;line-height:1.45;letter-spacing:-.025em}
+.m-copy .m-deck::first-letter{float:left;font-size:82px;line-height:.72;padding:12px 9px 0 0;color:#c43e30}
+.m-copy>p{font-family:"Microsoft YaHei",sans-serif;font-size:13px;line-height:1.9;color:#615c54;margin-top:22px}
+.m-list{margin-top:30px;border-top:2px solid #171717}
+.m-item{display:grid;grid-template-columns:42px 1fr auto;gap:14px;align-items:center;padding:15px 0;border-bottom:1px solid #171717}
+.m-item small{font-size:10px;color:#8b8378}
+.m-item h3{font-size:22px;font-weight:400;letter-spacing:-.03em}
+.m-item span{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#c43e30}
+.m-footer{display:flex;justify-content:space-between;margin-top:34px;padding-top:12px;border-top:1px solid #171717;font-size:10px;color:#6d675d}
+
+/* ---------- N 粒子交互 ---------- */
+#n{position:relative;isolation:isolate;overflow:hidden;background:#07090d;color:#f4f7ff;font-family:"Segoe UI","Microsoft YaHei",sans-serif}
+#nCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:-2}
+.n-grid-bg{position:absolute;inset:0;z-index:-3;background-image:linear-gradient(#ffffff05 1px,transparent 1px),linear-gradient(90deg,#ffffff05 1px,transparent 1px);background-size:56px 56px;mask-image:linear-gradient(#000,transparent 90%)}
+.n-glow{position:absolute;left:var(--mx,50%);top:var(--my,30%);width:520px;height:520px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,#8b5cf633,transparent 68%);filter:blur(24px);pointer-events:none;z-index:-1}
+.n-nav{display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#7f8798}
+.n-nav b{color:#f4f7ff;font-size:13px}
+.n-nav span:last-child{color:#9e8cff}
+.n-hero{padding:110px 0 90px;max-width:980px}
+.n-title{font-size:clamp(68px,11vw,164px);line-height:.78;letter-spacing:-.085em;font-weight:800;text-transform:uppercase}
+.n-title span{display:block;background:linear-gradient(90deg,#8b5cf6,#22d3ee 52%,#a3e635);-webkit-background-clip:text;background-clip:text;color:transparent}
+.n-sub{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-top:44px}
+.n-sub p{max-width:560px;font-size:16px;line-height:1.8;color:#929bad}
+.n-actions{display:flex;justify-content:flex-end;gap:10px}
+.n-actions span{padding:11px 16px;border:1px solid #ffffff1c;border-radius:999px;background:#ffffff06;font-size:11px;color:#c3c9d5}
+.n-actions span:first-child{border-color:#8b5cf655;color:#b6a4ff}
+.n-projects{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.n-project{position:relative;min-height:235px;padding:28px;border:1px solid #ffffff16;border-radius:22px;background:#0c1019b8;backdrop-filter:blur(12px);overflow:hidden;transition:transform .2s,border-color .2s,background .2s}
+.n-project::after{content:"";position:absolute;width:130px;height:130px;right:-60px;top:-60px;border-radius:50%;background:#8b5cf61c;filter:blur(10px)}
+.n-project:hover{transform:translateY(-6px);border-color:#8b5cf666;background:#101522e6}
+.n-project small{color:#8b5cf6;font-size:10px;letter-spacing:.15em;text-transform:uppercase}
+.n-project:nth-child(2) small{color:#22d3ee}.n-project:nth-child(3) small{color:#a3e635}
+.n-project h3{font-size:28px;letter-spacing:-.045em;margin:54px 0 10px}
+.n-project p{font-size:13px;line-height:1.7;color:#828b9e}
+.n-project b{position:absolute;right:26px;bottom:24px;font-size:22px;font-weight:400;color:#596174}
+
+@media (min-width:1450px){
+.switch{bottom:24px}
+}
+@media (max-width:1000px){
+.e-hero{grid-template-columns:1fr}.e-intro{max-width:560px}
+.f-profile,.f-status{grid-column:span 12}.f-project{grid-column:span 6}.f-now{grid-column:span 12}.f-contact{grid-column:span 12;min-height:210px}
+.g-hero{grid-template-columns:1fr}.g-orb{display:none}.h-grid{grid-template-columns:repeat(2,1fr)}
+.i-hero{grid-template-columns:1fr}.i-profile{min-height:320px}.i-projects{grid-template-columns:1fr}.i-project{min-height:170px}
+.j-hero{grid-template-columns:1fr}.j-planet{display:none}.j-projects{grid-template-columns:1fr}
+.l-hero{grid-template-columns:1fr}.l-art{height:330px}.l-projects{grid-template-columns:1fr}.l-project{min-height:220px}
+.m-headline{grid-template-columns:1fr}.m-issue{text-align:left;display:flex;align-items:center;gap:18px}.m-layout{grid-template-columns:1fr}.m-feature{min-height:360px}
+.n-sub{grid-template-columns:1fr}.n-actions{justify-content:flex-start}.n-projects{grid-template-columns:1fr}.n-project{min-height:200px}
+}
+@media (max-width:720px){
+.x-wrap{padding:44px 20px 125px}
+.e-top{font-size:10px}.e-hero{padding:40px 0 48px;gap:28px}.e-work{grid-template-columns:36px 1fr;gap:10px;padding:18px 4px}.e-work p{grid-column:2}.e-state{grid-column:2;justify-self:start}.e-meta{flex-wrap:wrap}
+.f-grid{gap:12px}.f-card{padding:22px;border-radius:22px}.f-profile,.f-status,.f-project,.f-now,.f-contact{grid-column:span 12}.f-profile{min-height:320px}.f-project{min-height:190px}.f-now li{grid-template-columns:48px 1fr}
+.g-shell{padding:20px;border-radius:24px}.g-hero{padding:45px 0 36px}.g-title{font-size:clamp(52px,15vw,82px)}.g-grid{grid-template-columns:1fr}
+.h-strip{margin-left:-20px;margin-right:-20px}.h-hero{padding-bottom:48px}.h-sticker{width:92px;height:92px;right:0;top:-20px;font-size:11px}.h-grid{grid-template-columns:1fr;gap:18px}.h-card{min-height:205px}
+.i-intro{padding:32px 24px}.i-intro h1{font-size:clamp(44px,12vw,68px)}.i-profile{padding:32px 20px}.i-project{padding:24px}
+.j-hud{flex-direction:column;gap:8px}.j-hero{min-height:450px}.j-title{font-size:clamp(52px,15vw,84px)}.j-stats{grid-template-columns:repeat(2,1fr)}
+.k-hero{padding:78px 0 70px}.k-list-head{grid-template-columns:36px 1fr}.k-list-head span:last-child{display:none}.k-item{grid-template-columns:36px 1fr;gap:12px}.k-state{grid-column:2;justify-self:start}.k-footer{flex-direction:column;gap:10px}
+.l-nav{margin-bottom:38px}.l-hero{gap:34px}.l-art{height:290px}.l-section-title{margin-top:64px}
+.m-bar{padding-left:20px;padding-right:20px}.m-mast{align-items:start;gap:20px}.m-mast span{max-width:110px;text-align:right}.m-headline{padding:34px 0 28px}.m-headline h1{font-size:clamp(52px,15vw,84px)}.m-feature{min-height:310px}.m-feature::after{right:12px}.m-copy .m-deck{font-size:21px}.m-item{grid-template-columns:32px 1fr}.m-item span{grid-column:2}.m-footer{gap:10px}
+.n-hero{padding:80px 0 64px}.n-title{font-size:clamp(62px,18vw,106px)}.n-sub{margin-top:34px}.n-actions{flex-wrap:wrap}.switch{bottom:12px}
+}
+
 @media (max-width:720px){
 .a-grid{grid-template-columns:1fr}
 .a-equip{grid-template-columns:1fr}
@@ -154,11 +437,21 @@ background-image:repeating-linear-gradient(transparent 0 35px,#c9b48940 35px 36p
 </head>
 <body>
 
-<nav class="switch" aria-label="切换风格">
-  <button data-s="a">A 像素存档</button>
-  <button data-s="b">B 手帐</button>
-  <button data-s="c">C 碎碎念</button>
-  <button data-s="d">D 终端</button>
+<nav class="switch" aria-label="切换风格" role="tablist">
+  <button data-s="a" role="tab" aria-controls="a">A 像素存档</button>
+  <button data-s="b" role="tab" aria-controls="b">B 手帐</button>
+  <button data-s="c" role="tab" aria-controls="c">C 碎碎念</button>
+  <button data-s="d" role="tab" aria-controls="d">D 终端</button>
+  <button data-s="e" role="tab" aria-controls="e">E 瑞士排版</button>
+  <button data-s="f" role="tab" aria-controls="f">F Bento</button>
+  <button data-s="g" role="tab" aria-controls="g">G Y2K</button>
+  <button data-s="h" role="tab" aria-controls="h">H 新粗野</button>
+  <button data-s="i" role="tab" aria-controls="i">I 玻璃拟态</button>
+  <button data-s="j" role="tab" aria-controls="j">J 太空 HUD</button>
+  <button data-s="k" role="tab" aria-controls="k">K 暗金极简</button>
+  <button data-s="l" role="tab" aria-controls="l">L 自然有机</button>
+  <button data-s="m" role="tab" aria-controls="m">M 杂志编辑</button>
+  <button data-s="n" role="tab" aria-controls="n">N 粒子交互</button>
 </nav>
 
 <!-- ================= A ================= -->
@@ -307,6 +600,175 @@ background-image:repeating-linear-gradient(transparent 0 35px,#c9b48940 35px 36p
 </div>
 </section>
 
+<!-- ================= E ================= -->
+<section id="e" class="panel">
+<div class="x-wrap">
+  <header class="e-top"><span>Your Name / Portfolio 2026</span><span>Independent Developer</span></header>
+  <div class="e-hero">
+    <h1>Think.<span>Build.</span>Ship.</h1>
+    <div class="e-intro"><b>前端开发 / 个人开发者</b>把复杂的问题做成简单的界面。上班做图片与 AI 工具、教师 Agent，下班持续打磨自己的小产品。</div>
+  </div>
+  <div class="e-meta"><span>Based in China</span><span>React / Next.js / Tauri</span><span>Available for ideas</span></div>
+  <div class="e-works">
+    <article class="e-work"><span class="e-num">01</span><h3>NOEVA</h3><p>记思路、复盘自己的 App，第一次生产部署已上线。</p><span class="e-state">Live</span></article>
+    <article class="e-work"><span class="e-num">02</span><h3>GeeGeeKing</h3><p>像素风桌面待办小组件，正在研究 Tauri 安装包。</p><span class="e-state">Building</span></article>
+    <article class="e-work"><span class="e-num">03</span><h3>课堂计分</h3><p>带动画反馈的课堂计分小程序。</p><span class="e-state">Freelance</span></article>
+    <article class="e-work"><span class="e-num">04</span><h3>热点展示站</h3><p>把当天热点收进一个清爽的页面。</p><span class="e-state">Experiment</span></article>
+    <article class="e-work"><span class="e-num">05</span><h3>游戏官网仿写</h3><p>从排版到动效，完整复刻一次品牌官网。</p><span class="e-state">Study</span></article>
+    <article class="e-work"><span class="e-num">06</span><h3>公司项目 ×2</h3><p>C 端图片 / AI 生成工具，B 端教师 Agent 助手。</p><span class="e-state">Work</span></article>
+  </div>
+</div>
+</section>
+
+<!-- ================= F ================= -->
+<section id="f" class="panel">
+<div class="x-wrap">
+  <header class="f-head"><h2>YOUR NAME — CREATIVE DEVELOPER</h2><span class="f-live">Open to interesting ideas</span></header>
+  <div class="f-grid">
+    <article class="f-card f-profile">
+      <div class="f-avatar">YN</div>
+      <h1>Hello, I make things for the web.</h1>
+      <p>前端开发，偶尔做产品。喜欢清晰的交互、克制的动效，以及把一个小想法慢慢做成能用的东西。</p>
+      <div class="f-social"><span>GitHub</span><span>X / Twitter</span><span>Email</span></div>
+    </article>
+    <article class="f-card f-status"><span class="x-kicker">Current Focus</span><div><strong>从 Demo 到<br>真正的产品。</strong><p>正在为 GeeGeeKing 研究 Tauri，让像素待办从网页走进桌面。</p></div><div class="f-meter"><i></i></div></article>
+    <article class="f-card f-project"><span class="f-icon">◈</span><div><h3>NOEVA</h3><p>思路记录与复盘工具<br>已上线 · Personal</p></div></article>
+    <article class="f-card f-project"><span class="f-icon">▦</span><div><h3>GeeGeeKing</h3><p>像素风桌面待办<br>开发中 · Tauri</p></div></article>
+    <article class="f-card f-project"><span class="f-icon">✦</span><div><h3>AI Tools</h3><p>图片生成与教师 Agent<br>工作项目 · Product</p></div></article>
+    <article class="f-card f-now"><h2>Recently</h2><ul><li><time>11.22</time><span>NOEVA 第一次生产部署上线。</span></li><li><time>11.24</time><span>开始研究 Tauri 和桌面应用打包。</span></li><li><time>11.25</time><span>给个人主页尝试了 14 种视觉方向。</span></li></ul></article>
+    <article class="f-card f-contact"><h2>Say hello</h2><p>有一个值得做的小想法？<br>我们聊聊。</p><a href="mailto:Threeee33@outlook.com">Threeee33@outlook.com ↗</a></article>
+  </div>
+</div>
+</section>
+
+<!-- ================= G ================= -->
+<section id="g" class="panel">
+<div class="x-wrap">
+  <div class="g-shell">
+    <header class="g-top"><span>Your Name.exe</span><span>Creative Mode: ON</span></header>
+    <div class="g-hero">
+      <div><h1 class="g-title">WEB<span>IS MY PLAYGROUND.</span></h1><p>前端开发、产品爱好者、像素控。白天做有用的工具，晚上做有点酷的小东西。</p></div>
+      <div class="g-orb" aria-hidden="true"></div>
+    </div>
+    <div class="g-grid">
+      <article class="g-card"><small>✦ Personal / Live</small><h3>NOEVA</h3><p>记录灵感，也记录自己走过的路。</p><b>OPEN APP ↗</b></article>
+      <article class="g-card"><small>✦ Personal / Beta</small><h3>GeeGeeKing</h3><p>一只住在桌面上的像素待办小人。</p><b>IN DEVELOPMENT</b></article>
+      <article class="g-card"><small>✦ Work / Product</small><h3>AI Studio</h3><p>让不会画画的人，也能轻松生成一张图。</p><b>TEAM PROJECT</b></article>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ================= H ================= -->
+<section id="h" class="panel">
+<div class="x-wrap">
+  <div class="h-strip">DESIGN × CODE × SHIP × REPEAT × DESIGN × CODE × SHIP × REPEAT</div>
+  <header class="h-hero"><h1>I MAKE<br><span>LOUD</span><br>THINGS.</h1><p>你好，我是 Your Name。前端开发，独立做产品。我相信好用的界面，也可以很有性格。</p><div class="h-sticker">100%<br>HAND<br>CODED</div></header>
+  <div class="h-grid">
+    <article class="h-card"><small>01 / PERSONAL</small><h3>NOEVA</h3><p>一个逼自己复盘的小 App。已上线。</p></article>
+    <article class="h-card"><small>02 / PERSONAL</small><h3>GEE GEE KING</h3><p>像素风桌面待办。正在变成真正的桌面应用。</p></article>
+    <article class="h-card"><small>03 / WORK</small><h3>AI + AGENT</h3><p>做图片生成工具，也做教师 Agent 助手。</p></article>
+  </div>
+</div>
+</section>
+
+<!-- ================= I ================= -->
+<section id="i" class="panel">
+<div class="i-orb one"></div><div class="i-orb two"></div><div class="i-orb three"></div>
+<div class="x-wrap">
+  <header class="i-nav"><b>YN®</b><span>Creative developer / China</span></header>
+  <div class="i-hero">
+    <article class="i-card i-intro"><span class="x-kicker">Hello, world</span><h1>Building calm<br>in a <span>noisy</span> web.</h1><p>我是 Your Name，一名前端开发。关注交互细节、产品体验和新技术，把想法变成清晰、顺手的数字产品。</p><div class="i-tags"><span>React</span><span>Next.js</span><span>TypeScript</span><span>Tauri</span><span>Creative Coding</span></div></article>
+    <article class="i-card i-profile"><div class="i-avatar">YN</div><h2>Your Name</h2><p>Frontend Developer & Maker</p><span class="i-available">● Available for collaboration</span></article>
+  </div>
+  <div class="i-projects">
+    <article class="i-card i-project"><small>Featured / Live</small><h3>NOEVA</h3><p>一个轻量的思路记录与复盘产品，让模糊的想法逐渐变得清晰。</p></article>
+    <article class="i-card i-project"><small>In progress</small><h3>GeeGeeKing</h3><p>像素风桌面待办小组件，正在探索 Tauri 的原生体验。</p></article>
+    <article class="i-card i-project"><small>Selected work</small><h3>AI Tools</h3><p>C 端图片生成工具与 B 端教师 Agent 助手。</p></article>
+  </div>
+</div>
+</section>
+
+<!-- ================= J ================= -->
+<section id="j" class="panel">
+<div class="j-grid-bg"></div>
+<div class="x-wrap j-wrap">
+  <header class="j-hud"><span>YN / PERSONAL SPACE</span><span>MISSION: KEEP BUILDING</span><b>● SYSTEM ONLINE</b></header>
+  <div class="j-hero"><div><h1 class="j-title">CREATIVE<span>DEVELOPER</span><em>ON EARTH.</em></h1><p class="j-copy">坐标：中国。任务：把好奇心变成产品。前端开发 / 独立创作者，负责界面、交互，以及偶尔失控但有趣的动效。</p></div><div class="j-planet" aria-hidden="true"></div></div>
+  <div class="j-stats"><div class="j-stat"><small>PROJECTS</small><b>07+</b></div><div class="j-stat"><small>COFFEE / DAY</small><b>02</b></div><div class="j-stat"><small>CURRENT STACK</small><b>REACT</b></div><div class="j-stat"><small>EXPLORING</small><b>TAURI</b></div></div>
+  <div class="j-projects">
+    <article class="j-project"><small>MISSION 01 / LIVE</small><h3>NOEVA</h3><p>记录、复盘、持续迭代。第一个完整上线的小产品。</p></article>
+    <article class="j-project"><small>MISSION 02 / BUILDING</small><h3>GEEGEEKING</h3><p>桌面像素待办，正在完成从 Web 到 Native 的跃迁。</p></article>
+    <article class="j-project"><small>MISSION 03 / CLASSIFIED</small><h3>AI + AGENT</h3><p>图片生成与教师助手。公司项目，细节暂未解密。</p></article>
+  </div>
+</div>
+</section>
+
+<!-- ================= K ================= -->
+<section id="k" class="panel">
+<div class="k-watermark" aria-hidden="true">K</div>
+<div class="x-wrap k-wrap">
+  <header class="k-top"><b>Your Name</b><span>Developer · Designer · Maker</span></header>
+  <div class="k-hero"><small>Selected works / 2022—2026</small><h1>Quiet craft.<br><em>Lasting value.</em></h1><p>不追逐喧闹的趋势，专注把每一件小事做好。界面、代码与产品，是我持续练习的手艺。</p><span class="k-sign">View selected projects</span></div>
+  <div class="k-list-head"><span>No.</span><span>Project / Description</span><span>Status</span></div>
+  <article class="k-item"><span class="k-num">01</span><div><h3>NOEVA</h3><p>思路记录与个人复盘工具</p></div><span class="k-state">Live</span></article>
+  <article class="k-item"><span class="k-num">02</span><div><h3>GeeGeeKing</h3><p>像素风桌面待办小组件</p></div><span class="k-state">In progress</span></article>
+  <article class="k-item"><span class="k-num">03</span><div><h3>课堂计分</h3><p>带动画反馈的教学小程序</p></div><span class="k-state">Delivered</span></article>
+  <article class="k-item"><span class="k-num">04</span><div><h3>热点展示站</h3><p>热点新闻聚合与阅读实验</p></div><span class="k-state">Archive</span></article>
+  <article class="k-item"><span class="k-num">05</span><div><h3>AI Creation Tools</h3><p>C 端图片生成与 B 端教师 Agent</p></div><span class="k-state">Work</span></article>
+  <footer class="k-footer"><span>© 2026 YOUR NAME</span><span>Made with intention.</span></footer>
+</div>
+</section>
+
+<!-- ================= L ================= -->
+<section id="l" class="panel">
+<div class="x-wrap">
+  <header class="l-nav"><b>Your Name.</b><span>Designer & Developer</span></header>
+  <div class="l-hero"><div><h1>慢慢生长，<br><em>持续创造。</em></h1><p>我是 Your Name，一名前端开发，也是喜欢折腾的个人开发者。做有用的工具，做温柔的产品，也做一些没有标准答案的实验。</p><span class="l-note">Currently growing GeeGeeKing</span></div><div class="l-art" aria-hidden="true"><div class="l-sun"></div><div class="l-blob"></div><span class="l-caption">Make something useful.</span></div></div>
+  <div class="l-section-title"><h2>Recent Seeds / 最近种下</h2><span>Small things, made with care.</span></div>
+  <div class="l-projects">
+    <article class="l-project"><span class="l-index">01 — Personal</span><div><h3>NOEVA</h3><p>记录灵感与复盘，让想法像植物一样慢慢长大。</p></div></article>
+    <article class="l-project"><span class="l-index">02 — In progress</span><div><h3>GeeGeeKing</h3><p>一只像素小人，陪你安排每天要做的事情。</p></div></article>
+    <article class="l-project"><span class="l-index">03 — Work</span><div><h3>AI & Agent</h3><p>把复杂的 AI 能力，变成自然好用的产品体验。</p></div></article>
+  </div>
+</div>
+</section>
+
+<!-- ================= M ================= -->
+<section id="m" class="panel">
+<div class="m-bar"><span>The Making of Your Name</span><span>Issue 026 / Personal Portfolio</span></div>
+<div class="x-wrap">
+  <header class="m-mast"><h2>Your Name®</h2><span>FRONTEND / PRODUCT / CREATIVE CODING</span></header>
+  <div class="m-headline"><h1>代码之外，<br>是<em>好奇心。</em></h1><div class="m-issue"><b>026</b>November<br>2026</div></div>
+  <div class="m-layout">
+    <div class="m-feature" aria-hidden="true"><span>Portrait of a Maker</span><b>YN</b></div>
+    <div class="m-copy"><p class="m-deck">你好，我是 Your Name。上班做图片与 AI 工具、教师 Agent，下班把零碎的时间留给自己的小项目。</p><p>我相信，个人项目不需要一开始就宏大。它可以是一个顺手的工具、一只桌面像素小人，或者一次认真完成的仿写。重要的是保持制作，保持好奇，然后让它一点点变得更好。</p>
+      <div class="m-list">
+        <article class="m-item"><small>01</small><h3>NOEVA</h3><span>Live</span></article>
+        <article class="m-item"><small>02</small><h3>GeeGeeKing</h3><span>Building</span></article>
+        <article class="m-item"><small>03</small><h3>课堂计分小程序</h3><span>Freelance</span></article>
+        <article class="m-item"><small>04</small><h3>热点新闻展示站</h3><span>Experiment</span></article>
+      </div>
+    </div>
+  </div>
+  <footer class="m-footer"><span>WORDS & CODE BY YOUR NAME</span><span>Keep making. Keep learning.</span></footer>
+</div>
+</section>
+
+<!-- ================= N ================= -->
+<section id="n" class="panel">
+<canvas id="nCanvas" aria-hidden="true"></canvas><div class="n-grid-bg"></div><div class="n-glow"></div>
+<div class="x-wrap">
+  <header class="n-nav"><b>YN / LAB</b><span>Move your cursor. Make some noise.</span></header>
+  <div class="n-hero"><h1 class="n-title">CREATIVE<span>CODER.</span></h1><div class="n-sub"><p>我是 Your Name。用代码做产品，也用代码探索视觉与交互的边界。这里收集我的实验、工具和正在长大的想法。</p><div class="n-actions"><span>● Open to collaborate</span><span>React / Next.js / Tauri</span></div></div></div>
+  <div class="n-projects">
+    <article class="n-project"><small>01 / Live</small><h3>NOEVA</h3><p>一个让记录和复盘变得更容易的小产品。</p><b>↗</b></article>
+    <article class="n-project"><small>02 / Building</small><h3>GeeGeeKing</h3><p>像素风桌面待办，正在学习如何成为原生应用。</p><b>↗</b></article>
+    <article class="n-project"><small>03 / Exploring</small><h3>Creative Web</h3><p>动效、生成艺术、WebGL，以及所有好玩的可能性。</p><b>↗</b></article>
+  </div>
+</div>
+</section>
+
 <script>
 const M=[
 '................',
@@ -330,19 +792,153 @@ const C={k:'#0a0a14',h:'#4be1c3',s:'#f7cfae',e:'#1b1b2f',m:'#d95763',c:'#8b7cff'
 document.querySelectorAll('.px').forEach(el=>{
   el.innerHTML=M.join('').split('').map(ch=>`<i style="background:${C[ch]||'transparent'}"></i>`).join('');
 });
-const ids=['a','b','c','d'];
+const ids=Array.from('abcdefghijklmn');
+const nav=document.querySelector('.switch');
+const tabs=[...nav.querySelectorAll('button')];
+const reduceMotion=matchMedia('(prefers-reduced-motion: reduce)');
 function show(k){
   if(!ids.includes(k))k='a';
-  ids.forEach(i=>document.getElementById(i).classList.toggle('on',i===k));
-  document.querySelectorAll('.switch button').forEach(b=>b.classList.toggle('on',b.dataset.s===k));
+  ids.forEach(i=>{
+    const panel=document.getElementById(i);
+    const active=i===k;
+    panel.classList.toggle('on',active);
+    panel.setAttribute('role','tabpanel');
+    panel.setAttribute('aria-hidden',String(!active));
+    panel.inert=!active;
+  });
+  tabs.forEach(b=>{
+    const active=b.dataset.s===k;
+    b.classList.toggle('on',active);
+    b.setAttribute('aria-selected',String(active));
+    b.tabIndex=active?0:-1;
+  });
+  const activeTab=tabs.find(b=>b.dataset.s===k);
+  nav.scrollTo({left:activeTab.offsetLeft-(nav.clientWidth-activeTab.offsetWidth)/2,behavior:'auto'});
+  k==='n'?startParticles():stopParticles();
 }
-document.querySelectorAll('.switch button').forEach(b=>b.onclick=()=>{
-  show(b.dataset.s);history.replaceState(null,'','#'+b.dataset.s);
+tabs.forEach(b=>b.onclick=()=>{
+  show(b.dataset.s);
+  history.replaceState(null,'','#'+b.dataset.s);
+  window.scrollTo({top:0,behavior:'auto'});
+});
+nav.addEventListener('keydown',e=>{
+  if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;
+  const current=tabs.indexOf(document.activeElement);
+  if(current<0)return;
+  e.preventDefault();
+  let next=current;
+  if(e.key==='ArrowRight')next=(current+1)%tabs.length;
+  if(e.key==='ArrowLeft')next=(current-1+tabs.length)%tabs.length;
+  if(e.key==='Home')next=0;
+  if(e.key==='End')next=tabs.length-1;
+  tabs[next].focus();
+  show(tabs[next].dataset.s);
+  history.replaceState(null,'','#'+tabs[next].dataset.s);
 });
 addEventListener('hashchange',()=>show(location.hash.slice(1)));
-show(location.hash.slice(1));
 if(/[?&]clean/.test(location.search))document.body.classList.add('clean');
 document.querySelectorAll('.c-hint').forEach(b=>b.onclick=()=>b.nextElementSibling.classList.toggle('open'));
+
+const particlePanel=document.getElementById('n');
+const canvas=document.getElementById('nCanvas');
+const ctx=canvas.getContext('2d');
+const pointer={x:0,y:0,active:false};
+let particles=[];
+let particleFrame=0;
+let particlesActive=false;
+let canvasWidth=0;
+let canvasHeight=0;
+function sizeParticles(){
+  const rect=particlePanel.getBoundingClientRect();
+  canvasWidth=rect.width;
+  canvasHeight=rect.height;
+  const dpr=Math.min(devicePixelRatio||1,2);
+  canvas.width=Math.round(canvasWidth*dpr);
+  canvas.height=Math.round(canvasHeight*dpr);
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  const count=Math.min(90,Math.max(36,Math.round(canvasWidth/17)));
+  particles=Array.from({length:count},()=>({
+    x:Math.random()*canvasWidth,
+    y:Math.random()*canvasHeight,
+    vx:(Math.random()-.5)*.35,
+    vy:(Math.random()-.5)*.35,
+    r:Math.random()*1.4+.6
+  }));
+  drawParticles();
+}
+function drawParticles(){
+  ctx.clearRect(0,0,canvasWidth,canvasHeight);
+  for(let i=0;i<particles.length;i++){
+    const p=particles[i];
+    for(let j=i+1;j<particles.length;j++){
+      const q=particles[j];
+      const distance=Math.hypot(p.x-q.x,p.y-q.y);
+      if(distance<125){
+        ctx.strokeStyle=`rgba(139,92,246,${(1-distance/125)*.2})`;
+        ctx.lineWidth=.7;
+        ctx.beginPath();
+        ctx.moveTo(p.x,p.y);
+        ctx.lineTo(q.x,q.y);
+        ctx.stroke();
+      }
+    }
+    ctx.fillStyle=i%5===0?'#67e8f9':'#a78bfa';
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fill();
+  }
+}
+function animateParticles(){
+  if(!particlesActive)return;
+  particles.forEach(p=>{
+    p.x+=p.vx;
+    p.y+=p.vy;
+    if(p.x<0||p.x>canvasWidth)p.vx*=-1;
+    if(p.y<0||p.y>canvasHeight)p.vy*=-1;
+    if(pointer.active){
+      const dx=p.x-pointer.x;
+      const dy=p.y-pointer.y;
+      const distance=Math.hypot(dx,dy);
+      if(distance<110&&distance>0){
+        p.x+=dx/distance*.7;
+        p.y+=dy/distance*.7;
+      }
+    }
+  });
+  drawParticles();
+  particleFrame=requestAnimationFrame(animateParticles);
+}
+function startParticles(){
+  particlesActive=true;
+  cancelAnimationFrame(particleFrame);
+  sizeParticles();
+  if(!reduceMotion.matches)animateParticles();
+}
+function stopParticles(){
+  particlesActive=false;
+  cancelAnimationFrame(particleFrame);
+}
+particlePanel.addEventListener('pointermove',e=>{
+  const rect=particlePanel.getBoundingClientRect();
+  const x=e.clientX-rect.left;
+  const y=e.clientY-rect.top;
+  pointer.x=x;
+  pointer.y=y;
+  pointer.active=true;
+  particlePanel.style.setProperty('--mx',x+'px');
+  particlePanel.style.setProperty('--my',y+'px');
+});
+particlePanel.addEventListener('pointerleave',()=>pointer.active=false);
+addEventListener('resize',()=>{
+  if(particlesActive)sizeParticles();
+});
+reduceMotion.addEventListener('change',()=>{
+  if(!particlesActive)return;
+  cancelAnimationFrame(particleFrame);
+  if(!reduceMotion.matches)animateParticles();
+  else drawParticles();
+});
+show(location.hash.slice(1));
 </script>
 </body>
 </html>
