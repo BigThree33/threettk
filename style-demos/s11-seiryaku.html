@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>你的名字 — 留白竖排</title>
+<style>
+:root{--paper:#f7f5f0;--ink:#2b2a28;--mute:#8a867c;--hair:#d8d3c7;--red:#b5301f;--serif:"Songti SC","SimSun","Noto Serif CJK SC",Georgia,"Times New Roman",serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font:15px/2.3 var(--serif);letter-spacing:.12em;-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--red);color:#fff}
+.v{writing-mode:vertical-rl;text-orientation:mixed}
+.up{text-orientation:upright}
+.tl{position:fixed;top:18px;left:28px;z-index:50;display:flex;gap:14px;align-items:center;font-size:12px;letter-spacing:.2em}
+.tl .back{padding:4px 0;border-bottom:1px solid var(--hair);transition:border-color .3s,color .3s}
+.tl .back:hover{color:var(--red);border-color:var(--red)}
+.tl .chip{border:1px solid var(--hair);padding:5px 12px;color:var(--mute);background:rgba(247,245,240,.9);white-space:nowrap}
+.tl .chip b{color:var(--ink);font-weight:400;margin-right:.6em}
+.hero{position:relative;min-height:min(100vh,900px);overflow:hidden}
+.hnav{position:absolute;top:44px;right:56px;display:flex;flex-direction:row-reverse;z-index:3}
+.hnav a{writing-mode:vertical-rl;text-orientation:upright;padding:6px 14px 6px 16px;border-left:1px solid var(--hair);font-size:15px;letter-spacing:.5em;height:170px;transition:color .3s,background .3s}
+.hnav a:first-child{border-left:0}
+.hnav a:hover{color:var(--red)}
+.hnav a small{display:block;font-size:10px;color:var(--mute);letter-spacing:.2em;margin-top:14px;font-family:Georgia,serif}
+.hline{position:absolute;left:56px;top:44px;width:1px;height:0;background:var(--ink);opacity:.6;z-index:2}
+.h-latin{position:absolute;left:56px;bottom:56px;font-family:Georgia,"Times New Roman",serif;letter-spacing:.3em;font-size:12px;color:var(--mute);z-index:3}
+.h-latin b{display:block;font-weight:400;font-style:italic;font-size:15px;color:var(--ink);letter-spacing:.25em;margin-bottom:8px}
+.enso{position:absolute;left:6%;top:50%;width:min(42vw,500px);height:min(42vw,500px);transform:translateY(-50%);z-index:1}
+.enso svg{width:100%;height:100%;overflow:visible}
+.enso .ink{fill:none;stroke:var(--ink);stroke-linecap:round;stroke-linejoin:round}
+.h-title{position:absolute;right:clamp(150px,18vw,230px);top:96px;display:flex;flex-direction:row-reverse;gap:34px;z-index:3}
+.h-title .sub{writing-mode:vertical-rl;text-orientation:upright;font-size:17px;letter-spacing:.6em;color:var(--mute);padding-top:14px}
+.h-title .sub.lat{text-orientation:mixed;font-family:Georgia,serif;letter-spacing:.35em;font-size:12px}
+.h-title .main{display:flex;flex-direction:column;align-items:center;gap:28px}
+.h-title h1{writing-mode:vertical-rl;text-orientation:upright;font-weight:400;font-size:clamp(56px,6.5vw,86px);letter-spacing:.32em;line-height:1}
+.seal{width:30px;height:30px;background:var(--red);color:#fff;font-size:17px;line-height:30px;text-align:center;letter-spacing:0;writing-mode:horizontal-tb;border-radius:2px}
+.tagline{text-align:center;padding:96px 24px 100px;font-size:clamp(16px,1.5vw,20px);letter-spacing:.5em;color:var(--ink);border-top:1px solid var(--hair)}
+.tagline small{display:block;font-size:11px;color:var(--mute);letter-spacing:.3em;margin-top:14px;font-family:Georgia,serif;font-style:italic}
+.wrap{max-width:1120px;margin:0 auto;padding:0 56px}
+section.about-s{display:grid;grid-template-columns:150px minmax(0,1fr);gap:40px;padding:110px 0 120px;border-top:1px solid var(--hair)}
+.sec-h{display:flex;flex-direction:column;align-items:flex-start;gap:22px;height:100%}
+.sec-h .num{font-size:15px;color:var(--red);letter-spacing:.3em}
+.sec-h h2{writing-mode:vertical-rl;text-orientation:upright;font-weight:400;font-size:26px;letter-spacing:.6em}
+.sec-h .lat{writing-mode:vertical-rl;font-family:Georgia,serif;font-size:11px;letter-spacing:.3em;color:var(--mute);margin-top:auto}
+.about-s .txt p{max-width:620px;font-size:16px;line-height:2.5}
+.about-s .txt p+p{margin-top:20px}
+.kv{display:grid;grid-template-columns:max-content 1fr;gap:0 36px;margin-top:44px;max-width:620px;font-size:14px}
+.kv dt{color:var(--mute);padding:9px 0;border-top:1px solid var(--hair);letter-spacing:.3em}
+.kv dd{padding:9px 0;border-top:1px solid var(--hair)}
+.art{position:relative;height:min(62vh,560px);overflow:hidden;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+.art svg{position:absolute;inset:auto 0 0 0;width:100%;height:100%}
+.art .cap{position:absolute;right:56px;top:48px;writing-mode:vertical-rl;text-orientation:upright;font-size:14px;letter-spacing:.6em;color:var(--mute)}
+.art .dog{position:absolute;left:56px;bottom:36px;display:flex;align-items:flex-end;gap:10px}
+.art .dog span{writing-mode:vertical-rl;text-orientation:upright;font-size:12px;letter-spacing:.4em;color:var(--mute)}
+.art .dog canvas{opacity:.9}
+.works{padding:110px 0 120px;border-top:0}
+.spines{list-style:none;display:flex;flex-direction:row-reverse;justify-content:flex-start;gap:0;flex-wrap:wrap}
+.spines li{border-right:1px solid var(--hair)}
+.spines li:last-child{border-left:1px solid var(--hair)}
+.spines a{display:flex;flex-direction:column;align-items:flex-start;gap:18px;padding:8px 22px 4px;transition:transform .5s ease}
+.spines .t{writing-mode:vertical-rl;text-orientation:mixed;font-size:25px;letter-spacing:.4em;height:230px;line-height:1.1;white-space:nowrap}
+.spines .m{font-size:11px;color:var(--mute);letter-spacing:.2em;writing-mode:horizontal-tb;white-space:nowrap}
+.spines li:hover a{transform:translateY(-6px)}
+.spines li:hover{border-color:var(--red)}
+.spines li:hover .t{color:var(--red)}
+.rec{list-style:none;max-width:640px}
+.rec li{display:grid;grid-template-columns:120px 1fr;gap:32px;padding:16px 0;border-top:1px solid var(--hair);transition:padding-left .4s,border-color .4s}
+.rec li:last-child{border-bottom:1px solid var(--hair)}
+.rec li:hover{padding-left:10px;border-color:var(--ink)}
+.rec time{font-family:Georgia,serif;font-size:13px;letter-spacing:.12em;color:var(--mute);font-variant-numeric:tabular-nums;line-height:2.3}
+.rec p{font-size:15px}
+.rec p span{font-size:12px;color:var(--mute);margin-left:14px;letter-spacing:.2em}
+.foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:44px 56px 56px;border-top:1px solid var(--hair);font-size:12px;color:var(--mute);letter-spacing:.25em}
+.foot b{font-weight:400;color:var(--ink);font-family:Georgia,serif;font-style:italic;letter-spacing:.2em}
+@media (max-width:1000px){.enso{width:360px;height:360px;left:2%}.tl .chip{display:none}.h-title{right:110px}.wrap{padding:0 32px}.spines a{padding:8px 16px 4px}}
+@media (prefers-reduced-motion:reduce){.spines a,.rec li{transition:none}}
+</style>
+</head>
+<body>
+<div class="tl">
+  <a class="back" href="gallery.html#31" target="_parent">← 返回总览</a>
+  <span class="chip"><b>留白竖排</b>借鉴：日本杂志 / 无印良品官网 × 设计工作室站点 × 卷轴画</span>
+</div>
+
+<section class="hero">
+  <div class="hline" id="hline"></div>
+  <nav class="hnav">
+    <a href="#about">关于<small>About</small></a>
+    <a href="#works">作品<small>Works</small></a>
+    <a href="#log">记录<small>Log</small></a>
+  </nav>
+
+  <div class="enso" aria-hidden="true">
+    <svg viewBox="0 0 500 500">
+      <path class="ink" id="enso1" d="M437.9 318.4 A200 200 0 0 1 50 250 A200 200 0 0 1 1 437.9 181.6" stroke-width="11"/>
+      <path class="ink" id="enso2" d="M437.9 318.4 A200 200 0 0 1 50 250 A200 200 0 0 1 1 437.9 181.6" stroke-width="4" opacity=".35" transform="rotate(1.5 250 250) scale(1.012)" transform-origin="250 250"/>
+      <path class="ink" id="enso3" d="M437.9 318.4 A200 200 0 0 1 50 250 A200 200 0 0 1 1 437.9 181.6" stroke-width="18" opacity=".08" transform="rotate(-1.5 250 250)"/>
+    </svg>
+  </div>
+
+  <div class="h-title">
+    <div class="main">
+      <h1>你的名字</h1>
+      <span class="seal">名</span>
+    </div>
+    <div class="sub up">前端开发者　养狗的人</div>
+    <div class="sub lat">Your Name — Portfolio 2026</div>
+  </div>
+
+  <div class="h-latin"><b>Your Name</b>个人主页 · 风格小样 十一</div>
+</section>
+
+<p class="tagline">写字的人，养狗的人，做小产品的人。<small>Write, keep a dog, build small things.</small></p>
+
+<section class="about-s wrap" id="about">
+  <div class="sec-h"><span class="num">一</span><h2>关于</h2><span class="lat">About</span></div>
+  <div class="txt">
+    <p class="fade">用 React 很多年，最近在学 Next.js 和 Tauri。白天在公司做 C 端图片 / AI 生成工具，和 B 端教师 Agent 助手；下班以后，做一点自己的小产品，偶尔接一单小程序。</p>
+    <p class="fade">休息的时候画像素画，研究网页动画，遛一只萨摩耶。</p>
+    <dl class="kv fade">
+      <dt>在做</dt><dd>NOEVA（记思路、复盘自己的 App）／ GeeGeeKing（像素风桌面待办小组件）</dd>
+      <dt>接单</dt><dd>课堂计分 + 动画呈现小程序</dd>
+      <dt>练手</dt><dd>仿写某游戏公司官网／ 热点新闻爬取展示站</dd>
+      <dt>在学</dt><dd>Next.js ／ Tauri</dd>
+    </dl>
+  </div>
+</section>
+
+<div class="art" id="art">
+  <svg viewBox="0 0 1280 560" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <g id="mtn-back" fill="#e2ddd1">
+      <path d="M0 420 L140 330 L260 400 L400 300 L540 410 L700 320 L860 420 L1010 340 L1160 410 L1280 350 L1280 560 L0 560 Z"/>
+    </g>
+    <g id="mtn-mid" fill="#d3ccbd">
+      <path d="M0 470 L180 380 L330 450 L520 370 L700 470 L900 390 L1080 470 L1280 400 L1280 560 L0 560 Z"/>
+    </g>
+    <g id="mtn-front" fill="#c3bba9">
+      <path d="M0 520 L220 450 L420 510 L640 440 L860 520 L1040 470 L1280 515 L1280 560 L0 560 Z"/>
+    </g>
+    <line x1="640" y1="60" x2="640" y2="440" stroke="#2b2a28" stroke-width="1" opacity=".35"/>
+  </svg>
+  <span class="cap">遠山　一座　犬　一匹</span>
+  <div class="dog"><canvas class="samo" data-pose="side" data-px="3" data-k="#2b2a28" data-w="#fbfaf6"></canvas><span>犬</span></div>
+</div>
+
+<section class="about-s wrap works" id="works">
+  <div class="sec-h"><span class="num">二</span><h2>作品</h2><span class="lat">Works</span></div>
+  <div>
+    <ul class="spines fade">
+      <li><a href="#works"><span class="t">NOEVA</span><span class="m">个人产品 · 二〇二六</span></a></li>
+      <li><a href="#works"><span class="t">GeeGeeKing</span><span class="m">开发中</span></a></li>
+      <li><a href="#works"><span class="t up">课堂计分</span><span class="m">接单 · 小程序</span></a></li>
+      <li><a href="#works"><span class="t up">仿写官网</span><span class="m">练手</span></a></li>
+      <li><a href="#works"><span class="t up">热点新闻</span><span class="m">练手 · 展示站</span></a></li>
+    </ul>
+  </div>
+</section>
+
+<section class="about-s wrap" id="log" style="border-bottom:1px solid var(--hair)">
+  <div class="sec-h"><span class="num">三</span><h2>记录</h2><span class="lat">Log</span></div>
+  <ol class="rec fade">
+    <li><time>2026.11.25</time><p>开始做这个主页<span>个人</span></p></li>
+    <li><time>2026.11.24</time><p>研究 Tauri<span>个人</span></p></li>
+    <li><time>2026.11.22</time><p>NOEVA 第一次生产部署上线<span>个人</span></p></li>
+    <li><time>更早</time><p>课堂计分 + 动画呈现小程序<span>接单</span></p></li>
+    <li><time>更早</time><p>仿写某游戏公司官网<span>练手</span></p></li>
+    <li><time>更早</time><p>热点新闻爬取展示站<span>练手</span></p></li>
+    <li><time>更早</time><p>上班做的 C 端 / B 端项目<span>上班</span></p></li>
+  </ol>
+</section>
+
+<footer class="foot"><span><b>Your Name</b>　二〇二六</span><span>风格小样 十一 · 留白竖排</span><span>基于中国</span></footer>
+
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="assets/samo.js"></script>
+<script>
+(function(){
+  const q = s => document.querySelector(s), qa = s => Array.from(document.querySelectorAll(s));
+  const isStatic = /[?&]static/.test(location.search);
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hasGsap = typeof gsap !== 'undefined';
+  if (hasGsap) gsap.registerPlugin(ScrollTrigger);
+
+  const inks = qa('#enso1, #enso2, #enso3').map(p => ({p, len: p.getTotalLength()}));
+  inks.forEach(({p, len}) => { p.style.strokeDasharray = len; p.style.strokeDashoffset = isStatic || reduced ? 0 : len; });
+  const hline = q('#hline');
+
+  if (!hasGsap || isStatic || reduced) {
+    hline.style.height = 'calc(100% - 100px)';
+    return;
+  }
+
+  gsap.timeline({defaults:{ease:'power2.out'}})
+    .fromTo(hline, {height:0}, {height:'calc(100% - 100px)', duration:1.2}, 0)
+    .from('.hnav a', {opacity:0, y:-10, duration:.6, stagger:.08}, .1)
+    .from('.h-title .main, .h-title .sub', {opacity:0, y:16, duration:.7, stagger:.1}, .15)
+    .from('.h-latin', {opacity:0, duration:.6}, .4);
+
+  inks.forEach(({p, len}, i) => gsap.to(p, {strokeDashoffset:0, ease:'none', scrollTrigger:{trigger:'.hero', start:'top top', end:'bottom 30%', scrub:1}}));
+
+  gsap.to('#mtn-back', {y:-36, ease:'none', scrollTrigger:{trigger:'#art', start:'top bottom', end:'bottom top', scrub:1}});
+  gsap.to('#mtn-mid', {y:-18, ease:'none', scrollTrigger:{trigger:'#art', start:'top bottom', end:'bottom top', scrub:1}});
+  gsap.fromTo('#mtn-front', {y:30}, {y:-6, ease:'none', scrollTrigger:{trigger:'#art', start:'top bottom', end:'bottom top', scrub:1}});
+  gsap.from('.art .dog', {y:14, opacity:0, duration:.8, scrollTrigger:{trigger:'#art', start:'top 70%', once:true}});
+
+  qa('.fade').forEach(el => gsap.from(el, {y:26, opacity:0, duration:1.1, ease:'power2.out', scrollTrigger:{trigger:el, start:'top 86%', once:true}}));
+  gsap.from('.tagline', {opacity:0, y:14, duration:1, scrollTrigger:{trigger:'.tagline', start:'top 90%', once:true}});
+  gsap.from('.sec-h', {opacity:0, duration:1.2, scrollTrigger:{trigger:'.sec-h', start:'top 85%', once:true}});
+})();
+</script>
+</body>
+</html>

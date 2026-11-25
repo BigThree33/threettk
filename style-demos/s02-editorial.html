@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Your Name — 巨字编辑风</title>
+<style>
+:root{--paper:#f2f0eb;--ink:#141414;--acid:#c8ff1e;--mute:#6f6c65;--line:rgba(20,20,20,.13);--tile:#e9e6df;--sans:"Helvetica Neue",Arial,"Microsoft YaHei",sans-serif;--disp:"Arial Black",Impact,"Microsoft YaHei",sans-serif;--mono:Consolas,"Courier New",monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:56px}
+html.has-cursor *{cursor:none}
+body{background:var(--paper);color:var(--ink);font:15px/1.7 var(--sans);overflow-x:clip;-webkit-font-smoothing:antialiased}
+::selection{background:var(--acid);color:var(--ink)}
+a{color:inherit;text-decoration:none}
+.page{position:relative}
+.lines{position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(to right,var(--line) 1px,transparent 1px) 0 0/calc(100%/4) 100%}
+.bar{position:fixed;top:0;left:0;right:0;z-index:50;height:44px;display:flex;align-items:center;gap:0;background:var(--paper);border-bottom:1px solid var(--ink);font:12px/1 var(--mono)}
+.bar>*{display:flex;align-items:center;height:100%;padding:0 14px;border-right:1px solid var(--line);white-space:nowrap}
+.bar .back:hover{background:var(--ink);color:var(--paper)}
+.bar .chip{flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;color:var(--mute);font-family:var(--sans)}
+.bar .chip b{font-weight:700;color:var(--ink);margin-right:6px}
+.bar nav{display:flex;height:100%;padding:0}
+.bar nav a{display:flex;align-items:center;gap:6px;height:100%;padding:0 14px;border-right:1px solid var(--line);font-family:var(--sans);font-weight:700}
+.bar nav a i{font:11px var(--mono);font-style:normal;color:var(--mute)}
+.bar nav a:hover{background:var(--acid)}
+.bar .sp{flex:1;border:0}
+.bar .loc{font-family:var(--sans);letter-spacing:.08em;text-transform:uppercase}
+.bar .clock{font-variant-numeric:tabular-nums;min-width:96px;justify-content:flex-end;border-right:0}
+@media (max-width:1100px){.bar .loc{display:none}}
+@media (max-width:900px){.bar .chip{display:none}}
+section{position:relative;z-index:1}
+.hero{min-height:min(100vh,900px);padding:68px 0 16px;display:flex;flex-direction:column;justify-content:space-between}
+.hero-meta{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;font:12px var(--mono);padding:0 20px 20px}
+.hero-meta p:last-child{text-align:right}
+.lead{font-size:clamp(20px,2.4vw,32px);line-height:1.35;font-weight:700;letter-spacing:-.01em;margin:24px 25% 32px 25%;max-width:560px}
+.lead small{display:block;font:12px var(--mono);font-weight:400;color:var(--mute);margin-top:10px;letter-spacing:.04em}
+.giant{font-family:var(--disp);font-size:14vw;line-height:.82;letter-spacing:-.035em;white-space:nowrap;margin-left:-3vw;user-select:none}
+[data-reveal]{will-change:clip-path,transform}
+.sec{padding:96px 20px 80px;border-top:1px solid var(--ink)}
+.sec-title{display:flex;align-items:baseline;gap:16px;font-family:var(--disp);font-size:clamp(44px,7vw,96px);line-height:1;letter-spacing:-.03em;margin-bottom:56px;flex-wrap:wrap}
+.sec-title .num{font:12px var(--mono);letter-spacing:0;align-self:flex-start;margin-top:6px}
+.sec-title .cn{font-family:var(--sans);font-weight:900}
+.sec-title em{font-style:normal;color:transparent;-webkit-text-stroke:1.5px var(--ink)}
+.sec-title .count{font:12px var(--mono);letter-spacing:0;margin-left:auto;align-self:flex-end;color:var(--mute)}
+.about-grid{display:grid;grid-template-columns:7fr 5fr;gap:40px 56px}
+.about-grid .big{font-size:clamp(18px,1.7vw,24px);line-height:1.6;font-weight:500;max-width:640px}
+.about-grid .big b{background:var(--acid);font-weight:700;padding:0 4px}
+.facts{display:grid;grid-template-columns:1fr}
+.facts div{display:grid;grid-template-columns:64px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--ink)}
+.facts div:last-child{border-bottom:1px solid var(--ink)}
+.facts dt{font:11px var(--mono);letter-spacing:.1em;color:var(--mute);padding-top:4px}
+.facts dd{font-weight:700}
+.facts dd span{display:block;font-weight:400;color:var(--mute);font-size:13px}
+.acid{background:var(--acid);border:1px solid var(--ink);height:220px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.acid canvas{animation:walk 1.1s steps(1) infinite}
+.acid figcaption{position:absolute;left:12px;bottom:10px;font:11px var(--mono);letter-spacing:.1em}
+.likelist{display:flex;flex-direction:column;justify-content:flex-end}
+.likelist::before{content:"喜欢的东西 — Likes";font:11px var(--mono);letter-spacing:.1em;color:var(--mute);margin-bottom:auto;padding-top:4px}
+.likelist li{list-style:none;display:flex;justify-content:space-between;font-family:var(--disp);font-size:22px;text-transform:uppercase;padding:10px 0;border-top:1px solid var(--line);letter-spacing:-.02em}
+.likelist li:last-child{border-bottom:1px solid var(--line)}
+.likelist li span{font:11px var(--mono);letter-spacing:.1em;color:var(--mute);align-self:center}
+@keyframes walk{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.marquee{overflow:hidden;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:12px 0;background:var(--paper);position:relative;z-index:1}
+.marquee .inner{display:inline-flex;white-space:nowrap;animation:mq 24s linear infinite}
+.marquee span{font:900 30px/1 var(--disp);letter-spacing:-.02em;padding-right:.5em}
+.marquee span i{font-style:normal;color:var(--acid);-webkit-text-stroke:1px var(--ink);margin-left:.5em;padding-right:0}
+@keyframes mq{to{transform:translateX(-50%)}}
+#work{border-top:0;padding:0;height:min(100vh,960px);display:flex;flex-direction:column;overflow:clip}
+#work .sec-title{padding:88px 20px 24px;margin:0}
+.gal{flex:1;overflow-x:auto;overflow-y:hidden;display:flex;align-items:center;scrollbar-width:thin;scrollbar-color:var(--ink) transparent}
+.gal.pinned{overflow:hidden}
+.track{display:flex;gap:2vw;padding:12px 3vw 24px;width:max-content}
+.panel{width:min(44vw,600px);height:min(58vh,520px);min-height:340px;border:1px solid var(--ink);background:var(--paper);display:grid;grid-template-rows:auto 1fr auto;padding:18px;gap:14px;transition:background .25s,color .25s;flex:none}
+.panel:hover{background:var(--ink);color:var(--paper)}
+.panel .top{display:flex;justify-content:space-between;font:12px var(--mono);letter-spacing:.06em}
+.panel .top b{font-weight:400}
+.panel .vis{position:relative;border:1px solid currentColor;overflow:hidden;min-height:0}
+.panel .bot{display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+.panel h3{font-family:var(--disp);font-size:clamp(22px,2.2vw,30px);line-height:1;letter-spacing:-.02em}
+.panel .cat{font:11px var(--mono);text-align:right;line-height:1.5;white-space:nowrap}
+.v-note{background:var(--tile)}
+.v-note .c{position:absolute;width:44%;height:56%;background:#fff;border:1.5px solid var(--ink);padding:10px;display:flex;flex-direction:column;gap:6px;color:var(--ink)}
+.v-note .c i{display:block;height:6px;background:var(--ink)}
+.v-note .c i:nth-child(2){width:70%}.v-note .c i:nth-child(3){width:85%}.v-note .c i:nth-child(4){width:50%}.v-note .c i.a{background:var(--acid)}
+.v-note .c1{left:8%;top:16%;transform:rotate(-6deg)}
+.v-note .c2{left:30%;top:26%;transform:rotate(3deg)}
+.v-note .c3{left:52%;top:12%;transform:rotate(-2deg)}
+.v-todo{background:var(--acid);display:flex;align-items:center;justify-content:center;color:var(--ink)}
+.wd{width:72%;background:#fff;border:3px solid var(--ink);box-shadow:5px 5px 0 var(--ink)}
+.wd .hd{display:flex;align-items:center;gap:8px;padding:8px 10px;border-bottom:3px solid var(--ink);font:900 12px var(--disp);letter-spacing:.02em}
+.wd .hd em{margin-left:auto;font:10px var(--mono);font-style:normal;background:var(--ink);color:var(--acid);padding:2px 6px}
+.wd .r{display:flex;align-items:center;gap:10px;padding:8px 10px;border-top:1.5px solid var(--ink)}
+.wd .r:first-of-type{border-top:0}
+.wd .bx{width:12px;height:12px;border:2px solid var(--ink);flex:none}
+.wd .on .bx{background:var(--ink)}
+.wd .bar{height:6px;background:#cfccc4;flex:1}
+.wd .on .bar{background:#e6e3db}
+.wd .s{flex:0 0 38%}
+.v-score{background:var(--tile);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:var(--ink)}
+.v-score .sc{font-family:var(--disp);font-size:clamp(48px,5vw,72px);line-height:1;letter-spacing:-.04em}
+.v-score .sc i{font-style:normal;color:#8a877f;margin:0 .1em}
+.v-score .tbs{width:64%;display:flex;flex-direction:column;gap:8px}
+.v-score .tb{height:12px;border:1.5px solid var(--ink);position:relative}
+.v-score .tb i{position:absolute;inset:0;background:var(--ink);transform-origin:left;animation:grow 2.4s ease-in-out infinite alternate}
+.v-score .tb:last-child i{background:var(--acid);animation-delay:-1.2s}
+.v-score .plus{position:absolute;right:12px;top:10px;font:900 16px var(--disp);transform:rotate(8deg);background:var(--ink);color:var(--paper);padding:2px 8px}
+@keyframes grow{from{transform:scaleX(.3)}to{transform:scaleX(1)}}
+.v-site{background:#141414;color:var(--paper);background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.05) 0 2px,transparent 2px 18px);display:flex;align-items:center;justify-content:center}
+.v-site b{font:900 clamp(70px,9vw,120px)/1 var(--disp);letter-spacing:-.05em;color:transparent;-webkit-text-stroke:2px var(--paper)}
+.v-site span{position:absolute;left:12px;bottom:10px;font:11px var(--mono);letter-spacing:.1em}
+.v-news{background:var(--tile);padding:16px;display:flex;flex-direction:column;gap:10px;color:var(--ink)}
+.v-news .nl{display:flex;flex-direction:column;gap:8px}
+.v-news .nl i{display:block;height:8px;background:var(--ink)}
+.v-news .nl i:nth-child(2){width:70%}.v-news .nl i:nth-child(3){width:86%}.v-news .nl i:nth-child(4){width:55%}
+.v-news svg{width:100%;height:auto;margin-top:auto}
+.v-news .hot{position:absolute;right:12px;top:10px;font:900 11px var(--disp);background:var(--acid);border:1px solid var(--ink);padding:2px 8px;transform:rotate(6deg)}
+.gal-progress{height:3px;background:rgba(20,20,20,.12);margin:0 20px 20px}
+.gal-progress i{display:block;height:100%;background:var(--ink);transform:scaleX(0);transform-origin:left}
+.links{list-style:none;border-top:1px solid var(--ink);max-width:960px}
+.links a{display:grid;grid-template-columns:120px 1fr 40px;align-items:center;padding:22px 12px;border-bottom:1px solid var(--ink);font-family:var(--disp);font-size:clamp(20px,2.4vw,34px);letter-spacing:-.02em;transition:background .2s,color .2s,padding-left .25s}
+.links .k{font:12px var(--mono);letter-spacing:.1em;color:var(--mute)}
+.links .arr{text-align:right;transition:transform .25s}
+.links a:hover{background:var(--ink);color:var(--paper);padding-left:28px}
+.links a:hover .k{color:var(--acid)}
+.links a:hover .arr{transform:translate(4px,-4px)}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:28px 20px 24px;border-top:1px solid var(--ink);font:11px var(--mono);letter-spacing:.06em;color:var(--mute);flex-wrap:wrap}
+.foot .dog{display:flex;align-items:center;gap:10px;color:var(--ink);font-family:var(--sans);font-weight:700}
+.cursor{position:fixed;left:0;top:0;z-index:9999;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;pointer-events:none;mix-blend-mode:difference;opacity:0}
+.cursor i{display:block;width:100%;height:100%;border-radius:50%;background:#fff;transition:transform .25s ease}
+.cursor.on{opacity:1}
+.cursor.big i{transform:scale(3.4)}
+@media (max-width:900px){.about-grid{grid-template-columns:1fr}.lead{margin-left:20px;margin-right:20px}.hero-meta{grid-template-columns:1fr 1fr}.hero-meta p:nth-child(2){display:none}}
+@media (prefers-reduced-motion:reduce){.marquee .inner,.acid canvas,.v-score .tb i{animation:none}}
+</style>
+</head>
+<body>
+<div class="page">
+<div class="lines"></div>
+
+<header class="bar">
+  <a class="back" href="gallery.html#26" target="_parent">← 返回总览</a>
+  <span class="chip"><b>巨字编辑风</b>借鉴：Awwwards 获奖作品 × 杂志编排 × 瑞士网格</span>
+  <nav>
+    <a href="#about"><i>01</i>关于</a>
+    <a href="#work"><i>02</i>作品</a>
+    <a href="#contact"><i>03</i>联系</a>
+  </nav>
+  <span class="sp"></span>
+  <span class="loc">Based in China</span>
+  <span class="clock" id="clock">00:00:00</span>
+</header>
+
+<section class="hero">
+  <div class="hero-meta">
+    <p data-reveal>（前端开发 / 个人开发者）</p>
+    <p data-reveal>Portfolio — 2026</p>
+    <p data-reveal>React → Next.js / Tauri</p>
+    <p data-reveal>Scroll ↓</p>
+  </div>
+  <p class="lead" data-reveal>做小产品的前端，像素画爱好者，<br>萨摩耶家长。<small>Fig. 00 — 首页 / 风格小样 02</small></p>
+  <h1 class="giant" data-reveal aria-label="Your Name">YOUR NAME</h1>
+</section>
+
+<section id="about" class="sec">
+  <h2 class="sec-title" data-st><span class="num">01</span><span class="cn">关于</span><em>ABOUT</em></h2>
+  <div class="about-grid">
+    <p class="big" data-st>用 React 很多年，最近在学 <b>Next.js</b> 和 <b>Tauri</b>。白天在公司做 C 端图片 / AI 生成工具和 B 端教师 Agent 助手；下班做自己的小产品，也接一点小程序的活。</p>
+    <dl class="facts" data-st>
+      <div><dt>上班</dt><dd>公司项目<span>C 端图片 / AI 生成工具 · B 端教师 Agent 助手</span></dd></div>
+      <div><dt>在做</dt><dd>NOEVA · GeeGeeKing<span>记思路、复盘的 App；像素风桌面待办小组件</span></dd></div>
+      <div><dt>接单</dt><dd>课堂计分 + 动画呈现小程序</dd></div>
+      <div><dt>练手</dt><dd>仿写某游戏公司官网<span>热点新闻爬取展示站</span></dd></div>
+      <div><dt>宠物</dt><dd>一只萨摩耶</dd></div>
+    </dl>
+    <figure class="acid" data-st>
+      <canvas class="samo" data-pose="side" data-px="8" data-k="#141414" data-g="#dfe9b0"></canvas>
+      <figcaption>图 01 — 家里那只萨摩耶</figcaption>
+    </figure>
+    <ul class="likelist" data-st>
+      <li>Pixel Art<span>像素画</span></li>
+      <li>Web Animation<span>GSAP / ScrollTrigger</span></li>
+      <li>Small Products<span>做小产品</span></li>
+    </ul>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="inner">
+    <span>前端开发<i>—</i></span><span>做小产品<i>—</i></span><span>像素画<i>—</i></span><span>萨摩耶家长<i>—</i></span>
+    <span>前端开发<i>—</i></span><span>做小产品<i>—</i></span><span>像素画<i>—</i></span><span>萨摩耶家长<i>—</i></span>
+  </div>
+</div>
+
+<section id="work">
+  <h2 class="sec-title" data-st><span class="num">02</span><span class="cn">作品</span><em>WORK</em><span class="count">(05) — 横向滚动</span></h2>
+  <div class="gal" id="gal">
+    <div class="track" id="track">
+      <article class="panel">
+        <div class="top"><b>01 / 05</b><b>2026</b></div>
+        <div class="vis v-note"><div class="c c1"><i></i><i></i><i class="a"></i></div><div class="c c2"><i></i><i></i><i></i><i class="a"></i></div><div class="c c3"><i></i><i class="a"></i><i></i></div></div>
+        <div class="bot"><h3>NOEVA</h3><div class="cat">个人产品<br>记思路 · 复盘</div></div>
+      </article>
+      <article class="panel">
+        <div class="top"><b>02 / 05</b><b>开发中</b></div>
+        <div class="vis v-todo"><div class="wd"><div class="hd"><canvas class="samo" data-pose="face" data-px="2" data-k="#141414"></canvas>GeeGeeKing<em>TODO</em></div><div class="r on"><span class="bx"></span><span class="bar"></span></div><div class="r"><span class="bx"></span><span class="bar"></span></div><div class="r"><span class="bx"></span><span class="bar s"></span></div><div class="r"><span class="bx"></span><span class="bar"></span></div></div></div>
+        <div class="bot"><h3>GeeGeeKing</h3><div class="cat">桌面小组件<br>像素风待办</div></div>
+      </article>
+      <article class="panel">
+        <div class="top"><b>03 / 05</b><b>接单</b></div>
+        <div class="vis v-score"><span class="plus">+2</span><div class="sc">12<i>:</i>8</div><div class="tbs"><div class="tb"><i style="width:78%"></i></div><div class="tb"><i style="width:52%"></i></div></div></div>
+        <div class="bot"><h3>课堂计分</h3><div class="cat">小程序<br>动画呈现</div></div>
+      </article>
+      <article class="panel">
+        <div class="top"><b>04 / 05</b><b>练手</b></div>
+        <div class="vis v-site"><b>SITE</b><span>Key Visual — 仿写</span></div>
+        <div class="bot"><h3>仿写游戏官网</h3><div class="cat">练习<br>某游戏公司官网</div></div>
+      </article>
+      <article class="panel">
+        <div class="top"><b>05 / 05</b><b>练手</b></div>
+        <div class="vis v-news"><span class="hot">HOT</span><div class="nl"><i></i><i></i><i></i><i></i></div><svg viewBox="0 0 160 44" preserveAspectRatio="none"><polyline points="0,36 22,30 44,32 66,18 88,24 110,8 132,16 160,6" fill="none" stroke="currentColor" stroke-width="2"/></svg></div>
+        <div class="bot"><h3>热点新闻展示站</h3><div class="cat">练习<br>爬取 + 展示</div></div>
+      </article>
+    </div>
+  </div>
+  <div class="gal-progress"><i id="prog"></i></div>
+</section>
+
+<section id="contact" class="sec">
+  <h2 class="sec-title" data-st><span class="num">03</span><span class="cn">联系</span><em>CONTACT</em></h2>
+  <ul class="links" data-st>
+    <li><a href="mailto:hello@example.com"><span class="k">邮箱</span>hello@example.com<span class="arr">↗</span></a></li>
+    <li><a href="#contact"><span class="k">GitHub</span>@yourname<span class="arr">↗</span></a></li>
+    <li><a href="#contact"><span class="k">RSS</span>/feed.xml<span class="arr">↗</span></a></li>
+  </ul>
+</section>
+
+<footer class="foot">
+  <span>© 2026 Your Name — Based in China</span>
+  <span class="dog"><canvas class="samo" data-pose="face" data-px="3" data-k="#141414"></canvas>萨摩耶已阅</span>
+  <span>风格小样 02 · 巨字编辑风</span>
+</footer>
+</div>
+
+<div class="cursor" id="cursor"><i></i></div>
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="assets/samo.js"></script>
+<script>
+(function(){
+  const q = s => document.querySelector(s), qa = s => Array.from(document.querySelectorAll(s));
+  const isStatic = /[?&]static/.test(location.search);
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hasGsap = typeof gsap !== 'undefined';
+  const anim = hasGsap && !isStatic && !reduced;
+  if (hasGsap) gsap.registerPlugin(ScrollTrigger);
+
+  const clock = q('#clock');
+  const tick = () => { clock.textContent = new Date().toLocaleTimeString('zh-CN', {hour12:false}); };
+  tick(); setInterval(tick, 1000);
+
+  const giant = q('.giant');
+  const fit = () => {
+    giant.style.fontSize = '14vw';
+    const w = giant.scrollWidth;
+    giant.style.fontSize = (14 * innerWidth * 1.08 / w).toFixed(2) + 'vw';
+  };
+  fit();
+  let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { fit(); if (hasGsap) ScrollTrigger.refresh(); }, 120); });
+
+  const dogs = qa('.acid canvas');
+  if (dogs.length && !reduced) setInterval(() => { const d = dogs[0]; Samo.setPose(d, d.dataset.pose === 'side' ? 'side2' : 'side'); }, 260);
+
+  if (matchMedia('(pointer: fine)').matches && hasGsap) {
+    document.documentElement.classList.add('has-cursor');
+    const cur = q('#cursor');
+    const xTo = gsap.quickTo(cur, 'x', {duration:.18, ease:'power3'});
+    const yTo = gsap.quickTo(cur, 'y', {duration:.18, ease:'power3'});
+    let shown = false;
+    addEventListener('mousemove', e => {
+      if (!shown) { shown = true; gsap.set(cur, {x:e.clientX, y:e.clientY}); cur.classList.add('on'); }
+      xTo(e.clientX); yTo(e.clientY);
+    });
+    document.addEventListener('mouseleave', () => cur.classList.remove('on'));
+    document.addEventListener('mouseenter', () => shown && cur.classList.add('on'));
+    qa('a, .panel, button').forEach(el => {
+      el.addEventListener('mouseenter', () => cur.classList.add('big'));
+      el.addEventListener('mouseleave', () => cur.classList.remove('big'));
+    });
+  }
+
+  if (!anim) return;
+
+  gsap.fromTo('.bar', {yPercent:-100}, {yPercent:0, duration:.4, ease:'power3.out'});
+  gsap.fromTo('.hero [data-reveal]', {clipPath:'inset(0 100% 0 0)', y:10, opacity:0}, {clipPath:'inset(0 0% 0 0)', y:0, opacity:1, duration:.45, stagger:.05, ease:'power3.out'});
+
+  qa('[data-st]').forEach(el => gsap.from(el, {y:36, opacity:0, duration:.8, ease:'power3.out', scrollTrigger:{trigger:el, start:'top 88%', once:true}}));
+  gsap.from('.panel', {y:40, opacity:0, duration:.7, stagger:.08, ease:'power3.out', scrollTrigger:{trigger:'#work', start:'top 70%', once:true}});
+
+  const gal = q('#gal'), track = q('#track'), prog = q('#prog');
+  const dist = () => Math.max(0, track.scrollWidth - gal.clientWidth);
+  gsap.to(track, {
+    x: () => -dist(), ease:'none',
+    scrollTrigger:{
+      trigger:'#work', start:'top top', end:() => '+=' + (dist() * 1.1), pin:true, scrub:1,
+      invalidateOnRefresh:true, anticipatePin:1,
+      onRefresh: () => gal.classList.add('pinned'),
+      onUpdate: st => { prog.style.transform = 'scaleX(' + st.progress + ')'; }
+    }
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Your Name — 新粗野 Bento</title>
+<style>
+:root{--cream:#fff8e7;--ink:#111;--yellow:#ffd23f;--pink:#ff8fc7;--cyan:#7de3e3;--lime:#c3f56b;--lav:#d8ccff;--white:#fff;--disp:"Arial Black",Impact,"Microsoft YaHei",sans-serif;--sans:"Segoe UI",Arial,"Microsoft YaHei",sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--cream);background-image:radial-gradient(#e6dcc2 1.3px,transparent 1.3px);background-size:20px 20px;color:var(--ink);font:15px/1.6 var(--sans);padding-top:64px;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--ink);color:var(--yellow)}
+.top{position:fixed;top:0;left:0;right:0;z-index:50;height:64px;display:flex;align-items:center;gap:14px;padding:0 20px;background:var(--cream);border-bottom:3px solid var(--ink)}
+.btn{display:inline-flex;align-items:center;gap:8px;border:3px solid var(--ink);background:var(--white);box-shadow:4px 4px 0 var(--ink);padding:6px 12px;font:900 13px var(--disp);transition:transform .15s,box-shadow .15s;cursor:pointer;white-space:nowrap}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.btn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+.btn.y{background:var(--yellow)}
+.btn.p{background:var(--pink)}
+.chip{display:inline-flex;align-items:center;gap:8px;border:3px solid var(--ink);background:var(--yellow);box-shadow:4px 4px 0 var(--ink);padding:6px 12px;font:700 12px var(--sans);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:60vw}
+.chip b{font-family:var(--disp);font-size:13px}
+.top .brand{margin-left:auto;display:flex;align-items:center;gap:10px;font:900 14px var(--disp);white-space:nowrap}
+.top .brand canvas{image-rendering:pixelated}
+.bento{max-width:1200px;margin:0 auto;padding:28px 20px 60px;display:grid;grid-template-columns:repeat(12,1fr);gap:18px;grid-auto-rows:minmax(150px,auto)}
+.tile{grid-column:span 4;position:relative;background:var(--white);border:3px solid var(--ink);box-shadow:6px 6px 0 var(--ink);padding:22px;transition:transform .18s,box-shadow .18s;display:flex;flex-direction:column;min-width:0}
+.tile:hover{transform:translate(-4px,-4px);box-shadow:10px 10px 0 var(--ink)}
+.s8{grid-column:span 8}.s6{grid-column:span 6}.s12{grid-column:span 12}
+.label{display:inline-block;font:900 11px var(--disp);letter-spacing:.08em;border:2px solid var(--ink);background:var(--white);padding:2px 8px;align-self:flex-start;margin-bottom:14px;text-transform:uppercase}
+h1{font:900 clamp(40px,5.2vw,68px)/1.05 var(--disp);letter-spacing:-.03em}
+h1 small{display:block;font-size:.42em;letter-spacing:0;margin-top:10px}
+.t-hero{grid-row:span 2;justify-content:space-between;gap:20px}
+.t-hero .actions{display:flex;gap:14px;flex-wrap:wrap}
+.sticker{position:absolute;top:-16px;right:26px;transform:rotate(-8deg);background:var(--pink);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);padding:6px 14px;font:900 15px var(--disp);z-index:2}
+.t-dog{background:var(--cyan);align-items:center;justify-content:center;gap:14px;text-align:center}
+.t-dog .dog{animation:tilt 2.6s ease-in-out infinite;transform-origin:50% 90%}
+.t-dog .dog canvas{display:block;filter:drop-shadow(6px 6px 0 rgba(17,17,17,.9))}
+.t-dog p{font:900 16px var(--disp)}
+.t-dog p span{font:700 13px var(--sans);display:block}
+@keyframes tilt{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}}
+.bubble{position:absolute;top:16px;right:16px;background:var(--white);border:3px solid var(--ink);padding:4px 10px;font:900 14px var(--disp);transform:rotate(6deg)}
+.t-now{background:var(--pink)}
+.t-now .tw{font:900 clamp(18px,1.8vw,24px)/1.4 var(--disp);min-height:3.6em;margin-top:auto}
+.tw .cur{display:inline-block;width:.55em;height:1.1em;background:var(--ink);vertical-align:-.2em;margin-left:4px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.t-skills{background:var(--lav)}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto}
+.chips span{display:inline-block;border:2px solid var(--ink);background:var(--white);padding:5px 12px;font:900 13px var(--disp);box-shadow:3px 3px 0 var(--ink);transition:transform .15s}
+.chips span:hover{animation:jiggle .45s ease;background:var(--yellow)}
+.chips span.new{background:var(--yellow)}
+.chips small{display:block;width:100%;font:700 12px var(--sans);opacity:.7}
+@keyframes jiggle{0%{transform:rotate(0)}25%{transform:rotate(-7deg) scale(1.08)}55%{transform:rotate(6deg) scale(1.08)}80%{transform:rotate(-3deg)}100%{transform:rotate(0)}}
+.t-day{background:var(--lime)}
+.rows{display:flex;flex-direction:column;gap:12px;margin-top:auto}
+.rows div{display:grid;grid-template-columns:64px 1fr;gap:10px;align-items:start;border:2px solid var(--ink);background:var(--white);padding:10px 12px}
+.rows b{font:900 12px var(--disp)}
+.t-strip{background:var(--yellow);flex-direction:row;align-items:center;padding:0;min-height:92px;overflow:hidden;justify-content:flex-start}
+.mq{display:inline-flex;white-space:nowrap;animation:mq 20s linear infinite;font:900 30px/1 var(--disp);letter-spacing:-.02em;padding:28px 0}
+.mq span{padding-right:.6em}
+.mq i{font-style:normal;color:var(--white);-webkit-text-stroke:1.5px var(--ink)}
+@keyframes mq{to{transform:translateX(-50%)}}
+.walker{position:absolute;left:0;bottom:8px;animation:walk 16s linear infinite;filter:drop-shadow(4px 4px 0 rgba(17,17,17,.85))}
+.walker canvas{display:block}
+@keyframes walk{from{transform:translateX(-140px)}to{transform:translateX(1240px)}}
+.card{gap:10px}
+.thumb{height:120px;border:3px solid var(--ink);margin:-4px -4px 12px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.th-lav{background:var(--lav)}.th-cy{background:var(--cyan)}.th-pk{background:var(--pink)}.th-li{background:var(--lime)}.th-ye{background:var(--yellow)}
+.card h3{font:900 24px/1.1 var(--disp);letter-spacing:-.02em}
+.card p{font-size:14px;color:#333;flex:1}
+.card .row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px}
+.price{display:inline-block;border:2px solid var(--ink);background:var(--cream);padding:3px 10px;font:900 12px var(--disp);white-space:nowrap}
+.price.dev{background:var(--cyan)}
+.art{position:relative;width:100%;height:100%}
+.art .n{position:absolute;width:34%;height:58%;background:var(--white);border:3px solid var(--ink);padding:8px;display:flex;flex-direction:column;gap:5px}
+.art .n i{display:block;height:5px;background:var(--ink)}
+.art .n i:nth-child(2){width:65%}.art .n i:nth-child(3){width:80%}.art .n i.y{background:var(--yellow)}
+.art .n1{left:12%;top:22%;transform:rotate(-7deg)}.art .n2{left:34%;top:30%;transform:rotate(3deg)}.art .n3{left:56%;top:16%;transform:rotate(-2deg)}
+.art .px{display:grid;grid-template-columns:repeat(3,18px);gap:6px}
+.art .px i{width:18px;height:18px;border:3px solid var(--ink);background:var(--white)}
+.art .px i.on{background:var(--ink)}
+.art .px i.ac{background:var(--yellow)}
+.art .score{font:900 54px/1 var(--disp);letter-spacing:-.04em;text-shadow:5px 5px 0 var(--white)}
+.art .site{font:900 70px/1 var(--disp);letter-spacing:-.05em;color:transparent;-webkit-text-stroke:2.5px var(--ink);background-image:repeating-linear-gradient(135deg,rgba(17,17,17,.12) 0 3px,transparent 3px 16px);padding:6px 14px}
+.art .news{display:flex;flex-direction:column;gap:8px;width:70%}
+.art .news i{display:block;height:10px;background:var(--ink);box-shadow:3px 3px 0 var(--white)}
+.art .news i:nth-child(2){width:72%}.art .news i:nth-child(3){width:88%}.art .news i:nth-child(4){width:55%}
+.art .star{position:absolute;right:12px;top:10px;font:900 16px var(--disp);background:var(--white);border:3px solid var(--ink);padding:2px 8px;transform:rotate(10deg)}
+.t-log{background:var(--white)}
+.log{list-style:none;margin-top:auto;display:flex;flex-direction:column;gap:0}
+.log li{display:grid;grid-template-columns:96px 1fr;gap:10px;padding:9px 0;border-top:2px dashed var(--ink);font-size:14px;font-weight:700}
+.log li:first-child{border-top:0}
+.log time{font:900 12px var(--disp);font-variant-numeric:tabular-nums;align-self:center}
+.log li.old time{background:var(--lime);border:2px solid var(--ink);padding:1px 6px;text-align:center}
+.t-contact{background:var(--yellow);flex-direction:row;align-items:center;gap:24px;flex-wrap:wrap}
+.t-contact h2{font:900 clamp(30px,4vw,52px)/1 var(--disp);letter-spacing:-.03em;flex:1;min-width:260px}
+.t-contact .acts{display:flex;gap:14px;flex-wrap:wrap}
+.t-contact .btn{font-size:16px;padding:12px 22px}
+.foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;max-width:1200px;margin:0 auto;padding:0 20px 30px;font:900 12px var(--disp)}
+.foot span:nth-child(2){font:700 12px var(--sans);color:#555}
+@media (max-width:980px){.card,.t-log{grid-column:span 6}.t-hero,.t-dog{grid-column:span 12;grid-row:auto}.top .brand{display:none}}
+@media (prefers-reduced-motion:reduce){.t-dog .dog,.mq,.walker,.tw .cur{animation:none}.walker{transform:translateX(500px)}}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="btn" href="gallery.html#27" target="_parent">← 返回总览</a>
+  <span class="chip"><b>新粗野 Bento</b>借鉴：Gumroad 首页 × Framer bento × 大胆撞色</span>
+  <span class="brand"><canvas class="samo" data-pose="face" data-px="3" data-k="#111"></canvas>Your Name ★ 2026</span>
+</header>
+
+<main class="bento">
+  <section class="tile t-hero">
+    <span class="sticker">有狗！</span>
+    <div>
+      <span class="label">Hello / 你好</span>
+      <h1>嗨，我是 Your Name<small>前端开发 / 个人开发者</small></h1>
+    </div>
+    <p style="font-size:17px;max-width:520px">用 React 很多年，最近在学 Next.js 和 Tauri。下班做自己的小产品，偶尔接单，画像素画，遛狗。</p>
+    <div class="actions"><a class="btn y" href="#works">看作品 ↓</a><a class="btn" href="#log">最近在干嘛</a></div>
+  </section>
+
+  <section class="tile t-dog">
+    <span class="bubble">汪！</span>
+    <div class="dog"><canvas class="samo" data-pose="face" data-px="7" data-k="#111"></canvas></div>
+    <p>萨摩耶家长<span>家里那只萨摩耶，本站吉祥物</span></p>
+  </section>
+
+  <section class="tile t-now">
+    <span class="label">Now / 现在</span>
+    <p class="tw"><span id="tw"></span><span class="cur"></span></p>
+  </section>
+
+  <section class="tile t-skills">
+    <span class="label">Tools / 会用的</span>
+    <div class="chips">
+      <span>React</span><span>Next.js<small>在学</small></span><span>Tauri<small>在学</small></span><span class="new">GSAP</span><span>ScrollTrigger</span><span>小程序</span><span>像素画</span>
+    </div>
+  </section>
+
+  <section class="tile t-day">
+    <span class="label">Day job / 上班做的</span>
+    <div class="rows">
+      <div><b>C 端</b><span>图片 / AI 生成工具</span></div>
+      <div><b>B 端</b><span>教师 Agent 助手</span></div>
+    </div>
+  </section>
+
+  <section class="tile t-strip s12" aria-hidden="true">
+    <div class="mq">
+      <span>做小产品 <i>✦</i> 像素画 <i>✦</i> 萨摩耶 <i>✦</i> GSAP <i>✦</i></span>
+      <span>做小产品 <i>✦</i> 像素画 <i>✦</i> 萨摩耶 <i>✦</i> GSAP <i>✦</i></span>
+      <span>做小产品 <i>✦</i> 像素画 <i>✦</i> 萨摩耶 <i>✦</i> GSAP <i>✦</i></span>
+      <span>做小产品 <i>✦</i> 像素画 <i>✦</i> 萨摩耶 <i>✦</i> GSAP <i>✦</i></span>
+    </div>
+    <div class="walker"><canvas class="samo" id="walker" data-pose="side" data-px="5" data-k="#111"></canvas></div>
+  </section>
+
+  <article class="tile card" id="works">
+    <div class="thumb th-lav"><div class="art"><div class="n n1"><i></i><i></i><i class="y"></i></div><div class="n n2"><i></i><i class="y"></i><i></i></div><div class="n n3"><i></i><i></i><i class="y"></i></div></div></div>
+    <h3>NOEVA</h3>
+    <p>记思路、复盘自己的 App。第一次生产部署。</p>
+    <div class="row"><span class="price">个人产品 · 2026.11.22 上线</span><a class="btn y" href="#works">看看</a></div>
+  </article>
+
+  <article class="tile card">
+    <div class="thumb th-cy"><div class="art"><div class="px"><i class="on"></i><i class="ac"></i><i></i><i></i><i class="on"></i><i class="ac"></i><i class="ac"></i><i></i><i class="on"></i></div></div></div>
+    <h3>GeeGeeKing</h3>
+    <p>像素风桌面待办小组件，还在开发中。</p>
+    <div class="row"><span class="price dev">开发中</span><a class="btn y" href="#works">看看</a></div>
+  </article>
+
+  <article class="tile card">
+    <div class="thumb th-pk"><div class="art"><div class="score">12:8</div><span class="star">+2</span></div></div>
+    <h3>课堂计分小程序</h3>
+    <p>接单：课堂计分 + 动画呈现的小程序。</p>
+    <div class="row"><span class="price">接单</span><a class="btn y" href="#works">看看</a></div>
+  </article>
+
+  <article class="tile card">
+    <div class="thumb th-li"><div class="art"><div class="site">SITE</div></div></div>
+    <h3>仿写游戏公司官网</h3>
+    <p>练手：照着某游戏公司官网仿写一遍。</p>
+    <div class="row"><span class="price">练手</span><a class="btn y" href="#works">看看</a></div>
+  </article>
+
+  <article class="tile card">
+    <div class="thumb th-ye"><div class="art"><div class="news"><i></i><i></i><i></i><i></i></div><span class="star">HOT</span></div></div>
+    <h3>热点新闻展示站</h3>
+    <p>练手：爬取热点新闻，做一个展示站。</p>
+    <div class="row"><span class="price">练手</span><a class="btn y" href="#works">看看</a></div>
+  </article>
+
+  <section class="tile t-log" id="log">
+    <span class="label">Log / 最近</span>
+    <ul class="log">
+      <li><time>11.25</time><span>开始做这个主页</span></li>
+      <li><time>11.24</time><span>研究 Tauri</span></li>
+      <li><time>11.22</time><span>NOEVA 第一次生产部署上线</span></li>
+      <li class="old"><time>更早</time><span>课堂计分小程序（接单）</span></li>
+      <li class="old"><time>更早</time><span>仿写游戏官网 · 热点新闻站（练手）</span></li>
+    </ul>
+  </section>
+
+  <section class="tile t-contact s12">
+    <h2>想一起做点小东西？</h2>
+    <div class="acts"><a class="btn" href="mailto:hello@example.com">邮件聊聊</a><a class="btn p" href="gallery.html#27" target="_parent">← 返回总览</a></div>
+  </section>
+</main>
+
+<footer class="foot"><span>© 2026 Your Name</span><span>风格小样 03 · 新粗野 Bento · 萨摩耶已审核通过</span><span>Based in China</span></footer>
+
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="assets/samo.js"></script>
+<script>
+(function(){
+  const q = s => document.querySelector(s);
+  const isStatic = /[?&]static/.test(location.search);
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hasGsap = typeof gsap !== 'undefined';
+  if (hasGsap) gsap.registerPlugin(ScrollTrigger);
+
+  const phrases = ['在做 NOEVA：记思路、复盘', '在学 Next.js 和 Tauri', '在做 GeeGeeKing 像素待办', '在给这个主页找风格', '在遛一只萨摩耶'];
+  const tw = q('#tw');
+  if (reduced || isStatic) {
+    tw.textContent = phrases[0];
+  } else {
+    let pi = 0, ci = 0, del = false;
+    const step = () => {
+      const p = phrases[pi];
+      if (!del) { ci++; tw.textContent = p.slice(0, ci); if (ci === p.length) { del = true; return setTimeout(step, 1800); } }
+      else { ci--; tw.textContent = p.slice(0, ci); if (ci === 0) { del = false; pi = (pi + 1) % phrases.length; return setTimeout(step, 350); } }
+      setTimeout(step, del ? 30 : 90);
+    };
+    step();
+  }
+
+  const walker = q('#walker');
+  if (!reduced) setInterval(() => Samo.setPose(walker, walker.dataset.pose === 'side' ? 'side2' : 'side'), 220);
+
+  if (!hasGsap || isStatic || reduced) return;
+  gsap.from('.top', {yPercent:-100, duration:.4, ease:'power3.out'});
+  gsap.from('.tile', {scale:.9, y:24, autoAlpha:0, duration:.55, stagger:.06, ease:'back.out(1.7)', clearProps:'transform,opacity,visibility'});
+  gsap.from('.foot', {y:20, opacity:0, duration:.5, scrollTrigger:{trigger:'.foot', start:'top 95%', once:true}});
+})();
+</script>
+</body>
+</html>

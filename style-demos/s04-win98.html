@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>YOUR NAME · Win98 桌面</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden}
+body{background:#008080;font-family:Tahoma,"MS Sans Serif","SimSun","宋体",sans-serif;font-size:12px;color:#000;user-select:none;-webkit-font-smoothing:none}
+button{font:inherit;color:inherit;cursor:default}
+a{color:inherit;text-decoration:none}
+canvas{image-rendering:pixelated;display:block}
+
+.topnav{position:fixed;left:8px;top:6px;z-index:1000;display:flex;gap:6px;align-items:stretch}
+.topnav a{display:flex;align-items:center;padding:0 8px;height:24px;background:#c0c0c0;border:1px solid;border-color:#dfdfdf #000 #000 #dfdfdf;box-shadow:inset 1px 1px 0 #fff,inset -1px -1px 0 #808080}
+.topnav a:active{border-color:#000 #dfdfdf #dfdfdf #000;box-shadow:inset 1px 1px 0 #808080}
+.topnav .chip{display:flex;align-items:center;gap:8px;padding:0 8px;height:24px;background:#c0c0c0;border:1px solid;border-color:#808080 #fff #fff #808080;white-space:nowrap}
+.topnav .chip b{font-weight:700}
+.topnav .chip i{font-style:normal;color:#404060}
+
+.desktop{position:absolute;inset:0 0 28px}
+.icons{position:absolute;left:14px;top:64px;width:76px;display:flex;flex-direction:column;gap:10px}
+.dicon{width:76px;padding:4px 2px;display:flex;flex-direction:column;align-items:center;gap:3px;border:1px dotted transparent;cursor:pointer}
+.dicon span{color:#fff;text-shadow:1px 1px 0 #000;text-align:center;line-height:1.3;padding:0 2px}
+.dicon.sel{background:#000080;border-color:#fff;outline:1px dotted #ffef9e}
+.dicon.sel span{text-shadow:none}
+.dicon canvas{width:32px;height:32px}
+
+.win{position:absolute;background:#c0c0c0;padding:3px;border:1px solid;border-color:#dfdfdf #000 #000 #dfdfdf;box-shadow:inset 1px 1px 0 #fff,inset -1px -1px 0 #808080;z-index:10}
+.tbar{height:18px;display:flex;align-items:center;gap:3px;padding:0 1px 0 2px;background:linear-gradient(90deg,#000080,#1084d0);color:#fff;font-weight:700;cursor:default}
+.win.inactive .tbar{background:linear-gradient(90deg,#7b7b7b,#b5b5b5)}
+.tbar canvas{width:16px;height:16px}
+.ttext{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:.2px}
+.tbtn{width:16px;height:14px;flex:none;background:#c0c0c0;border:1px solid;border-color:#fff #000 #000 #fff;box-shadow:inset -1px -1px 0 #808080,inset 1px 1px 0 #dfdfdf;position:relative;padding:0}
+.tbtn::before,.tbtn::after{content:"";position:absolute;left:4px;top:6px;width:7px;height:0;border-top:2px solid #000}
+.tbtn::before{transform:rotate(45deg)}.tbtn::after{transform:rotate(-45deg)}
+.tbtn:active{border-color:#000 #fff #fff #000;box-shadow:inset 1px 1px 0 #808080}
+.mbar{display:flex;gap:2px;padding:1px 0;background:#c0c0c0}
+.mbar span{padding:1px 6px}
+.mbar span:hover{background:#000080;color:#fff}
+.text{white-space:pre-wrap;line-height:1.6;font-size:13px;padding:6px 8px;font-family:"SimSun","宋体",Tahoma,monospace;user-select:text;overflow:auto}
+
+.toolbar{display:flex;align-items:center;gap:4px;padding:3px 4px;background:#c0c0c0;border-top:1px solid #dfdfdf}
+.tbtn2{min-width:24px;height:22px;padding:0 6px;background:#c0c0c0;border:1px solid;border-color:#dfdfdf #000 #000 #dfdfdf;box-shadow:inset 1px 1px 0 #fff,inset -1px -1px 0 #808080;font-size:12px}
+.tbtn2:active,.tbtn2.on{border-color:#000 #dfdfdf #dfdfdf #000;box-shadow:inset 1px 1px 0 #808080}
+.addr{display:flex;align-items:center;gap:6px;padding:3px 4px;background:#c0c0c0;border-top:1px solid #808080;border-bottom:1px solid #dfdfdf}
+.addr input{flex:1;height:20px;font:12px "SimSun","宋体",Tahoma;border:1px solid;border-color:#808080 #dfdfdf #dfdfdf #808080;background:#fff;padding:0 4px;color:#000}
+.cols{display:grid;grid-template-columns:1fr 84px 56px 70px;background:#c0c0c0;border-top:1px solid #fff;border-left:1px solid #fff}
+.cols div{height:18px;line-height:16px;padding:0 4px;border-right:1px solid #808080;border-bottom:1px solid #808080;box-shadow:inset 1px 1px 0 #dfdfdf;white-space:nowrap;overflow:hidden}
+.rows{background:#fff;height:186px;overflow:auto;user-select:none}
+.row{display:grid;grid-template-columns:1fr 84px 56px 70px;align-items:center;height:22px;padding:0 3px;border:1px solid transparent}
+.row canvas{width:16px;height:16px;flex:none}
+.row .nm{display:flex;align-items:center;gap:5px;min-width:0}
+.row .nm span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row small{font-size:12px;padding-right:6px;white-space:nowrap;overflow:hidden}
+.row.sel{background:#000080;color:#fff}
+.row.sel small{color:#d8d8ff}
+.sbar{display:flex;gap:2px;padding:2px}
+.sbar span{flex:1;padding:1px 6px;border:1px solid;border-color:#808080 #fff #fff #808080}
+
+.dhead{display:flex;gap:12px;align-items:center;padding:14px 14px 6px}
+.dhead b{font-size:14px;display:block}
+.dhead small{color:#404040}
+.dtext{padding:8px 14px 12px;white-space:pre-wrap;line-height:1.7;font-size:13px;font-family:"SimSun","宋体",Tahoma,monospace;user-select:text}
+.dfoot{display:flex;justify-content:flex-end;gap:6px;padding:8px 10px;border-top:1px solid #808080;box-shadow:0 1px 0 #fff inset}
+.btn{min-width:72px;height:22px;padding:0 10px;background:#c0c0c0;border:1px solid;border-color:#dfdfdf #000 #000 #dfdfdf;box-shadow:inset 1px 1px 0 #fff,inset -1px -1px 0 #808080;outline:1px dotted #000;outline-offset:-4px}
+.btn:active{border-color:#000 #dfdfdf #dfdfdf #000;box-shadow:inset 1px 1px 0 #808080}
+
+.taskbar{position:fixed;left:0;right:0;bottom:0;height:28px;background:#c0c0c0;display:flex;align-items:center;gap:4px;padding:2px 2px 2px 0;border-top:1px solid #dfdfdf;box-shadow:0 -1px 0 #000;z-index:900}
+.start{display:flex;align-items:center;gap:4px;height:24px;padding:0 6px 0 3px;font-weight:700;background:#c0c0c0;border:1px solid;border-color:#dfdfdf #000 #000 #dfdfdf;box-shadow:inset 1px 1px 0 #fff,inset -1px -1px 0 #808080}
+.start.on,.start:active{border-color:#000 #dfdfdf #dfdfdf #000;box-shadow:inset 1px 1px 0 #808080}
+.start canvas{width:16px;height:16px}
+.tasks{flex:1;display:flex;gap:3px;min-width:0;height:22px}
+.tasks button{flex:0 1 160px;min-width:0;display:flex;align-items:center;gap:4px;padding:0 4px;background:#c0c0c0;border:1px solid;border-color:#dfdfdf #000 #000 #dfdfdf;box-shadow:inset 1px 1px 0 #fff,inset -1px -1px 0 #808080;white-space:nowrap;overflow:hidden}
+.tasks button.on{border-color:#000 #dfdfdf #dfdfdf #000;box-shadow:inset 1px 1px 0 #808080;font-weight:700}
+.tasks button span{overflow:hidden;text-overflow:ellipsis}
+.tasks button canvas{width:16px;height:16px;flex:none}
+.tray{display:flex;align-items:center;gap:8px;height:22px;padding:0 8px;border:1px solid;border-color:#808080 #fff #fff #808080;margin-right:2px;font-variant-numeric:tabular-nums}
+.tray i{width:12px;height:12px;display:block;background:
+ linear-gradient(#000,#000) 50% 100%/2px 4px no-repeat,
+ linear-gradient(#000,#000) 0 50%/4px 4px no-repeat,
+ linear-gradient(#000,#000) 30% 30%/6px 6px no-repeat;clip-path:polygon(0 30%,30% 30%,70% 0,70% 100%,30% 70%,0 70%)}
+
+.smenu{position:fixed;left:2px;bottom:30px;width:170px;background:#c0c0c0;border:1px solid;border-color:#dfdfdf #000 #000 #dfdfdf;box-shadow:inset 1px 1px 0 #fff,inset -1px -1px 0 #808080;display:none;z-index:950;padding:3px}
+.smenu.open{display:flex}
+.sband{width:26px;background:linear-gradient(90deg,#000080,#1084d0);color:#fff;font-weight:700;font-size:16px;letter-spacing:1px;display:flex;align-items:flex-end;justify-content:center;padding:6px 0;writing-mode:vertical-rl;transform:rotate(180deg)}
+.sband b{font-weight:700;font-size:12px;margin-top:4px}
+.sitems{flex:1;position:relative}
+.sitem{display:flex;align-items:center;gap:10px;height:36px;padding:0 6px;position:relative}
+.sitem canvas{width:32px;height:32px}
+.sitem:hover{background:#000080;color:#fff}
+.sitem em{font-style:normal;margin-left:auto}
+.ssep{height:2px;margin:3px 4px;border-top:1px solid #808080;border-bottom:1px solid #fff}
+.ssub{position:absolute;left:140px;top:-4px;width:176px;background:#c0c0c0;border:1px solid;border-color:#dfdfdf #000 #000 #dfdfdf;box-shadow:inset 1px 1px 0 #fff,inset -1px -1px 0 #808080;padding:3px;display:none}
+.ssub.open{display:block}
+.ssub .sitem{height:36px}
+
+.dlg{width:300px;z-index:1200}
+.dlg .dbody{display:flex;gap:14px;align-items:flex-start;padding:14px 14px 8px}
+.dlg .dbody canvas{width:32px;height:32px;flex:none}
+.dlg .dbody p{padding-top:6px;line-height:1.6;user-select:text}
+
+#pet{position:absolute;left:120px;bottom:32px;width:72px;height:48px;z-index:5;cursor:pointer}
+#pet canvas{position:absolute;left:0;bottom:0}
+#pet canvas{--fx:1;transform:scaleX(var(--fx))}
+#pet canvas.flip{--fx:-1}
+#pet.wag canvas{animation:wag .3s steps(2) infinite}
+#pet.wag.hop canvas,#pet.hop canvas{animation:hop .35s steps(4)}
+.bubble{position:absolute;left:50%;bottom:54px;transform:translateX(-50%);background:#ffffe1;border:1px solid #000;padding:2px 6px;white-space:nowrap;font-size:12px;color:#000;display:none;box-shadow:1px 1px 0 #808080}
+.bubble::after{content:"";position:absolute;left:50%;bottom:-6px;margin-left:-4px;border:5px solid transparent;border-top-color:#000;border-bottom:0}
+.bubble.show{display:block}
+@keyframes wag{0%,100%{transform:scaleX(var(--fx)) rotate(0)}50%{transform:scaleX(var(--fx)) rotate(-4deg) translateY(-2px)}}
+@keyframes hop{0%,100%{translate:0 0}50%{translate:0 -10px}}
+@media (prefers-reduced-motion:reduce){#pet.wag canvas,#pet.hop canvas{animation:none}}
+@media (max-width:1000px){.topnav .chip{max-width:46vw;overflow:hidden;text-overflow:ellipsis;display:block;line-height:22px;white-space:nowrap}}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <a href="gallery.html#28" target="_parent">← 返回总览</a>
+  <span class="chip"><b>Win98 桌面</b><i>借鉴：Windows 98 桌面 UI × GeeGeeKing 桌面小组件</i></span>
+</nav>
+
+<div class="desktop" id="desktop">
+  <div class="icons" id="icons">
+    <div class="dicon" data-open="w-works"><span class="ico" data-i="folder" data-s="32"></span><span>我的作品</span></div>
+    <div class="dicon" data-open="w-about"><span class="ico" data-i="doc" data-s="32"></span><span>关于我.txt</span></div>
+    <div class="dicon" data-open="detail:noeva"><span class="ico" data-i="noeva" data-s="32"></span><span>NOEVA.exe</span></div>
+    <div class="dicon" data-open="w-bin"><span class="ico" data-i="bin" data-s="32"></span><span>回收站<br>放弃的项目 (3)</span></div>
+  </div>
+
+  <div class="win" id="w-about" data-title="关于我.txt - 记事本" data-icon="doc">
+    <div class="tbar"><span class="ico" data-i="doc"></span><span class="ttext">关于我.txt - 记事本</span><button class="tbtn" aria-label="关闭"></button></div>
+    <div class="mbar"><span>文件(F)</span><span>编辑(E)</span><span>搜索(S)</span><span>帮助(H)</span></div>
+    <div class="text">Your Name
+前端开发 / 个人开发者
+
+React 写了很多年，最近在学 Next.js 和 Tauri。
+
+上班：
+  C 端图片 / AI 生成工具
+  B 端教师 Agent 助手
+接单：
+  课堂计分 + 动画呈现小程序
+练手：
+  仿写某游戏公司官网
+  热点新闻爬取展示站
+
+个人项目：
+  NOEVA         记思路、复盘自己的 App
+                2026-11-22 第一次生产部署上线
+  GeeGeeKing    像素风桌面待办小组件，开发中
+
+家里有一只萨摩耶。</div>
+  </div>
+
+  <div class="win" id="w-works" style="width:min(560px,56vw)" data-title="我的作品" data-icon="folder">
+    <div class="tbar"><span class="ico" data-i="folder"></span><span class="ttext">我的作品</span><button class="tbtn" aria-label="关闭"></button></div>
+    <div class="toolbar"><button class="tbtn2">← 后退</button><button class="tbtn2">向上</button></div>
+    <div class="addr"><span>地址(A)</span><input value="C:\桌面\我的作品" readonly></div>
+    <div class="cols"><div>名称</div><div>类型</div><div>年份</div><div>状态</div></div>
+    <div class="rows" id="rows"></div>
+    <div class="sbar"><span id="rowCount"></span><span>我的电脑</span></div>
+  </div>
+
+  <div class="win" id="w-bin" style="width:330px;display:none" data-title="回收站" data-icon="bin">
+    <div class="tbar"><span class="ico" data-i="bin"></span><span class="ttext">回收站</span><button class="tbtn" aria-label="关闭"></button></div>
+    <div class="dbody" style="display:flex;gap:14px;padding:16px 14px;background:#fff">
+      <span class="ico" data-i="bin" data-s="48"></span>
+      <p style="line-height:1.7;user-select:text;font-size:13px">回收站里有 3 个放弃的项目。<br>名字就不写了，给它们留点面子。</p>
+    </div>
+    <div class="sbar"><span>3 个对象</span></div>
+  </div>
+
+  <div class="win" id="w-detail" style="width:360px;display:none">
+    <div class="tbar"><span class="ico" data-i="doc" id="dicon"></span><span class="ttext" id="dtitle">项目</span><button class="tbtn" aria-label="关闭"></button></div>
+    <div class="dhead"><span class="ico" data-i="folder" id="dbig"></span><div><b id="dname"></b><small id="dmeta"></small></div></div>
+    <div class="dtext" id="dtext"></div>
+    <div class="dfoot"><button class="btn" id="dok">确定</button></div>
+  </div>
+</div>
+
+<div id="pet"><canvas class="samo" data-pose="side" data-px="3"></canvas><span class="bubble" id="bubble">汪！</span></div>
+
+<div class="taskbar">
+  <button class="start" id="start"><span class="ico" data-i="flag"></span>开始</button>
+  <div class="tasks" id="tasks"></div>
+  <div class="tray"><i></i><span id="clock">--:--</span></div>
+</div>
+
+<div class="smenu" id="smenu">
+  <div class="sband">Your Name<b>98</b></div>
+  <div class="sitems">
+    <div class="sitem" data-act="prog"><span class="ico" data-i="folder"></span>程序<em>▸</em></div>
+    <div class="ssub" id="ssub">
+      <div class="sitem" data-act="noeva"><span class="ico" data-i="noeva"></span>NOEVA.exe</div>
+      <div class="sitem" data-act="geegee"><span class="ico" data-i="noeva" data-w="#ffe9f3"></span>GeeGeeKing</div>
+      <div class="ssep"></div>
+      <div class="sitem" data-act="works"><span class="ico" data-i="folder"></span>我的作品</div>
+    </div>
+    <div class="sitem" data-act="about"><span class="ico" data-i="doc"></span>文档</div>
+    <div class="ssep"></div>
+    <div class="sitem" data-act="help"><span class="ico" data-i="help"></span>帮助(H)</div>
+    <div class="sitem" data-act="run"><span class="ico" data-i="run"></span>运行(R)...</div>
+    <div class="ssep"></div>
+    <div class="sitem" data-act="off"><span class="ico" data-i="pc"></span>关机(U)...</div>
+  </div>
+</div>
+
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="assets/samo.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = s => document.querySelector(s);
+
+const PAL = {k:'#000',w:'#fff',y:'#ffe97a',o:'#b8901c',b:'#000080',c:'#008080',g:'#c0c0c0',d:'#808080',r:'#ff2a2a',e:'#22c55e',u:'#2f5fe0',s:'#cfe6ff',p:'#f2868f'};
+const ICONS = {
+folder:[
+'................',
+'.kk.............',
+'.kwk............',
+'.kwwkkkkkkkkkkk.',
+'.kwwwwwwwwwwwwk.',
+'.kyyyyyyyyyyyyk.',
+'.kywwwyyyyyyyyk.',
+'.kyyyyyyyyyyyyk.',
+'.kyyyyyyyyyyyyk.',
+'.kyyyyyyyyyyyyk.',
+'.koooooooooooook',
+'.kkkkkkkkkkkkkk.',
+'................','................','................','................'],
+doc:[
+'................',
+'..kkkkkkkkkkkk..',
+'..kwwwwwwwwwwk..',
+'..kwwwwwwwwwwk..',
+'..kwwuuuuuuwwk..',
+'..kwwwwwwwwwwk..',
+'..kwwuuuuuwwwk..',
+'..kwwwwwwwwwwk..',
+'..kwwuuuuuuwwk..',
+'..kwwwwwwwwwwk..',
+'..kwwuuuuuwwwk..',
+'..kwwwwwwwwwwk..',
+'..kwwwwwwwwkwk..',
+'..kwwwwwwwkggk..',
+'..kkkkkkkkkkkk..',
+'................'],
+noeva:[
+'................',
+'.kkkkkkkkkkkkkk.',
+'.kbbbbbbbbkwwkk.',
+'.kbbbbbbbbbbbbk.',
+'.kcccccccccccck.',
+'.kcccccccccccck.',
+'.kccckwwwwkccck.',
+'.kcckwwwwwwkcck.',
+'.kccwwwwwwwwcck.',
+'.kccwwkwwwkwcck.',
+'.kccwwwwnnwwcck.',
+'.kccwwwwwwwwcck.',
+'.kcccwwwwwwccck.',
+'.kcccccccccccck.',
+'.kkkkkkkkkkkkkk.',
+'................'],
+bin:[
+'................',
+'.....kkkkkk.....',
+'....kwwwwwwk....',
+'.kkkwwwwwwwwkkk.',
+'.kwwwwwwwwwwwwk.',
+'.kgwgwgwgwgwgwk.',
+'.kgwgwgwgwgwgwk.',
+'.kgwgwgwgwgwgwk.',
+'.kgwgwgwgwgwgwk.',
+'.kgwgwgwgwgwgwk.',
+'.kgwgwgwgwgwgwk.',
+'.kgwgwgwgwgwgwk.',
+'.kgwgwgwgwgwgwk.',
+'.kkkkkkkkkkkkkk.',
+'................','................'],
+flag:[
+'................',
+'................',
+'..kkk...kkk.....',
+'.krrrkkkeeeekk..',
+'.krrrrkkeeeeeek.',
+'.krrrrkkeeeeeek.',
+'.kkkkkkkkkkkkk..',
+'.kbuuukkkyyyyk..',
+'.kuuuuukkyyyyyk.',
+'.kuuuuukkyyyyyk.',
+'.keeeuukkyuuyk..',
+'..kkkkk..kkkk...',
+'................','................','................','................'],
+help:[
+'................',
+'..kkkkkkkkkkkk..',
+'..kwwwwwwwwwwk..',
+'..kwwwwwwwrrwk..',
+'..kwwwwwrrrrwk..',
+'..kwwwwwrrrrwk..',
+'..kwwwwwwrrwwk..',
+'..kwwwwwwrwwwk..',
+'..kwwwwwwwwwwk..',
+'..kwwwwwwrwwwk..',
+'..kwwwwwwrwwwk..',
+'..kwwwwwwwwwwk..',
+'..kwwwwwwwwwwk..',
+'..kwwwwwwwwwwk..',
+'..kkkkkkkkkkkk..',
+'................'],
+run:[
+'................',
+'.kkkkkkkkkkkkkk.',
+'.kbbbbbbbbbbbbk.',
+'.kbbbbbbbbbbbbk.',
+'.kggggggggggggk.',
+'.kgkkkkkkkkkkgk.',
+'.kgkwwwwwwwwkgk.',
+'.kgkwkkkkkwwkgk.',
+'.kgkggggggggkgk.',
+'.kgkkkkkkkkkkgk.',
+'.kggggggggggggk.',
+'.kkkkkkkkkkkkkk.',
+'................','................','................','................'],
+pc:[
+'................',
+'................',
+'.kkkkkkkkkkkkkk.',
+'.kssssssssssssk.',
+'.kssssskssssssk.',
+'.ksssskkksssssk.',
+'.ksssssksssssrk.',
+'.ksssssssssssrk.',
+'.kkkkkkkkkkkkkk.',
+'......kkkk......',
+'....kkkkkkkk....',
+'..kkkkkkkkkkkk..',
+'..kkkkkkkkkkkk..',
+'................','................','................']
+};
+function drawIcon(cv){
+  const rows = ICONS[cv.dataset.i], px = +(cv.dataset.s || 16);
+  cv.width = 16; cv.height = 16;
+  const c = cv.getContext('2d');
+  rows.forEach((row, y) => { for (let x = 0; x < 16; x++){ const col = PAL[row[x]]; if (col){ c.fillStyle = col; c.fillRect(x, y, 1, 1);} } });
+  cv.style.width = cv.style.height = px + 'px';
+}
+document.querySelectorAll('.ico').forEach(el => {
+  const cv = document.createElement('canvas'); cv.id = el.id; cv.dataset.i = el.dataset.i; cv.dataset.s = el.dataset.s || '16';
+  el.replaceWith(cv); drawIcon(cv);
+});
+
+const PROJECTS = [
+  {id:'noeva', name:'NOEVA', type:'个人项目', year:'2026', status:'已上线', icon:'noeva', desc:'记思路、复盘自己的 App。\n\n2026-11-22 第一次生产部署上线。'},
+  {id:'geegee', name:'GeeGeeKing', type:'个人项目', year:'2026', status:'开发中', icon:'noeva', desc:'像素风桌面待办小组件，开发中。\n\n桌面上走来走去的那只萨摩耶，就是照着它的感觉画的。'},
+  {id:'score', name:'课堂计分 + 动画呈现小程序', type:'接单', year:'—', status:'完成', icon:'doc', desc:'接单项目。\n\n课堂计分板，加分时有动画呈现。'},
+  {id:'news', name:'热点新闻爬取展示站', type:'练手', year:'—', status:'完成', icon:'doc', desc:'练手项目。\n\n把热点新闻爬下来，集中展示。'},
+  {id:'site', name:'仿写某游戏公司官网', type:'练手', year:'—', status:'完成', icon:'doc', desc:'练手项目。\n\n照着官网做一遍，学排版和动效。'},
+  {id:'img', name:'C 端图片 / AI 生成工具', type:'公司项目', year:'—', status:'进行中', icon:'doc', desc:'公司项目。\n\n细节不方便展开。'},
+  {id:'agent', name:'B 端教师 Agent 助手', type:'公司项目', year:'—', status:'进行中', icon:'doc', desc:'公司项目。\n\n细节不方便展开。'}
+];
+const rowsEl = $('#rows');
+PROJECTS.forEach(p => {
+  const r = document.createElement('div'); r.className = 'row'; r.dataset.id = p.id;
+  r.innerHTML = `<div class="nm"><canvas class="ico" data-i="${p.icon}"></canvas><span>${p.name}</span></div><small>${p.type}</small><small>${p.year}</small><small>${p.status}</small>`;
+  rowsEl.appendChild(r);
+  drawIcon(r.querySelector('canvas'));
+});
+$('#rowCount').textContent = PROJECTS.length + ' 个对象';
+rowsEl.addEventListener('click', e => {
+  const r = e.target.closest('.row'); if (!r) return;
+  rowsEl.querySelectorAll('.row').forEach(x => x.classList.toggle('sel', x === r));
+});
+rowsEl.addEventListener('dblclick', e => {
+  const r = e.target.closest('.row'); if (!r) return;
+  openDetail(PROJECTS.find(p => p.id === r.dataset.id));
+});
+
+let Z = 20;
+const wins = () => [...document.querySelectorAll('.win:not(.dlg)')];
+const visible = () => wins().filter(w => w.style.display !== 'none');
+function bring(w){
+  w.style.zIndex = ++Z;
+  wins().forEach(x => x.classList.toggle('inactive', x !== w));
+  syncTasks(w);
+}
+function openWin(id){
+  const w = document.getElementById(id);
+  const was = w.style.display !== 'none';
+  w.style.display = 'block'; bring(w);
+  if (!was) pop(w);
+}
+function pop(w){
+  if (REDUCED) return;
+  gsap.fromTo(w, {scale:.92, opacity:0}, {scale:1, opacity:1, duration:.16, ease:'power2.out', clearProps:'transform,opacity'});
+}
+function closeWin(w){
+  w.style.display = 'none';
+  const v = visible().sort((a, b) => +b.style.zIndex - +a.style.zIndex);
+  if (v[0]) bring(v[0]); else syncTasks(null);
+}
+function syncTasks(active){
+  const t = $('#tasks'); t.innerHTML = '';
+  visible().sort((a, b) => a.dataset.order - b.dataset.order).forEach(w => {
+    const b = document.createElement('button');
+    b.innerHTML = `<canvas class="ico" data-i="${w.dataset.icon}"></canvas><span></span>`;
+    b.querySelector('span').textContent = w.dataset.title;
+    if (w === active) b.classList.add('on');
+    b.onclick = () => bring(w);
+    drawIcon(b.querySelector('canvas'));
+    t.appendChild(b);
+  });
+}
+document.querySelectorAll('.win:not(.dlg)').forEach((w, i) => w.dataset.order = i);
+
+let cascade = 0;
+function openDetail(p){
+  const w = $('#w-detail');
+  $('#dtitle').textContent = p.name + ' - 属性';
+  $('#dname').textContent = p.name;
+  $('#dmeta').textContent = `${p.type} · ${p.status}${p.year !== '—' ? ' · ' + p.year : ''}`;
+  $('#dtext').textContent = p.desc;
+  ['dicon', 'dbig'].forEach((id, k) => { const el = document.getElementById(id); el.dataset.i = p.icon; el.dataset.s = k ? '32' : '16'; drawIcon(el); });
+  w.dataset.title = p.name; w.dataset.icon = p.icon;
+  const wasOpen = w.style.display !== 'none';
+  w.style.display = 'block';
+  if (!wasOpen){
+    const s = cascade++ % 4;
+    w.style.left = Math.max(110, Math.min(innerWidth - 380, innerWidth / 2 - 180 + s * 24)) + 'px';
+    w.style.top = (120 + s * 24) + 'px';
+    pop(w);
+  }
+  bring(w);
+}
+function openById(id){
+  if (id.startsWith('detail:')) openDetail(PROJECTS.find(p => p.id === id.slice(7)));
+  else openWin(id);
+}
+$('#dok').onclick = () => closeWin($('#w-detail'));
+
+document.querySelectorAll('.win .tbtn').forEach(b => b.onclick = () => closeWin(b.closest('.win')));
+
+document.querySelectorAll('.win .tbar').forEach(bar => {
+  bar.addEventListener('pointerdown', e => {
+    if (e.target.closest('.tbtn')) return;
+    const w = bar.parentElement;
+    const r = w.getBoundingClientRect(), dx = e.clientX - r.left, dy = e.clientY - r.top;
+    bar.setPointerCapture(e.pointerId);
+    const mv = ev => {
+      w.style.left = Math.max(-w.offsetWidth + 60, Math.min(innerWidth - 60, ev.clientX - dx)) + 'px';
+      w.style.top = Math.max(32, Math.min(innerHeight - 30, ev.clientY - dy)) + 'px';
+    };
+    const up = () => { bar.removeEventListener('pointermove', mv); bar.removeEventListener('pointerup', up); };
+    bar.addEventListener('pointermove', mv); bar.addEventListener('pointerup', up);
+  });
+});
+
+const icons = $('#icons');
+icons.addEventListener('click', e => {
+  const d = e.target.closest('.dicon'); if (!d) return;
+  icons.querySelectorAll('.dicon').forEach(x => x.classList.toggle('sel', x === d));
+});
+icons.addEventListener('dblclick', e => {
+  const d = e.target.closest('.dicon'); if (d) openById(d.dataset.open);
+});
+$('#desktop').addEventListener('click', e => { if (e.target.id === 'desktop') icons.querySelectorAll('.dicon').forEach(x => x.classList.remove('sel')); });
+
+const smenu = $('#smenu'), ssub = $('#ssub'), startBtn = $('#start');
+function closeStart(){ smenu.classList.remove('open'); ssub.classList.remove('open'); startBtn.classList.remove('on'); }
+startBtn.onclick = e => { e.stopPropagation(); smenu.classList.toggle('open'); startBtn.classList.toggle('on', smenu.classList.contains('open')); };
+document.querySelector('[data-act="prog"]').addEventListener('pointerenter', () => ssub.classList.add('open'));
+smenu.addEventListener('pointerleave', () => ssub.classList.remove('open'));
+smenu.addEventListener('click', e => {
+  const it = e.target.closest('.sitem'); if (!it) return;
+  const act = it.dataset.act;
+  if (act === 'prog') return;
+  closeStart();
+  if (act === 'noeva') openDetail(PROJECTS[0]);
+  else if (act === 'geegee') openDetail(PROJECTS[1]);
+  else if (act === 'works') openWin('w-works');
+  else if (act === 'about') openWin('w-about');
+  else if (act === 'help') dialog('帮助', 'help', '双击图标打开窗口，拖标题栏移动窗口，双击列表里的项目看说明。\n\n顺便一提，桌面上那只狗可以摸。');
+  else if (act === 'run') dialog('运行', 'run', '别找了，这里没有可以运行的东西。\n\n要运行的话，去「程序」里点。');
+  else if (act === 'off') dialog('关闭 Windows', 'pc', '现在还不想关。');
+});
+document.addEventListener('pointerdown', e => {
+  const w = e.target.closest('.win'); if (w) bring(w);
+  if (!e.target.closest('.smenu') && !e.target.closest('.start')) closeStart();
+});
+
+function dialog(title, icon, text){
+  document.querySelectorAll('.dlg').forEach(d => d.remove());
+  const d = document.createElement('div'); d.className = 'win dlg';
+  d.innerHTML = `<div class="tbar"><span class="ico" data-i="${icon}"></span><span class="ttext"></span><button class="tbtn" aria-label="关闭"></button></div>
+    <div class="dbody"><canvas class="ico" data-i="${icon}" data-s="32"></canvas><p></p></div>
+    <div class="dfoot"><button class="btn">确定</button></div>`;
+  d.querySelector('.ttext').textContent = title; d.querySelector('p').textContent = text;
+  d.style.left = (innerWidth / 2 - 150) + 'px'; d.style.top = (innerHeight / 2 - 90) + 'px';
+  document.body.appendChild(d);
+  d.querySelectorAll('canvas').forEach(drawIcon);
+  d.style.zIndex = ++Z + 500;
+  const close = () => d.remove();
+  d.querySelector('.tbtn').onclick = close; d.querySelector('.btn').onclick = close;
+  d.querySelector('.tbar').addEventListener('pointerdown', e => {
+    if (e.target.closest('.tbtn')) return;
+    const r = d.getBoundingClientRect(), dx = e.clientX - r.left, dy = e.clientY - r.top;
+    const mv = ev => { d.style.left = (ev.clientX - dx) + 'px'; d.style.top = Math.max(32, ev.clientY - dy) + 'px'; };
+    const up = () => { removeEventListener('pointermove', mv); removeEventListener('pointerup', up); };
+    addEventListener('pointermove', mv); addEventListener('pointerup', up);
+  });
+}
+
+const clock = $('#clock');
+const tick = () => { const d = new Date(); clock.textContent = String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0'); };
+tick(); setInterval(tick, 1000);
+
+const pet = $('#pet'), dog = pet.querySelector('canvas'), bubble = $('#bubble');
+let x = Math.max(120, innerWidth * 0.35), dir = -1, frame = 0, paused = false, lastT = 0, lastF = 0;
+const barks = ['汪！', '汪汪！', '汪？', '（摇尾巴）'];
+let bark = 0;
+function walk(t){
+  const dt = lastT ? Math.min((t - lastT) / 1000, .1) : 0; lastT = t;
+  if (!paused && !REDUCED){
+    x += dir * 44 * dt;
+    if (x < 6){ x = 6; dir = 1; } if (x > innerWidth - 80){ x = innerWidth - 80; dir = -1; }
+    if (t - lastF > 150){ frame ^= 1; Samo.setPose(dog, frame ? 'side2' : 'side'); dog.classList.toggle('flip', dir === 1); lastF = t; }
+  }
+  pet.style.left = x + 'px';
+  requestAnimationFrame(walk);
+}
+pet.addEventListener('pointerenter', () => { paused = true; pet.classList.add('wag'); });
+pet.addEventListener('pointerleave', () => { paused = false; pet.classList.remove('wag'); });
+pet.addEventListener('click', () => {
+  bubble.textContent = barks[bark++ % barks.length]; bubble.classList.add('show');
+  pet.classList.remove('hop'); void pet.offsetWidth; pet.classList.add('hop');
+  clearTimeout(pet._t); pet._t = setTimeout(() => bubble.classList.remove('show'), 1400);
+});
+requestAnimationFrame(walk);
+
+function layout(){
+  const works = $('#w-works'), about = $('#w-about');
+  about.style.left = '110px'; about.style.top = '66px';
+  works.style.left = (innerWidth - 40 - works.offsetWidth) + 'px'; works.style.top = '118px';
+}
+layout();
+openWin('w-about');
+if (REDUCED) openWin('w-works');
+else gsap.delayedCall(.12, () => openWin('w-works'));
+</script>
+</body>
+</html>

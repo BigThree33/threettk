@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Your Name — 时间线</title>
+<style>
+:root{--bg:#fbfbfd;--ink:#1a1d23;--mute:#6b7280;--faint:#9aa0aa;--line:#e6e7ec;--acc:#5b5bd6;--sans:-apple-system,"Segoe UI","Microsoft YaHei","PingFang SC",Arial,sans-serif;--mono:"Cascadia Mono",Consolas,"SF Mono",monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:15px/1.7 var(--sans);-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+a{color:inherit;text-decoration:none}
+::selection{background:#dcdcfb}
+.top{position:fixed;top:0;left:0;right:0;z-index:50;height:52px;display:flex;align-items:center;gap:10px;padding:0 24px;background:rgba(251,251,253,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);font-size:13px}
+.top .back{color:var(--mute);padding:4px 8px;border-radius:6px;transition:background .15s,color .15s}
+.top .back:hover{background:#eef0f4;color:var(--ink)}
+.top .chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:3px 10px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:62vw}
+.top .chip b{color:var(--ink);font-weight:600}
+.top .chip i{width:6px;height:6px;border-radius:50%;background:var(--acc);font-style:normal}
+.top .right{margin-left:auto;display:flex;align-items:center;gap:16px;color:var(--mute);white-space:nowrap}
+.top .right b{color:var(--ink);font-weight:600}
+.wrap{max-width:1080px;margin:0 auto;padding:104px 32px 0;display:grid;grid-template-columns:300px minmax(0,1fr);gap:72px}
+.side{position:sticky;top:84px;align-self:start}
+.avatar{width:72px;height:72px;border-radius:18px;background:#fff;border:1px solid var(--line);box-shadow:0 1px 2px rgba(16,24,40,.06),0 0 0 4px #fff;display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+.side h1{font-size:22px;font-weight:700;letter-spacing:-.01em;line-height:1.2}
+.role{color:var(--mute);font-size:14px;margin-top:4px}
+.bio{margin-top:16px;color:#3f4450;font-size:14px}
+.now{margin-top:28px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:0 1px 2px rgba(16,24,40,.04)}
+.now h2{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-bottom:10px}
+.now dl{display:grid;grid-template-columns:40px 1fr;gap:8px 12px;font-size:14px}
+.now dt{color:var(--mute)}
+.now dd{color:var(--ink)}
+.now dd span{display:block;color:var(--mute);font-size:13px}
+.side-links{margin-top:20px;display:flex;gap:14px;font-size:13px;color:var(--mute)}
+.side-links a:hover{color:var(--acc)}
+.status{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:5px 12px 5px 10px;font-size:13px;font-weight:600;color:#3a3a8c}
+.status i{position:relative;width:8px;height:8px;border-radius:50%;background:var(--acc);font-style:normal}
+.status i::after{content:"";position:absolute;inset:-4px;border-radius:50%;background:var(--acc);opacity:.35;animation:pulse 1.8s ease-out infinite}
+@keyframes pulse{0%{transform:scale(.5);opacity:.5}100%{transform:scale(1.6);opacity:0}}
+.main h2.title{font-size:34px;font-weight:700;letter-spacing:-.02em;line-height:1.2;margin-top:18px}
+.main .sub{color:var(--mute);font-size:14px;margin-top:6px}
+.timeline{position:relative;margin-top:36px;padding-bottom:24px}
+.rail{position:absolute;left:122px;top:8px;bottom:8px;width:2px;background:var(--line);border-radius:2px;overflow:hidden}
+.rail i{position:absolute;inset:0;background:var(--acc);transform-origin:top;transform:scaleY(1)}
+.group{display:grid;grid-template-columns:100px 48px 1fr;align-items:center;margin:18px 0 6px;font:600 12px var(--mono);letter-spacing:.06em;color:var(--faint);text-transform:uppercase}
+.group span:first-child{grid-column:1/3;text-align:right;padding-right:16px}
+.group span:last-child{height:1px;background:var(--line);margin-left:12px}
+.entry{list-style:none;display:grid;grid-template-columns:100px 48px 1fr;padding:16px 0;position:relative}
+.date{font:500 13px var(--mono);color:var(--mute);text-align:right;padding-right:16px;padding-top:3px;white-space:nowrap}
+.date.old{color:var(--faint);border:1px dashed #d5d7de;border-radius:6px;display:inline-block;justify-self:end;align-self:start;padding:1px 7px;margin-top:0}
+.dot{position:absolute;left:117px;top:22px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid #cfd1da;transition:background .3s,border-color .3s,box-shadow .3s}
+.entry.on .dot{background:var(--acc);border-color:var(--acc);box-shadow:0 0 0 5px rgba(91,91,214,.15)}
+.body{padding:14px 18px;margin-left:12px;border-radius:12px;transition:background .2s,box-shadow .2s;position:relative}
+.entry:hover .body{background:#fff;box-shadow:0 1px 3px rgba(16,24,40,.08),0 0 0 1px var(--line)}
+.head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.head h3{font-size:16px;font-weight:600;line-height:1.4}
+.tag{font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;line-height:1.5}
+.tag.personal{background:#eef0ff;color:#4a4ac9}
+.tag.work{background:#f1f3f5;color:#495057}
+.tag.freelance{background:#fff3df;color:#a86a12}
+.tag.practice{background:#e7f6ee;color:#2b8a57}
+.body p{color:var(--mute);font-size:14px;margin-top:4px}
+.rel{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:12px;font-weight:600;color:var(--acc);background:#eef0ff;border-radius:6px;padding:3px 9px;opacity:0;transform:translateX(-6px);transition:opacity .2s,transform .2s}
+.entry:hover .rel{opacity:1;transform:none}
+.foot{padding:40px 32px 72px;color:var(--faint);font-size:13px;display:flex;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);max-width:1080px}
+.foot span:first-child{color:var(--mute)}
+@media (max-width:1000px){.wrap{grid-template-columns:250px minmax(0,1fr);gap:40px}.top .chip{display:none}}
+@media (max-width:860px){.wrap{grid-template-columns:1fr}.side{position:static}.top .right span{display:none}}
+@media (prefers-reduced-motion:reduce){.status i::after{animation:none;opacity:.2}}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="back" href="gallery.html#30" target="_parent">← 返回总览</a>
+  <span class="chip"><i></i><b>时间线</b>借鉴：nownownownow.com Now Page × Linear changelog × Stripe 滚动叙事</span>
+  <span class="right"><span>更新于 <b>2026.11.25</b></span><b>Your Name</b></span>
+</header>
+
+<div class="wrap">
+  <aside class="side">
+    <div class="avatar"><canvas class="samo" data-pose="portrait" data-px="4" data-k="#1a1d23"></canvas></div>
+    <h1>Your Name</h1>
+    <p class="role">前端开发 / 个人开发者</p>
+    <p class="bio">用 React 很多年，最近在学 Next.js 和 Tauri。白天在公司做 C 端图片 / AI 生成工具和 B 端教师 Agent 助手，下班做自己的小产品。家里有一只萨摩耶。</p>
+    <div class="now">
+      <h2>现在</h2>
+      <dl>
+        <dt>在做</dt><dd>NOEVA<span>记思路、复盘自己的 App</span>GeeGeeKing<span>像素风桌面待办小组件</span></dd>
+        <dt>在学</dt><dd>Next.js · Tauri</dd>
+        <dt>在玩</dt><dd>像素画 · GSAP 动画 · 这个主页</dd>
+      </dl>
+    </div>
+    <nav class="side-links"><a href="mailto:hello@example.com">邮箱</a><a href="#">GitHub</a><a href="#">RSS</a></nav>
+  </aside>
+
+  <main class="main">
+    <span class="status"><i></i>现在：在做 NOEVA</span>
+    <h2 class="title">时间线</h2>
+    <p class="sub">按时间倒序，记下做过的事。没有具体日期的，就归到「更早」。</p>
+
+    <ol class="timeline" id="timeline">
+      <div class="rail" aria-hidden="true"><i id="fill"></i></div>
+
+      <div class="group"><span>2026</span><span></span></div>
+
+      <li class="entry">
+        <span class="date">2026.11.25</span><span class="dot"></span>
+        <div class="body">
+          <div class="head"><h3>开始做这个主页</h3><span class="tag personal">个人</span></div>
+          <p>给个人主页选一个视觉方向，先做了十几个风格小样。</p>
+          <a class="rel" href="#">相关：这个主页 →</a>
+        </div>
+      </li>
+
+      <li class="entry">
+        <span class="date">2026.11.24</span><span class="dot"></span>
+        <div class="body">
+          <div class="head"><h3>研究 Tauri</h3><span class="tag personal">个人</span></div>
+          <p>想把做的小工具打包成桌面应用。</p>
+          <a class="rel" href="#">相关：GeeGeeKing →</a>
+        </div>
+      </li>
+
+      <li class="entry">
+        <span class="date">2026.11.22</span><span class="dot"></span>
+        <div class="body">
+          <div class="head"><h3>NOEVA 第一次生产部署上线</h3><span class="tag personal">个人</span></div>
+          <p>用来记思路、复盘自己的 App，第一次真正部署到生产环境。</p>
+          <a class="rel" href="#">相关：NOEVA →</a>
+        </div>
+      </li>
+
+      <div class="group"><span>更早</span><span></span></div>
+
+      <li class="entry">
+        <span class="date old">更早</span><span class="dot"></span>
+        <div class="body">
+          <div class="head"><h3>课堂计分 + 动画呈现小程序</h3><span class="tag freelance">接单</span></div>
+          <p>接的单：课堂计分，带动画呈现的小程序。</p>
+          <a class="rel" href="#">相关：接单 →</a>
+        </div>
+      </li>
+
+      <li class="entry">
+        <span class="date old">更早</span><span class="dot"></span>
+        <div class="body">
+          <div class="head"><h3>仿写某游戏公司官网</h3><span class="tag practice">练手</span></div>
+          <p>照着做一遍，学动效和排版。</p>
+          <a class="rel" href="#">相关：练手 →</a>
+        </div>
+      </li>
+
+      <li class="entry">
+        <span class="date old">更早</span><span class="dot"></span>
+        <div class="body">
+          <div class="head"><h3>热点新闻爬取展示站</h3><span class="tag practice">练手</span></div>
+          <p>爬热点新闻，做一个展示站。</p>
+          <a class="rel" href="#">相关：练手 →</a>
+        </div>
+      </li>
+
+      <li class="entry">
+        <span class="date old">更早</span><span class="dot"></span>
+        <div class="body">
+          <div class="head"><h3>上班做的 C 端 / B 端项目</h3><span class="tag work">上班</span></div>
+          <p>C 端图片 / AI 生成工具；B 端教师 Agent 助手。</p>
+          <a class="rel" href="#">相关：上班 →</a>
+        </div>
+      </li>
+    </ol>
+  </main>
+</div>
+
+<footer class="foot"><span>© 2026 Your Name</span><span>风格小样 07 · 时间线</span><span>Based in China</span></footer>
+
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="assets/samo.js"></script>
+<script>
+(function(){
+  const q = s => document.querySelector(s), qa = s => Array.from(document.querySelectorAll(s));
+  const isStatic = /[?&]static/.test(location.search);
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hasGsap = typeof gsap !== 'undefined';
+  if (hasGsap) gsap.registerPlugin(ScrollTrigger);
+
+  const entries = qa('.entry');
+  if (isStatic || reduced || !hasGsap) {
+    entries.forEach(e => e.classList.add('on'));
+    return;
+  }
+
+  gsap.from('.top', {yPercent:-100, duration:.4, ease:'power2.out'});
+  gsap.from('.side > *', {y:12, opacity:0, duration:.45, stagger:.05, ease:'power2.out'});
+  gsap.from('.main > :not(.timeline)', {y:12, opacity:0, duration:.45, stagger:.06, delay:.1, ease:'power2.out'});
+
+  const tl = q('#timeline');
+  gsap.fromTo('#fill', {scaleY:0}, {scaleY:1, ease:'none', scrollTrigger:{trigger:tl, start:'top 55%', end:'bottom 55%', scrub:.6}});
+  entries.forEach((e, i) => {
+    ScrollTrigger.create({trigger:e, start:'top 58%', onEnter:() => e.classList.add('on'), onLeaveBack:() => e.classList.remove('on')});
+    gsap.from(e, {x:-28, opacity:0, duration:.6, ease:'power3.out', scrollTrigger:{trigger:e, start:'top 90%', once:true}});
+  });
+  gsap.from('.foot', {opacity:0, y:12, duration:.5, scrollTrigger:{trigger:'.foot', start:'top 95%', once:true}});
+})();
+</script>
+</body>
+</html>
